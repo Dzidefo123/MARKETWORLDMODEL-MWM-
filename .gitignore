@@ -1,6 +1,12 @@
 # Claude Code local session state (contains local settings / permissions)
 .claude/
 
+# Superseded short-history checkpoints + live-trading heads (no paper number
+# uses these; kept on disk for the live-trading path, out of the repo).
+experiments/checkpoints/
+# last_model.pt is the final-epoch weights; the paper uses best_model.pt only.
+experiments/checkpoints_long/*/last_model.pt
+
 # Python
 __pycache__/
 *.py[cod]
