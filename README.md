@@ -3,10 +3,14 @@
 **When a Learned Encoder Does Not Beat a Random One: An Evaluation Protocol for
 Self-Supervised World Models on Financial Markets**
 
-This repository accompanies the paper
-[`mwm_audit_paper.pdf`](mwm_audit_paper.pdf) (ICAIF '26 format). It contains the
-model under audit, the four controls the paper proposes, and the scripts that
-regenerate every table and figure.
+This repository accompanies a paper currently under review (ICAIF '26 format).
+It contains the model under audit, the four controls the paper proposes, and
+the scripts that regenerate every table and figure.
+
+> **Manuscript withheld.** The paper source (`mwm_audit_paper.tex` / `.pdf`) is
+> not included here until it is approved for release. All code, checkpoints, and
+> result files needed to reproduce the findings are present; the sections below
+> map each finding to the script that produces it.
 
 ## What the paper says
 
@@ -44,7 +48,6 @@ representation learning.
 ## Repository layout
 
 ```
-mwm_audit_paper.tex / .pdf    the paper
 PROVENANCE.md                 every paper number → its artifact → its script
 models/                       encoder.py, predictor.py, sigreg.py, mwm_loss.py
 training/train_o1.py          the JEPA–SIGReg training loop
@@ -55,7 +58,7 @@ experiments/                  result JSONs, figure scripts, the audit scripts,
 execution/, scripts/          live-trading path (not used by the paper)
 ```
 
-## Reproducing the paper
+## Reproducing the findings
 
 Every number derives from the 60-epoch checkpoints in
 `experiments/checkpoints_long/` (trained on a Colab GPU; see
@@ -75,14 +78,15 @@ python experiments/o1b_artifact_check.py usdjpy
 
 python experiments/make_o3_figure.py                # Figure 2
 python experiments/make_o1b_figure.py               # Figure 3
-
-pdflatex mwm_audit_paper.tex && pdflatex mwm_audit_paper.tex
 ```
 
 ### Verifying the numbers
 
-`check_paper_numbers.py` re-derives all 66 quantitative claims in the `.tex`
-from the stored result JSONs and exits non-zero on any mismatch:
+`check_paper_numbers.py` re-derives every quantitative claim from the stored
+result JSONs and exits non-zero on any mismatch. When the manuscript source is
+present (the author's working copy) it also cross-checks each value against the
+`.tex`; when it is absent (this public repo) it validates the result files for
+internal consistency and skips the `.tex` cross-references.
 
 ```bash
 python experiments/check_paper_numbers.py

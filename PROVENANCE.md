@@ -1,4 +1,9 @@
-# Provenance of every number in `mwm_audit_paper.tex`
+# Provenance of every number in the manuscript
+
+> The manuscript source (`mwm_audit_paper.tex` / `.pdf`) is withheld from this
+> public repo until approved for release. This file maps each paper number to
+> the artifact and script that produce it, so the results remain fully
+> auditable from the released code and checkpoints alone.
 
 Audited 2026-07-23. This file records which artifact each paper number comes
 from, and which script regenerates it. `experiments/check_paper_numbers.py`
@@ -78,9 +83,13 @@ python experiments/regen_surprise_matched.py all
 python experiments/o1b_artifact_check.py gold      # and eurusd, usdjpy
 python experiments/make_o3_figure.py
 python experiments/make_o1b_figure.py
-pdflatex mwm_audit_paper.tex && pdflatex mwm_audit_paper.tex
+# pdflatex mwm_audit_paper.tex   # only if you have the manuscript source
 python experiments/check_paper_numbers.py
 ```
+
+The manuscript source (`mwm_audit_paper.tex` / `.pdf`) is withheld from the
+public repo until approved; the checker degrades to JSON-only consistency when
+it is absent.
 
 All of it runs on CPU from the released checkpoints and cached data. Only the
 checkpoints themselves needed a GPU.

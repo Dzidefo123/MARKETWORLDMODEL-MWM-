@@ -29,7 +29,17 @@ import pandas as pd
 
 ASSETS = ["gold", "eurusd", "usdjpy"]
 TARGETS = ["session", "high_vol", "ret_direction", "realized_vol", "dxy_direction"]
-TEX = pathlib.Path("mwm_audit_paper.tex").read_text(encoding="utf8")
+
+# The manuscript source is withheld from the public repo until approved (see
+# .gitignore / README). When it is absent, we cannot assert the .tex contains a
+# given value, so `in_tex` becomes a no-op and only the result JSONs are checked
+# for internal consistency. With the .tex present (author's working copy) the
+# full 66-check cross-reference runs.
+_texfile = pathlib.Path("mwm_audit_paper.tex")
+TEX = _texfile.read_text(encoding="utf8") if _texfile.exists() else None
+if TEX is None:
+    print("NOTE: mwm_audit_paper.tex not found (manuscript withheld); "
+          "checking result JSONs only, skipping .tex cross-references.\n")
 
 fails = []
 
@@ -47,7 +57,9 @@ def check(name, cond, detail=""):
 
 
 def in_tex(s):
-    return s in TEX
+    # No .tex available -> cannot contradict it; treat the containment as passing
+    # so the JSON-consistency checks still run from a clone.
+    return True if TEX is None else s in TEX
 
 
 # ---------------------------------------------------------------- load
@@ -80,7 +92,7 @@ print("\n-- Table 2: deltas (unrounded, rendered 2dp) --")
 for t in TARGETS:
     vals = [delta[(i, t, "mlp")] for i in ASSETS]
     cells = " & ".join("$%+.2f$" % v for v in vals)
-    check("%s row" % t, cells in TEX.replace("$-0.00$", "$-0.00$"), cells)
+    check("%s row" % t, in_tex(cells), cells)
 
 print("\n-- Section 5.2 prose --")
 n_loss = sum(1 for v in delta.values() if v < 0)
@@ -198,21 +210,21 @@ check("FX test spans differ: 15,504 / 15,503",
 print("\n-- Tables 5 and 6 / Section 5.4: the batching artifact --")
 ART = {i: json.load(open("experiments/o1b_artifact_check_%s.json" % i)) for i in ASSETS}
 NAME = {"gold": "Gold", "eurusd": "EUR/USD", "usdjpy": "USD/JPY"}
-flat = " ".join(TEX.split())
+flat = "" if TEX is None else " ".join(TEX.split())
 for i in ASSETS:
     t1 = ART[i]["test1_batch_artifact"]
     for bs in ["bs64", "bs128"]:
         c, r = t1[bs]["contiguous_shuffleFalse"], t1[bs]["random_shuffleTrue"]
         row = "%s & %s & %.3f & %.3f & $%.1f\\times$" % (
             NAME[i], bs[2:], round(c, 3), round(r, 3), c / r)
-        check("Table 5 %s %s" % (i, bs), " ".join(row.split()) in flat, row)
+        check("Table 5 %s %s" % (i, bs), (TEX is None or " ".join(row.split()) in flat), row)
 for i in ASSETS:
     t2 = ART[i]["test2"]
     sm = t2["segment_means"]
     row = "%s & %.3f & %.3f & %.3f & %.3f" % (
         NAME[i], round(t2["train_baseline"], 3), round(sm["train"], 3),
         round(sm["val"], 3), round(sm["oos"], 3))
-    check("Table 6 %s" % i, " ".join(row.split()) in flat, row)
+    check("Table 6 %s" % i, (TEX is None or " ".join(row.split()) in flat), row)
 vr = [ART[i]["test2"]["spearman_val_sig_vol_ratio"] for i in ASSETS]
 ks = [ART[i]["test2"]["spearman_val_sig_ks"] for i in ASSETS]
 check("vol-ratio correlations -0.15/+0.26/-0.25",
@@ -257,13 +269,13 @@ for i in ASSETS:
     row_b = "%s & $%.2f$ & $%.2f$ & $%.2f$ & $%.2f$" % (
         NAME[i], r2(d["extreme_ratio_pooled"]), r2(st["low"]["extreme_ratio"]),
         r2(st["mid"]["extreme_ratio"]), r2(st["high"]["extreme_ratio"]))
-    flat = " ".join(TEX.split())
-    check("%s rho row" % i, " ".join(row_a.split()) in flat, row_a)
-    check("%s ratio row" % i, " ".join(row_b.split()) in flat, row_b)
+    flat = "" if TEX is None else " ".join(TEX.split())
+    check("%s rho row" % i, (TEX is None or " ".join(row_a.split()) in flat), row_a)
+    check("%s ratio row" % i, (TEX is None or " ".join(row_b.split()) in flat), row_b)
 
 print("\n-- Table 3 cells --")
 bad = 0
-for probe in ["linear", "mlp"]:
+for probe in ([] if TEX is None else ["linear", "mlp"]):
     key = "\\emph{%s probe}" % ("Linear" if probe == "linear" else "MLP")
     block = TEX.split(key)[1].split("\\bottomrule")[0].split("\\midrule")[0]
     for t, lab in zip(TARGETS, ["Session (3-class)", "High vol (binary)",
@@ -278,7 +290,8 @@ for probe in ["linear", "mlp"]:
         if nums != exp:
             bad += 1
             print("    FAIL %s %s\n      tex=%s\n      exp=%s" % (probe, t, nums, exp))
-check("all 120 cells", bad == 0, "%d bad rows" % bad)
+check("all 120 cells", bad == 0, "%d bad rows" % bad) if TEX is not None else \
+    print("  skip  all 120 cells (manuscript withheld)")
 
 print("\n" + "=" * 60)
 if fails:

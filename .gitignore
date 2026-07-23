@@ -1,6 +1,12 @@
 # Claude Code local session state (contains local settings / permissions)
 .claude/
 
+# Manuscript source withheld from the public repo until approved for release.
+# Kept on the author's disk; regenerate figures/results from the scripts below.
+mwm_audit_paper.tex
+mwm_audit_paper.pdf
+mwm_revised_full_corrected.tex
+
 # Superseded short-history checkpoints + live-trading heads (no paper number
 # uses these; kept on disk for the live-trading path, out of the repo).
 experiments/checkpoints/
