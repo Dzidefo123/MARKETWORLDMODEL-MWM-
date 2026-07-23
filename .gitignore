@@ -6,6 +6,12 @@
 mwm_audit_paper.tex
 mwm_audit_paper.pdf
 mwm_revised_full_corrected.tex
+# Older manuscript drafts / paper-section fragments (same reason).
+experiments/MWM_ICAIF_v4.tex
+experiments/O3_revised_section.tex
+# Obsolete static-check tool hard-wired to the v4 draft above (superseded by
+# experiments/check_paper_numbers.py). Kept on disk, out of the repo.
+experiments/check_latex.py
 
 # Third-party reference paper (LeWorldModel) — not ours to redistribute.
 LeWorldModel.pdf
