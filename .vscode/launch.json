@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run SIGReg test",
+            "type": "python",
+            "request": "launch",
+            "module": "models.sigreg",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Run Encoder test",
+            "type": "python",
+            "request": "launch",
+            "module": "models.encoder",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Run O1 Pipeline test",
+            "type": "python",
+            "request": "launch",
+            "module": "models.mwm_loss",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

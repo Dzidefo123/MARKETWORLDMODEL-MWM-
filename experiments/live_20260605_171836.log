@@ -1,0 +1,25 @@
+2026-06-05 14:18:36  INFO      Logging to experiments\live_20260605_171836.log
+2026-06-05 14:18:36  INFO      Loaded encoder + predictor from ./experiments/checkpoints/best_model.pt (epoch 180)
+2026-06-05 14:18:36  INFO      Loaded execution heads from ./experiments/heads_gold  Dir AUC=0.543  Vol AUC=0.641
+2026-06-05 14:18:36  INFO      Config D: loaded M15 encoder (epoch 172)
+2026-06-05 14:18:36  INFO      Connected to MT5: MetaTrader 5 build 5836
+2026-06-05 14:18:36  INFO      Config D M15 execution layer enabled  S_t gate=0.000012
+2026-06-05 14:18:36  INFO      Warming up: fetching 548 bars for XAUUSD ...
+2026-06-05 14:18:43  INFO      Warm-up complete. Surprise buffer: 250 bars.
+2026-06-05 14:18:43  INFO      M15 warm-up: fetching 596 M15 bars...
+2026-06-05 14:18:46  INFO      M15 warm-up complete. Surprise buffer: 250 bars.
+2026-06-05 14:18:46  INFO      Live trader started. symbol=XAUUSD  dry_run=True  poll=10s  m15=enabled
+2026-06-05 15:00:07  INFO      S_t check: S_t=1.730612  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=251
+2026-06-05 15:00:07  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-05 15:00:07  INFO      Bar close: dir_prob=0.209  S_t=1.73061  signal=-1.000  eff=0.000  lots=0.00  action=hold
+2026-06-05 16:00:08  INFO      S_t check: S_t=0.113481  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=252
+2026-06-05 16:00:08  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-05 16:00:08  INFO      Bar close: dir_prob=0.125  S_t=0.11348  signal=-1.000  eff=0.000  lots=0.00  action=hold
+2026-06-05 17:00:10  INFO      S_t check: S_t=0.031001  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=253
+2026-06-05 17:00:10  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-05 17:00:10  INFO      Bar close: dir_prob=0.505  S_t=0.03100  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-05 18:00:02  INFO      S_t check: S_t=0.000939  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=254
+2026-06-05 18:00:02  INFO      Post-shock cooldown: 1/8 bars elapsed — skipping entry
+2026-06-05 18:00:02  INFO      Bar close: dir_prob=0.539  S_t=0.00094  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-05 18:17:58  INFO      Interrupted — closing positions and disconnecting.
+2026-06-05 18:17:58  INFO      MT5 connection closed.

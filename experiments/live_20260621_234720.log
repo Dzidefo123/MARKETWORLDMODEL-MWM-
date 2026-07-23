@@ -1,0 +1,91 @@
+2026-06-21 20:47:20  INFO      Logging to experiments\live_20260621_234720.log
+2026-06-21 20:47:20  INFO      Loaded encoder + predictor from ./experiments/checkpoints/best_model.pt (epoch 180)
+2026-06-21 20:47:20  INFO      Loaded execution heads from ./experiments/heads_gold  Dir AUC=0.543  Vol AUC=0.641
+2026-06-21 20:47:20  INFO      Config D: loaded M15 encoder (epoch 172)
+2026-06-21 20:47:20  INFO      Connected to MT5: MetaTrader 5 build 5836
+2026-06-21 20:47:20  INFO      Config D M15 execution layer enabled  S_t gate=0.000200
+2026-06-21 20:47:20  INFO      Warming up: fetching 1048 bars for XAUUSD ...
+2026-06-21 20:47:29  INFO      Warm-up complete. Surprise buffer: 750 bars.
+2026-06-21 20:47:29  INFO      M15 warm-up: fetching 1096 M15 bars...
+2026-06-21 20:47:35  INFO      M15 warm-up complete. Surprise buffer: 750 bars.
+2026-06-21 20:47:35  INFO      Live trader started. symbol=XAUUSD  dry_run=True  poll=10s  m15=enabled
+2026-06-21 21:05:00  INFO      S_t check: S_t=0.000205  p20=0.000103  p60=0.000485  p90=0.002525  zone=Q2-skip  buffer_len=751
+2026-06-21 21:05:00  INFO      Bar close: dir_prob=0.490  S_t=0.00020  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-21 22:00:04  INFO      S_t check: S_t=0.000920  p20=0.000103  p60=0.000485  p90=0.002525  zone=Q4-half  buffer_len=752
+2026-06-21 22:00:04  INFO      Bar close: dir_prob=0.490  S_t=0.00092  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-21 23:00:06  INFO      S_t check: S_t=0.002034  p20=0.000103  p60=0.000486  p90=0.002524  zone=Q4-half  buffer_len=753
+2026-06-21 23:00:06  INFO      Bar close: dir_prob=0.484  S_t=0.00203  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 00:00:09  INFO      S_t check: S_t=0.000704  p20=0.000103  p60=0.000487  p90=0.002524  zone=Q4-half  buffer_len=754
+2026-06-22 00:00:09  INFO      Bar close: dir_prob=0.485  S_t=0.00070  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 01:00:11  INFO      S_t check: S_t=0.000206  p20=0.000103  p60=0.000487  p90=0.002524  zone=Q2-skip  buffer_len=755
+2026-06-22 01:00:11  INFO      Bar close: dir_prob=0.484  S_t=0.00021  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 02:00:19  ERROR     $DX-Y.NYB: possibly delisted; no price data found  (1h 2026-05-17 21:00:08.384849+00:00 -> 2026-06-22 05:00:08.384849+00:00)
+2026-06-22 02:00:19  ERROR     
+1 Failed download:
+2026-06-22 02:00:19  ERROR     ['DX-Y.NYB']: possibly delisted; no price data found  (1h 2026-05-17 21:00:08.384849+00:00 -> 2026-06-22 05:00:08.384849+00:00)
+2026-06-22 02:00:24  ERROR     HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: DX=F"}}}
+2026-06-22 02:00:25  ERROR     $DX=F: possibly delisted; no timezone found
+2026-06-22 02:00:25  ERROR     
+1 Failed download:
+2026-06-22 02:00:25  ERROR     ['DX=F']: possibly delisted; no timezone found
+2026-06-22 02:00:25  INFO      dxy: used fallback ticker UUP
+2026-06-22 02:00:26  INFO      S_t check: S_t=0.000099  p20=0.000103  p60=0.000486  p90=0.002524  zone=Q1  buffer_len=756
+2026-06-22 02:00:26  INFO      Bar close: dir_prob=0.482  S_t=0.00010  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 03:00:08  INFO      S_t check: S_t=0.000225  p20=0.000103  p60=0.000485  p90=0.002523  zone=Q2-skip  buffer_len=757
+2026-06-22 03:00:08  INFO      Bar close: dir_prob=0.481  S_t=0.00023  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 04:00:10  INFO      S_t check: S_t=0.000175  p20=0.000103  p60=0.000485  p90=0.002523  zone=Q2-skip  buffer_len=758
+2026-06-22 04:00:10  INFO      Bar close: dir_prob=0.479  S_t=0.00017  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 05:00:02  INFO      S_t check: S_t=0.000413  p20=0.000103  p60=0.000484  p90=0.002523  zone=Q2-skip  buffer_len=759
+2026-06-22 05:00:02  INFO      Bar close: dir_prob=0.479  S_t=0.00041  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 06:00:04  INFO      S_t check: S_t=0.000490  p20=0.000103  p60=0.000485  p90=0.002523  zone=Q4-half  buffer_len=760
+2026-06-22 06:00:04  INFO      Bar close: dir_prob=0.477  S_t=0.00049  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 07:00:06  INFO      S_t check: S_t=0.000174  p20=0.000103  p60=0.000485  p90=0.002523  zone=Q2-skip  buffer_len=761
+2026-06-22 07:00:06  INFO      Bar close: dir_prob=0.477  S_t=0.00017  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 08:00:08  INFO      S_t check: S_t=0.000155  p20=0.000103  p60=0.000483  p90=0.002516  zone=Q2-skip  buffer_len=762
+2026-06-22 08:00:08  INFO      Bar close: dir_prob=0.477  S_t=0.00016  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 09:00:09  INFO      S_t check: S_t=0.000355  p20=0.000103  p60=0.000482  p90=0.002510  zone=Q2-skip  buffer_len=763
+2026-06-22 09:00:09  INFO      Bar close: dir_prob=0.477  S_t=0.00035  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 10:00:11  INFO      S_t check: S_t=0.000170  p20=0.000103  p60=0.000481  p90=0.002503  zone=Q2-skip  buffer_len=764
+2026-06-22 10:00:11  INFO      Bar close: dir_prob=0.477  S_t=0.00017  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 11:00:02  INFO      S_t check: S_t=0.000291  p20=0.000104  p60=0.000481  p90=0.002496  zone=Q2-skip  buffer_len=765
+2026-06-22 11:00:03  INFO      Bar close: dir_prob=0.477  S_t=0.00029  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 12:00:04  INFO      S_t check: S_t=0.000387  p20=0.000104  p60=0.000481  p90=0.002490  zone=Q2-skip  buffer_len=766
+2026-06-22 12:00:04  INFO      Bar close: dir_prob=0.478  S_t=0.00039  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 13:00:06  INFO      S_t check: S_t=0.000307  p20=0.000104  p60=0.000481  p90=0.002483  zone=Q2-skip  buffer_len=767
+2026-06-22 13:00:06  INFO      Bar close: dir_prob=0.478  S_t=0.00031  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 14:00:08  INFO      S_t check: S_t=0.000320  p20=0.000104  p60=0.000480  p90=0.002477  zone=Q2-skip  buffer_len=768
+2026-06-22 14:00:08  INFO      Bar close: dir_prob=0.478  S_t=0.00032  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 15:00:09  INFO      S_t check: S_t=0.000114  p20=0.000104  p60=0.000480  p90=0.002470  zone=Q2-skip  buffer_len=769
+2026-06-22 15:00:09  INFO      Bar close: dir_prob=0.478  S_t=0.00011  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 16:00:11  INFO      S_t check: S_t=0.000461  p20=0.000104  p60=0.000479  p90=0.002464  zone=Q2-skip  buffer_len=770
+2026-06-22 16:00:11  INFO      Bar close: dir_prob=0.478  S_t=0.00046  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 17:00:03  INFO      S_t check: S_t=0.000091  p20=0.000104  p60=0.000478  p90=0.002457  zone=Q1  buffer_len=771
+2026-06-22 17:00:03  INFO      Bar close: dir_prob=0.478  S_t=0.00009  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 18:00:05  INFO      S_t check: S_t=0.000233  p20=0.000104  p60=0.000477  p90=0.002452  zone=Q2-skip  buffer_len=772
+2026-06-22 18:00:05  INFO      Bar close: dir_prob=0.479  S_t=0.00023  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 19:00:06  INFO      S_t check: S_t=0.000209  p20=0.000104  p60=0.000476  p90=0.002447  zone=Q2-skip  buffer_len=773
+2026-06-22 19:00:06  INFO      Bar close: dir_prob=0.479  S_t=0.00021  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 20:00:06  INFO      S_t check: S_t=0.000147  p20=0.000104  p60=0.000474  p90=0.002442  zone=Q2-skip  buffer_len=774
+2026-06-22 20:00:06  INFO      Bar close: dir_prob=0.479  S_t=0.00015  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 21:00:08  INFO      S_t check: S_t=0.000389  p20=0.000104  p60=0.000473  p90=0.002437  zone=Q2-skip  buffer_len=775
+2026-06-22 21:00:08  INFO      Bar close: dir_prob=0.480  S_t=0.00039  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 22:00:10  INFO      S_t check: S_t=0.000262  p20=0.000105  p60=0.000472  p90=0.002432  zone=Q2-skip  buffer_len=776
+2026-06-22 22:00:10  INFO      Bar close: dir_prob=0.480  S_t=0.00026  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-22 23:00:05  INFO      S_t check: S_t=0.000118  p20=0.000105  p60=0.000467  p90=0.002427  zone=Q2-skip  buffer_len=777
+2026-06-22 23:00:05  INFO      Bar close: dir_prob=0.480  S_t=0.00012  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-23 00:00:07  INFO      S_t check: S_t=0.000100  p20=0.000104  p60=0.000463  p90=0.002422  zone=Q1  buffer_len=778
+2026-06-23 00:00:07  INFO      Bar close: dir_prob=0.480  S_t=0.00010  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-23 01:00:09  INFO      S_t check: S_t=0.000274  p20=0.000104  p60=0.000461  p90=0.002417  zone=Q2-skip  buffer_len=779
+2026-06-23 01:00:09  INFO      Bar close: dir_prob=0.481  S_t=0.00027  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-23 02:00:11  INFO      S_t check: S_t=0.000640  p20=0.000104  p60=0.000465  p90=0.002412  zone=Q4-half  buffer_len=780
+2026-06-23 02:00:11  INFO      Bar close: dir_prob=0.482  S_t=0.00064  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-23 03:00:02  INFO      S_t check: S_t=0.000327  p20=0.000105  p60=0.000461  p90=0.002407  zone=Q2-skip  buffer_len=781
+2026-06-23 03:00:02  INFO      Bar close: dir_prob=0.482  S_t=0.00033  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-23 04:00:04  INFO      S_t check: S_t=0.000090  p20=0.000104  p60=0.000460  p90=0.002407  zone=Q1  buffer_len=782
+2026-06-23 04:00:04  INFO      Bar close: dir_prob=0.483  S_t=0.00009  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-23 05:00:06  INFO      S_t check: S_t=0.000067  p20=0.000103  p60=0.000460  p90=0.002407  zone=Q1  buffer_len=783
+2026-06-23 05:00:06  INFO      Bar close: dir_prob=0.483  S_t=0.00007  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-23 06:00:07  INFO      S_t check: S_t=0.000736  p20=0.000103  p60=0.000461  p90=0.002407  zone=Q4-half  buffer_len=784
+2026-06-23 06:00:07  INFO      Bar close: dir_prob=0.485  S_t=0.00074  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-23 07:00:09  INFO      S_t check: S_t=0.000212  p20=0.000104  p60=0.000460  p90=0.002407  zone=Q2-skip  buffer_len=785
+2026-06-23 07:00:09  INFO      Bar close: dir_prob=0.484  S_t=0.00021  signal=0.000  eff=0.000  lots=0.00  action=hold

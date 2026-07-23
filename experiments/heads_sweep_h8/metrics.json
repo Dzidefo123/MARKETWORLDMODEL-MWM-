@@ -1,0 +1,26 @@
+{
+  "horizon": 8,
+  "trend_window": 200,
+  "history_len": 3,
+  "dir_in_dim": null,
+  "structured_features": false,
+  "vol": {
+    "accuracy": 0.44273399014778325,
+    "auc": 0.6137628692498671
+  },
+  "direction": {
+    "accuracy": 0.5470297029702971,
+    "auc": 0.5426039536468984
+  },
+  "magnitude": {
+    "mae": 0.056769900023937225,
+    "pearson_r": -0.04788162559270859
+  },
+  "vol_thresholds": [
+    -0.6058753728866577,
+    0.25006815791130066
+  ],
+  "mag_threshold": 0.059853650629520416,
+  "n_train_labeled": 7746,
+  "n_val_labeled": 1616
+}

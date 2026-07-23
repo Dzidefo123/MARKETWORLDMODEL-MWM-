@@ -1,0 +1,75 @@
+2026-06-05 00:57:11  INFO      Logging to experiments\live_20260605_035711.log
+2026-06-05 00:57:11  INFO      Loaded encoder + predictor from ./experiments/checkpoints/best_model.pt (epoch 180)
+2026-06-05 00:57:11  INFO      Loaded execution heads from ./experiments/heads_gold  Dir AUC=0.543  Vol AUC=0.641
+2026-06-05 00:57:12  INFO      Config D: loaded M15 encoder (epoch 172)
+2026-06-05 00:57:12  INFO      Connected to MT5: MetaTrader 5 build 5836
+2026-06-05 00:57:12  INFO      Config D M15 execution layer enabled  S_t gate=0.000012
+2026-06-05 00:57:12  INFO      Warming up: fetching 548 bars for XAUUSD ...
+2026-06-05 00:57:16  ERROR     Failed to get ticker 'DX-Y.NYB' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 00:57:16  ERROR     
+1 Failed download:
+2026-06-05 00:57:16  ERROR     ['DX-Y.NYB']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 00:57:16  WARNING   yfinance returned empty data for dxy (DX-Y.NYB)
+2026-06-05 00:57:18  ERROR     Failed to get ticker '^GVZ' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 00:57:18  ERROR     
+1 Failed download:
+2026-06-05 00:57:18  ERROR     ['^GVZ']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 00:57:18  WARNING   yfinance returned empty data for gvz (^GVZ)
+2026-06-05 00:57:21  ERROR     Failed to get ticker 'TLT' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 00:57:21  ERROR     
+1 Failed download:
+2026-06-05 00:57:21  ERROR     ['TLT']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 00:57:21  WARNING   yfinance returned empty data for tlt (TLT)
+2026-06-05 00:57:23  ERROR     Failed to get ticker 'SI=F' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 00:57:23  ERROR     
+1 Failed download:
+2026-06-05 00:57:23  ERROR     ['SI=F']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 00:57:23  WARNING   yfinance returned empty data for silver (SI=F)
+2026-06-05 00:57:25  INFO      Warm-up complete. Surprise buffer: 250 bars.
+2026-06-05 00:57:25  INFO      M15 warm-up: fetching 596 M15 bars...
+2026-06-05 00:57:25  ERROR     Failed to get ticker 'DX-Y.NYB' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 00:57:25  ERROR     
+1 Failed download:
+2026-06-05 00:57:25  ERROR     ['DX-Y.NYB']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 00:57:25  WARNING   yfinance returned empty data for dxy (DX-Y.NYB)
+2026-06-05 00:57:25  ERROR     Failed to get ticker '^GVZ' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 00:57:25  ERROR     
+1 Failed download:
+2026-06-05 00:57:25  ERROR     ['^GVZ']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 00:57:25  WARNING   yfinance returned empty data for gvz (^GVZ)
+2026-06-05 00:57:25  ERROR     Failed to get ticker 'TLT' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 00:57:25  ERROR     
+1 Failed download:
+2026-06-05 00:57:25  ERROR     ['TLT']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 00:57:25  WARNING   yfinance returned empty data for tlt (TLT)
+2026-06-05 00:57:25  ERROR     Failed to get ticker 'SI=F' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 00:57:25  ERROR     
+1 Failed download:
+2026-06-05 00:57:25  ERROR     ['SI=F']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 00:57:25  WARNING   yfinance returned empty data for silver (SI=F)
+2026-06-05 00:57:27  INFO      M15 warm-up complete. Surprise buffer: 250 bars.
+2026-06-05 00:57:27  INFO      Live trader started. symbol=XAUUSD  dry_run=True  poll=10s  m15=enabled
+2026-06-05 01:00:07  ERROR     Failed to get ticker 'DX-Y.NYB' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 01:00:07  ERROR     
+1 Failed download:
+2026-06-05 01:00:07  ERROR     ['DX-Y.NYB']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 01:00:07  WARNING   yfinance returned empty data for dxy (DX-Y.NYB)
+2026-06-05 01:00:07  ERROR     Failed to get ticker '^GVZ' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 01:00:07  ERROR     
+1 Failed download:
+2026-06-05 01:00:07  ERROR     ['^GVZ']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 01:00:07  WARNING   yfinance returned empty data for gvz (^GVZ)
+2026-06-05 01:00:07  ERROR     Failed to get ticker 'TLT' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 01:00:07  ERROR     
+1 Failed download:
+2026-06-05 01:00:07  ERROR     ['TLT']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 01:00:07  WARNING   yfinance returned empty data for tlt (TLT)
+2026-06-05 01:00:07  ERROR     Failed to get ticker 'SI=F' reason: Expecting value: line 1 column 1 (char 0)
+2026-06-05 01:00:07  ERROR     
+1 Failed download:
+2026-06-05 01:00:07  ERROR     ['SI=F']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2026-06-05 01:00:07  WARNING   yfinance returned empty data for silver (SI=F)
+2026-06-05 01:00:07  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-05 01:00:07  INFO      Bar close: dir_prob=0.197  S_t=2.91092  signal=-1.000  eff=0.000  lots=0.00  action=hold
+2026-06-05 01:05:11  INFO      Interrupted — closing positions and disconnecting.
+2026-06-05 01:05:11  INFO      MT5 connection closed.

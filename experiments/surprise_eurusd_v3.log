@@ -1,0 +1,155 @@
+=================================================================
+MarketWorldModel - O3 Surprise / VoE Evaluation  [EURUSD]
+=================================================================
+
+[1/5] Loading checkpoint...
+  Loaded epoch 200  val_loss=0.0212
+
+[2/5] Building test dataset...
+  Using split_dates from checkpoint: {'train_end': '2024-10-31', 'val_end': '2024-11-14'}
+
+=======================================================
+DataPipeline.build()  [EURUSD]
+=======================================================
+
+[1/5] Fetching market data...
+
+=======================================================
+DataFetcher: 2024-05-14 -> 2026-05-13  |  interval=1h  |  EURUSD
+=======================================================
+  Loading eurusd from cache (EURUSD_X_1h_2024-05-14_2026-05-13.parquet)...
+
+  EURUSD bars: 11,396
+  Date range: 2024-07-07 -> 2026-05-12
+  Loading dxy from cache (DX_Y.NYB_1h_2024-05-14_2026-05-13.parquet)...
+  dxy     : 11,923 bars
+  Loading evz from cache (VIX_1h_2024-05-14_2026-05-13.parquet)...
+  evz     : 7,107 bars
+  Loading tlt from cache (TLT_1h_2024-05-14_2026-05-13.parquet)...
+  tlt     : 3,476 bars
+  Loading shy from cache (SHY_1h_2024-05-14_2026-05-13.parquet)...
+  shy     : 3,476 bars
+  Loading gbpusd from cache (GBPUSD_X_1h_2024-05-14_2026-05-13.parquet)...
+  gbpusd  : 11,397 bars
+
+  Macro columns:  ['dxy', 'evz', 'tlt', 'shy', 'gbpusd']
+  Missing values: {'dxy': 20, 'evz': 18, 'tlt': 265, 'shy': 265, 'gbpusd': 0}
+  Raw bars: 11,396
+
+[2/5] Computing 52 features...
+  Computing Group A: Returns...
+  Computing Group B: Volatility...
+  Computing Group C: Momentum/Trend...
+  Computing Group D: Price Structure...
+  Computing Group E: Session/Time...
+  Computing Group F: Macro (eurusd)...
+
+  Feature matrix shape: (11146, 52)
+  NaN count after cleanup: 0
+  Timestamp range: 2024-07-22 11:00:00 -> 2026-05-12 22:00:00
+  After warm-up trim: (11146, 52)
+
+[3/5] Building action vectors...
+  Action shape: (11146, 5)  (5 macro signals per bar)
+
+[4/5] Applying rolling z-score normalization...
+  Clipped 1,552 values beyond +-5 sigma
+  Normalized stats: mean=0.0050  std=1.0470
+
+[5/5] Creating walk-forward train/val/test splits...
+  Using date-based splits: train_end=2024-10-31, val_end=2024-11-14
+  Train: 1,726 bars  (2024-07-22 -> 2024-10-31)
+  Val:   238 bars  (2024-10-31 -> 2024-11-14)
+  Test:  9,182 bars  (2024-11-14 -> 2026-05-12)
+  MarketWindowDataset: 1726 bars -> 1677 samples (lookback=48, stride=1, history_len=3)
+  MarketWindowDataset: 238 bars -> 48 samples (lookback=48, stride=4, history_len=3)
+  MarketWindowDataset: 9182 bars -> 9133 samples (lookback=48, stride=1, history_len=3)
+
+----------------------------------------
+Pipeline complete.
+  Train samples: 1,677
+  Val samples:   48
+  Test samples:  9,133
+  Feature dim:   52
+  Action dim:    5
+  Lookback:      48 bars
+----------------------------------------
+  Test samples: 9,133
+  Test window:  2024-11-14 -> 2026-05-08
+
+[3/5] Loading trained models...
+
+Building MarketEncoder:
+  PatchEmbedding: 48 bars ? 52 features -> 12 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 13 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     888,448
+  Trainable parameters: 888,448
+  CausalPredictor: 1,424,448 parameters  (6 layers ? 4 heads ? 128 dims  history=3  cond_dim=64)
+
+[4/5] Computing surprise timeseries...
+  Surprise computed for 9,133 bars
+  Mean: 0.0010   Std: 0.0039
+  Min:  0.0000   Max: 0.1201
+  90th pct: 0.0020
+
+[5/5] Detecting extreme events and running statistics...
+
+  Event detection summary:
+    Total bars:          9,133
+    Extreme returns:     522 (5.7%)
+    High GVZ:            1,827 (20.0%)
+    Vol regime jumps:    914 (10.0%)
+    Any extreme event:   2,888 (31.6%)
+
+=================================================================
+O3 VIOLATION-OF-EXPECTATION RESULTS
+=================================================================
+
+Event type              N ext  Med ext  Med nrm  Ratio      r        p sig
+---------------------------------------------------------------------------
+  extreme_return          522   0.0002   0.0002   1.21x -0.051   0.0254 *
+  high_gvz               1827   0.0002   0.0002   1.09x -0.026   0.0419 *
+  vol_jump                914   0.0002   0.0002   1.16x -0.040   0.0240 *
+  extreme_any            2888   0.0002   0.0002   1.11x -0.024   0.0307 *
+
+  Spearman(surprise, GVZ): ?=-0.051  p=0.0000  *
+
+=================================================================
+PAPER SUMMARY (for Section 4.3)
+=================================================================
+
+  "We evaluate O3 using the held-out test set. Extreme market events
+  (|return| > 2? or GVZ above 80th percentile) account for
+  31.6% of test bars. The world model assigns
+  1.11? higher median surprise to extreme bars than to
+  normal bars (median: 0.0002 vs
+  0.0002, Mann-Whitney p < 0.05,
+  effect size r=-0.024 [small]).
+  Spearman correlation between surprise and GVZ level:
+  ?=-0.051
+  (p=0.0000).
+  These results confirm that MarketWorldModel reliably detects
+  violations of learned market dynamics."
+
+
+?? TOP 10 SURPRISE EVENTS ??
+  # 1  2025-08-22  surprise=0.0019  ret=+0.3172  GVZ=-0.87  Asian
+  # 2  2025-08-22  surprise=0.0334  ret=-0.7787  GVZ=-0.87  Asian
+  # 3  2025-08-22  surprise=0.0002  ret=+0.9130  GVZ=-0.86  Asian
+  # 4  2025-08-22  surprise=0.0058  ret=-1.4771  GVZ=-0.86  Asian
+  # 5  2025-08-21  surprise=0.1201  ret=-0.4816  GVZ=-0.87  Asian
+  # 6  2025-08-21  surprise=0.0011  ret=+2.5226  GVZ=-0.87  Asian
+  # 7  2025-08-22  surprise=0.0013  ret=-0.3822  GVZ=-0.87  Asian
+  # 8  2025-08-22  surprise=0.0033  ret=-0.3813  GVZ=-0.87  Asian
+  # 9  2025-08-22  surprise=0.0254  ret=+0.0148  GVZ=-0.86  Asian
+  #10  2025-08-22  surprise=0.0004  ret=-0.2933  GVZ=-0.25  London
+
+Saved:
+  Time series -> ./experiments/surprise_timeseries_eurusd.json
+  Statistics  -> ./experiments/surprise_results_eurusd.json
+
+? O3 surprise evaluation complete

@@ -1,0 +1,2059 @@
+============================================================
+MarketWorldModel - O1 Training  [EURUSD]
+Log: ./experiments/train_eurusd.log
+============================================================
+
+Device: cpu
+
+[DATA]
+
+=======================================================
+DataPipeline.build()  [EURUSD]
+=======================================================
+
+[1/5] Fetching market data...
+
+=======================================================
+DataFetcher: 2024-05-14 -> 2026-05-13  |  interval=1h  |  EURUSD
+=======================================================
+  Downloading eurusd (EURUSD=X)... (13 chunks)  11,396 bars downloaded
+
+  EURUSD bars: 11,396
+  Date range: 2024-07-07 -> 2026-05-12
+  Downloading dxy (DX-Y.NYB)... (14 chunks)  11,923 bars downloaded
+  dxy     : 11,923 bars
+  Downloading evz (^VIX)... (14 chunks)  7,107 bars downloaded
+  evz     : 7,107 bars
+  Downloading tlt (TLT)... (14 chunks)  3,476 bars downloaded
+  tlt     : 3,476 bars
+  Downloading shy (SHY)... (14 chunks)  3,476 bars downloaded
+  shy     : 3,476 bars
+  Downloading gbpusd (GBPUSD=X)... (13 chunks)  11,397 bars downloaded
+  gbpusd  : 11,397 bars
+
+  Macro columns:  ['dxy', 'evz', 'tlt', 'shy', 'gbpusd']
+  Missing values: {'dxy': 20, 'evz': 18, 'tlt': 265, 'shy': 265, 'gbpusd': 0}
+  Raw bars: 11,396
+
+[2/5] Computing 52 features...
+  Computing Group A: Returns...
+  Computing Group B: Volatility...
+  Computing Group C: Momentum/Trend...
+  Computing Group D: Price Structure...
+  Computing Group E: Session/Time...
+  Computing Group F: Macro (eurusd)...
+
+  Feature matrix shape: (11146, 52)
+  NaN count after cleanup: 0
+  Timestamp range: 2024-07-22 11:00:00 -> 2026-05-12 22:00:00
+  After warm-up trim: (11146, 52)
+
+[3/5] Building action vectors...
+  Action shape: (11146, 5)  (5 macro signals per bar)
+
+[4/5] Applying rolling z-score normalization...
+  Clipped 1,552 values beyond +-5 sigma
+  Normalized stats: mean=0.0050  std=1.0470
+
+[5/5] Creating walk-forward train/val/test splits...
+  Using date-based splits: train_end=2024-10-31, val_end=2024-11-14
+  Train: 1,726 bars  (2024-07-22 -> 2024-10-31)
+  Val:   238 bars  (2024-10-31 -> 2024-11-14)
+  Test:  9,182 bars  (2024-11-14 -> 2026-05-12)
+  MarketWindowDataset: 1726 bars -> 1677 samples (lookback=48, stride=1, history_len=3)
+  MarketWindowDataset: 238 bars -> 48 samples (lookback=48, stride=4, history_len=3)
+  MarketWindowDataset: 9182 bars -> 9133 samples (lookback=48, stride=1, history_len=3)
+
+----------------------------------------
+Pipeline complete.
+  Train samples: 1,677
+  Val samples:   48
+  Test samples:  9,133
+  Feature dim:   52
+  Action dim:    5
+  Lookback:      48 bars
+----------------------------------------
+Train batches per epoch: 27
+Val   batches per epoch: 1
+
+[MODELS]
+
+Building MarketEncoder:
+  PatchEmbedding: 48 bars ? 52 features -> 12 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 13 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     888,448
+  Trainable parameters: 888,448
+  CausalPredictor: 1,424,448 parameters  (6 layers ? 4 heads ? 128 dims  history=3  cond_dim=64)
+
+Total trainable parameters: 2,312,896
+
+[TRAINING] 200 epochs
+------------------------------------------------------------
+  E001 S0000 | total=0.5293  pred=0.5147  sigreg=0.1460  lr=6.00e-05
+  E001 S0020 | total=0.1522  pred=0.1364  sigreg=0.1573  lr=6.00e-05
+
+  ?? Epoch   1/200 ??
+     Train: total=0.2457  pred=0.2303  sigreg=0.1542
+     Val:   total=0.0878  pred=0.0671  sigreg=0.2066
+     LR: 6.00e-05
+
+  Checkpoint saved [val=0.0878]
+  E002 S0000 | total=0.1123  pred=0.0960  sigreg=0.1629  lr=1.20e-04
+  E002 S0020 | total=0.0585  pred=0.0400  sigreg=0.1849  lr=1.20e-04
+
+  ?? Epoch   2/200 ??
+     Train: total=0.0734  pred=0.0558  sigreg=0.1757
+     Val:   total=0.0366  pred=0.0157  sigreg=0.2097
+     LR: 1.20e-04
+
+  Checkpoint saved [val=0.0366]
+  E003 S0000 | total=0.0546  pred=0.0363  sigreg=0.1832  lr=1.80e-04
+  E003 S0020 | total=0.0402  pred=0.0215  sigreg=0.1872  lr=1.80e-04
+
+  ?? Epoch   3/200 ??
+     Train: total=0.0447  pred=0.0260  sigreg=0.1862
+     Val:   total=0.0285  pred=0.0074  sigreg=0.2112
+     LR: 1.80e-04
+
+  Checkpoint saved [val=0.0285]
+  E004 S0000 | total=0.0379  pred=0.0191  sigreg=0.1873  lr=2.40e-04
+  E004 S0020 | total=0.0332  pred=0.0149  sigreg=0.1825  lr=2.40e-04
+
+  ?? Epoch   4/200 ??
+     Train: total=0.0352  pred=0.0168  sigreg=0.1843
+     Val:   total=0.0236  pred=0.0031  sigreg=0.2057
+     LR: 2.40e-04
+
+  Checkpoint saved [val=0.0236]
+  E005 S0000 | total=0.0314  pred=0.0131  sigreg=0.1824  lr=3.00e-04
+  E005 S0020 | total=0.0286  pred=0.0112  sigreg=0.1736  lr=3.00e-04
+
+  ?? Epoch   5/200 ??
+     Train: total=0.0306  pred=0.0129  sigreg=0.1771
+     Val:   total=0.0222  pred=0.0020  sigreg=0.2020
+     LR: 3.00e-04
+
+  Checkpoint saved [val=0.0222]
+  E006 S0000 | total=0.0288  pred=0.0116  sigreg=0.1723  lr=3.00e-04
+  E006 S0020 | total=0.0264  pred=0.0099  sigreg=0.1657  lr=3.00e-04
+
+  ?? Epoch   6/200 ??
+     Train: total=0.0277  pred=0.0109  sigreg=0.1678
+     Val:   total=0.0213  pred=0.0017  sigreg=0.1966
+     LR: 3.00e-04
+
+  Checkpoint saved [val=0.0213]
+  E007 S0000 | total=0.0258  pred=0.0098  sigreg=0.1606  lr=3.00e-04
+  E007 S0020 | total=0.0288  pred=0.0131  sigreg=0.1572  lr=3.00e-04
+
+  ?? Epoch   7/200 ??
+     Train: total=0.0254  pred=0.0099  sigreg=0.1559
+     Val:   total=0.0207  pred=0.0013  sigreg=0.1939
+     LR: 3.00e-04
+
+  Checkpoint saved [val=0.0207]
+  E008 S0000 | total=0.0230  pred=0.0083  sigreg=0.1467  lr=3.00e-04
+  E008 S0020 | total=0.0221  pred=0.0078  sigreg=0.1429  lr=3.00e-04
+
+  ?? Epoch   8/200 ??
+     Train: total=0.0235  pred=0.0090  sigreg=0.1444
+     Val:   total=0.0193  pred=0.0012  sigreg=0.1818
+     LR: 3.00e-04
+
+  Checkpoint saved [val=0.0193]
+  E009 S0000 | total=0.0258  pred=0.0117  sigreg=0.1410  lr=3.00e-04
+  E009 S0020 | total=0.0213  pred=0.0078  sigreg=0.1343  lr=3.00e-04
+
+  ?? Epoch   9/200 ??
+     Train: total=0.0224  pred=0.0088  sigreg=0.1360
+     Val:   total=0.0190  pred=0.0008  sigreg=0.1817
+     LR: 3.00e-04
+
+  Checkpoint saved [val=0.0190]
+  E010 S0000 | total=0.0212  pred=0.0084  sigreg=0.1286  lr=3.00e-04
+  E010 S0020 | total=0.0219  pred=0.0090  sigreg=0.1291  lr=3.00e-04
+
+  ?? Epoch  10/200 ??
+     Train: total=0.0230  pred=0.0101  sigreg=0.1294
+     Val:   total=0.0188  pred=0.0010  sigreg=0.1773
+     LR: 3.00e-04
+
+  Checkpoint saved [val=0.0188]
+  E011 S0000 | total=0.0204  pred=0.0078  sigreg=0.1260  lr=3.00e-04
+  E011 S0020 | total=0.0206  pred=0.0080  sigreg=0.1259  lr=3.00e-04
+
+  ?? Epoch  11/200 ??
+     Train: total=0.0213  pred=0.0086  sigreg=0.1267
+     Val:   total=0.0188  pred=0.0009  sigreg=0.1794
+     LR: 3.00e-04
+
+  E012 S0000 | total=0.0191  pred=0.0063  sigreg=0.1284  lr=2.99e-04
+  E012 S0020 | total=0.0202  pred=0.0076  sigreg=0.1260  lr=2.99e-04
+
+  ?? Epoch  12/200 ??
+     Train: total=0.0196  pred=0.0071  sigreg=0.1247
+     Val:   total=0.0193  pred=0.0009  sigreg=0.1840
+     LR: 2.99e-04
+
+  E013 S0000 | total=0.0191  pred=0.0068  sigreg=0.1229  lr=2.99e-04
+  E013 S0020 | total=0.0211  pred=0.0092  sigreg=0.1187  lr=2.99e-04
+
+  ?? Epoch  13/200 ??
+     Train: total=0.0219  pred=0.0098  sigreg=0.1213
+     Val:   total=0.0233  pred=0.0025  sigreg=0.2072
+     LR: 2.99e-04
+
+  E014 S0000 | total=0.0203  pred=0.0083  sigreg=0.1194  lr=2.99e-04
+  E014 S0020 | total=0.0192  pred=0.0066  sigreg=0.1259  lr=2.99e-04
+
+  ?? Epoch  14/200 ??
+     Train: total=0.0204  pred=0.0079  sigreg=0.1249
+     Val:   total=0.0199  pred=0.0010  sigreg=0.1890
+     LR: 2.99e-04
+
+  E015 S0000 | total=0.0181  pred=0.0058  sigreg=0.1228  lr=2.98e-04
+  E015 S0020 | total=0.0188  pred=0.0065  sigreg=0.1228  lr=2.98e-04
+
+  ?? Epoch  15/200 ??
+     Train: total=0.0184  pred=0.0062  sigreg=0.1225
+     Val:   total=0.0190  pred=0.0007  sigreg=0.1834
+     LR: 2.98e-04
+
+  E016 S0000 | total=0.0177  pred=0.0055  sigreg=0.1227  lr=2.98e-04
+  E016 S0020 | total=0.0173  pred=0.0056  sigreg=0.1177  lr=2.98e-04
+
+  ?? Epoch  16/200 ??
+     Train: total=0.0182  pred=0.0062  sigreg=0.1191
+     Val:   total=0.0211  pred=0.0009  sigreg=0.2021
+     LR: 2.98e-04
+
+  E017 S0000 | total=0.0180  pred=0.0059  sigreg=0.1205  lr=2.98e-04
+  E017 S0020 | total=0.0168  pred=0.0053  sigreg=0.1147  lr=2.98e-04
+
+  ?? Epoch  17/200 ??
+     Train: total=0.0176  pred=0.0059  sigreg=0.1173
+     Val:   total=0.0187  pred=0.0010  sigreg=0.1775
+     LR: 2.98e-04
+
+  Checkpoint saved [val=0.0187]
+  E018 S0000 | total=0.0167  pred=0.0053  sigreg=0.1133  lr=2.97e-04
+  E018 S0020 | total=0.0171  pred=0.0051  sigreg=0.1198  lr=2.97e-04
+
+  ?? Epoch  18/200 ??
+     Train: total=0.0174  pred=0.0058  sigreg=0.1163
+     Val:   total=0.0190  pred=0.0012  sigreg=0.1787
+     LR: 2.97e-04
+
+  E019 S0000 | total=0.0168  pred=0.0053  sigreg=0.1153  lr=2.97e-04
+  E019 S0020 | total=0.0169  pred=0.0054  sigreg=0.1158  lr=2.97e-04
+
+  ?? Epoch  19/200 ??
+     Train: total=0.0174  pred=0.0059  sigreg=0.1147
+     Val:   total=0.0190  pred=0.0013  sigreg=0.1769
+     LR: 2.97e-04
+
+  E020 S0000 | total=0.0167  pred=0.0052  sigreg=0.1154  lr=2.96e-04
+  E020 S0020 | total=0.0160  pred=0.0048  sigreg=0.1125  lr=2.96e-04
+
+  ?? Epoch  20/200 ??
+     Train: total=0.0174  pred=0.0061  sigreg=0.1128
+     Val:   total=0.0189  pred=0.0007  sigreg=0.1817
+     LR: 2.96e-04
+
+  E021 S0000 | total=0.0163  pred=0.0047  sigreg=0.1153  lr=2.96e-04
+  E021 S0020 | total=0.0162  pred=0.0052  sigreg=0.1102  lr=2.96e-04
+
+  ?? Epoch  21/200 ??
+     Train: total=0.0189  pred=0.0076  sigreg=0.1132
+     Val:   total=0.0178  pred=0.0009  sigreg=0.1692
+     LR: 2.96e-04
+
+  Checkpoint saved [val=0.0178]
+  E022 S0000 | total=0.0169  pred=0.0054  sigreg=0.1143  lr=2.95e-04
+  E022 S0020 | total=0.0173  pred=0.0056  sigreg=0.1170  lr=2.95e-04
+
+  ?? Epoch  22/200 ??
+     Train: total=0.0170  pred=0.0055  sigreg=0.1148
+     Val:   total=0.0151  pred=0.0008  sigreg=0.1431
+     LR: 2.95e-04
+
+  Checkpoint saved [val=0.0151]
+  E023 S0000 | total=0.0182  pred=0.0067  sigreg=0.1150  lr=2.94e-04
+  E023 S0020 | total=0.0160  pred=0.0050  sigreg=0.1102  lr=2.94e-04
+
+  ?? Epoch  23/200 ??
+     Train: total=0.0163  pred=0.0051  sigreg=0.1124
+     Val:   total=0.0160  pred=0.0008  sigreg=0.1513
+     LR: 2.94e-04
+
+  E024 S0000 | total=0.0158  pred=0.0050  sigreg=0.1077  lr=2.94e-04
+  E024 S0020 | total=0.0160  pred=0.0057  sigreg=0.1024  lr=2.94e-04
+
+  ?? Epoch  24/200 ??
+     Train: total=0.0159  pred=0.0051  sigreg=0.1076
+     Val:   total=0.0171  pred=0.0009  sigreg=0.1627
+     LR: 2.94e-04
+
+  E025 S0000 | total=0.0154  pred=0.0046  sigreg=0.1074  lr=2.93e-04
+  E025 S0020 | total=0.0156  pred=0.0052  sigreg=0.1047  lr=2.93e-04
+
+  ?? Epoch  25/200 ??
+     Train: total=0.0153  pred=0.0049  sigreg=0.1039
+     Val:   total=0.0187  pred=0.0010  sigreg=0.1766
+     LR: 2.93e-04
+
+  E026 S0000 | total=0.0144  pred=0.0044  sigreg=0.0997  lr=2.92e-04
+  E026 S0020 | total=0.0151  pred=0.0053  sigreg=0.0978  lr=2.92e-04
+
+  ?? Epoch  26/200 ??
+     Train: total=0.0152  pred=0.0051  sigreg=0.1007
+     Val:   total=0.0199  pred=0.0011  sigreg=0.1882
+     LR: 2.92e-04
+
+  E027 S0000 | total=0.0151  pred=0.0053  sigreg=0.0977  lr=2.91e-04
+  E027 S0020 | total=0.0144  pred=0.0046  sigreg=0.0981  lr=2.91e-04
+
+  ?? Epoch  27/200 ??
+     Train: total=0.0149  pred=0.0050  sigreg=0.0988
+     Val:   total=0.0183  pred=0.0009  sigreg=0.1740
+     LR: 2.91e-04
+
+  E028 S0000 | total=0.0143  pred=0.0048  sigreg=0.0956  lr=2.91e-04
+  E028 S0020 | total=0.0138  pred=0.0049  sigreg=0.0890  lr=2.91e-04
+
+  ?? Epoch  28/200 ??
+     Train: total=0.0146  pred=0.0050  sigreg=0.0961
+     Val:   total=0.0203  pred=0.0015  sigreg=0.1884
+     LR: 2.91e-04
+
+  E029 S0000 | total=0.0144  pred=0.0050  sigreg=0.0937  lr=2.90e-04
+  E029 S0020 | total=0.0138  pred=0.0046  sigreg=0.0917  lr=2.90e-04
+
+  ?? Epoch  29/200 ??
+     Train: total=0.0145  pred=0.0053  sigreg=0.0926
+     Val:   total=0.0228  pred=0.0028  sigreg=0.1998
+     LR: 2.90e-04
+
+  E030 S0000 | total=0.0156  pred=0.0067  sigreg=0.0898  lr=2.89e-04
+  E030 S0020 | total=0.0145  pred=0.0057  sigreg=0.0887  lr=2.89e-04
+
+  ?? Epoch  30/200 ??
+     Train: total=0.0144  pred=0.0054  sigreg=0.0897
+     Val:   total=0.0218  pred=0.0009  sigreg=0.2092
+     LR: 2.89e-04
+
+  E031 S0000 | total=0.0141  pred=0.0050  sigreg=0.0916  lr=2.88e-04
+  E031 S0020 | total=0.0137  pred=0.0050  sigreg=0.0864  lr=2.88e-04
+
+  ?? Epoch  31/200 ??
+     Train: total=0.0143  pred=0.0055  sigreg=0.0880
+     Val:   total=0.0211  pred=0.0013  sigreg=0.1976
+     LR: 2.88e-04
+
+  E032 S0000 | total=0.0132  pred=0.0046  sigreg=0.0860  lr=2.87e-04
+  E032 S0020 | total=0.0136  pred=0.0048  sigreg=0.0878  lr=2.87e-04
+
+  ?? Epoch  32/200 ??
+     Train: total=0.0136  pred=0.0051  sigreg=0.0855
+     Val:   total=0.0215  pred=0.0010  sigreg=0.2041
+     LR: 2.87e-04
+
+  E033 S0000 | total=0.0139  pred=0.0052  sigreg=0.0874  lr=2.86e-04
+  E033 S0020 | total=0.0147  pred=0.0064  sigreg=0.0830  lr=2.86e-04
+
+  ?? Epoch  33/200 ??
+     Train: total=0.0135  pred=0.0052  sigreg=0.0834
+     Val:   total=0.0211  pred=0.0011  sigreg=0.2000
+     LR: 2.86e-04
+
+  E034 S0000 | total=0.0138  pred=0.0055  sigreg=0.0832  lr=2.85e-04
+  E034 S0020 | total=0.0135  pred=0.0055  sigreg=0.0809  lr=2.85e-04
+
+  ?? Epoch  34/200 ??
+     Train: total=0.0134  pred=0.0054  sigreg=0.0803
+     Val:   total=0.0214  pred=0.0009  sigreg=0.2050
+     LR: 2.85e-04
+
+  E035 S0000 | total=0.0120  pred=0.0044  sigreg=0.0766  lr=2.84e-04
+  E035 S0020 | total=0.0126  pred=0.0053  sigreg=0.0727  lr=2.84e-04
+
+  ?? Epoch  35/200 ??
+     Train: total=0.0128  pred=0.0050  sigreg=0.0783
+     Val:   total=0.0214  pred=0.0007  sigreg=0.2069
+     LR: 2.84e-04
+
+  E036 S0000 | total=0.0120  pred=0.0044  sigreg=0.0755  lr=2.83e-04
+  E036 S0020 | total=0.0126  pred=0.0044  sigreg=0.0822  lr=2.83e-04
+
+  ?? Epoch  36/200 ??
+     Train: total=0.0127  pred=0.0048  sigreg=0.0783
+     Val:   total=0.0248  pred=0.0015  sigreg=0.2325
+     LR: 2.83e-04
+
+  E037 S0000 | total=0.0133  pred=0.0052  sigreg=0.0803  lr=2.82e-04
+  E037 S0020 | total=0.0121  pred=0.0044  sigreg=0.0772  lr=2.82e-04
+
+  ?? Epoch  37/200 ??
+     Train: total=0.0126  pred=0.0048  sigreg=0.0778
+     Val:   total=0.0223  pred=0.0007  sigreg=0.2164
+     LR: 2.82e-04
+
+  E038 S0000 | total=0.0121  pred=0.0042  sigreg=0.0782  lr=2.81e-04
+  E038 S0020 | total=0.0115  pred=0.0040  sigreg=0.0745  lr=2.81e-04
+
+  ?? Epoch  38/200 ??
+     Train: total=0.0122  pred=0.0046  sigreg=0.0765
+     Val:   total=0.0242  pred=0.0017  sigreg=0.2248
+     LR: 2.81e-04
+
+  E039 S0000 | total=0.0133  pred=0.0059  sigreg=0.0741  lr=2.79e-04
+  E039 S0020 | total=0.0109  pred=0.0036  sigreg=0.0734  lr=2.79e-04
+
+  ?? Epoch  39/200 ??
+     Train: total=0.0125  pred=0.0050  sigreg=0.0750
+     Val:   total=0.0245  pred=0.0018  sigreg=0.2271
+     LR: 2.79e-04
+
+  E040 S0000 | total=0.0125  pred=0.0050  sigreg=0.0747  lr=2.78e-04
+  E040 S0020 | total=0.0111  pred=0.0039  sigreg=0.0721  lr=2.78e-04
+
+  ?? Epoch  40/200 ??
+     Train: total=0.0123  pred=0.0049  sigreg=0.0741
+     Val:   total=0.0216  pred=0.0006  sigreg=0.2101
+     LR: 2.78e-04
+
+  E041 S0000 | total=0.0120  pred=0.0047  sigreg=0.0731  lr=2.77e-04
+  E041 S0020 | total=0.0120  pred=0.0047  sigreg=0.0721  lr=2.77e-04
+
+  ?? Epoch  41/200 ??
+     Train: total=0.0125  pred=0.0050  sigreg=0.0751
+     Val:   total=0.0243  pred=0.0013  sigreg=0.2303
+     LR: 2.77e-04
+
+  E042 S0000 | total=0.0117  pred=0.0042  sigreg=0.0750  lr=2.75e-04
+  E042 S0020 | total=0.0127  pred=0.0048  sigreg=0.0792  lr=2.75e-04
+
+  ?? Epoch  42/200 ??
+     Train: total=0.0118  pred=0.0042  sigreg=0.0762
+     Val:   total=0.0243  pred=0.0012  sigreg=0.2315
+     LR: 2.75e-04
+
+  E043 S0000 | total=0.0114  pred=0.0038  sigreg=0.0760  lr=2.74e-04
+  E043 S0020 | total=0.0117  pred=0.0045  sigreg=0.0723  lr=2.74e-04
+
+  ?? Epoch  43/200 ??
+     Train: total=0.0115  pred=0.0040  sigreg=0.0753
+     Val:   total=0.0216  pred=0.0008  sigreg=0.2074
+     LR: 2.74e-04
+
+  E044 S0000 | total=0.0114  pred=0.0039  sigreg=0.0754  lr=2.73e-04
+  E044 S0020 | total=0.0128  pred=0.0051  sigreg=0.0771  lr=2.73e-04
+
+  ?? Epoch  44/200 ??
+     Train: total=0.0114  pred=0.0040  sigreg=0.0741
+     Val:   total=0.0242  pred=0.0011  sigreg=0.2304
+     LR: 2.73e-04
+
+  E045 S0000 | total=0.0117  pred=0.0041  sigreg=0.0763  lr=2.71e-04
+  E045 S0020 | total=0.0121  pred=0.0046  sigreg=0.0749  lr=2.71e-04
+
+  ?? Epoch  45/200 ??
+     Train: total=0.0116  pred=0.0043  sigreg=0.0736
+     Val:   total=0.0251  pred=0.0011  sigreg=0.2401
+     LR: 2.71e-04
+
+  E046 S0000 | total=0.0141  pred=0.0065  sigreg=0.0764  lr=2.70e-04
+  E046 S0020 | total=0.0113  pred=0.0041  sigreg=0.0725  lr=2.70e-04
+
+  ?? Epoch  46/200 ??
+     Train: total=0.0121  pred=0.0047  sigreg=0.0736
+     Val:   total=0.0266  pred=0.0015  sigreg=0.2506
+     LR: 2.70e-04
+
+  E047 S0000 | total=0.0120  pred=0.0047  sigreg=0.0722  lr=2.68e-04
+  E047 S0020 | total=0.0109  pred=0.0037  sigreg=0.0717  lr=2.68e-04
+
+  ?? Epoch  47/200 ??
+     Train: total=0.0118  pred=0.0043  sigreg=0.0743
+     Val:   total=0.0228  pred=0.0015  sigreg=0.2128
+     LR: 2.68e-04
+
+  E048 S0000 | total=0.0112  pred=0.0037  sigreg=0.0751  lr=2.67e-04
+  E048 S0020 | total=0.0115  pred=0.0038  sigreg=0.0779  lr=2.67e-04
+
+  ?? Epoch  48/200 ??
+     Train: total=0.0117  pred=0.0043  sigreg=0.0740
+     Val:   total=0.0209  pred=0.0006  sigreg=0.2034
+     LR: 2.67e-04
+
+  E049 S0000 | total=0.0106  pred=0.0034  sigreg=0.0715  lr=2.65e-04
+  E049 S0020 | total=0.0108  pred=0.0036  sigreg=0.0726  lr=2.65e-04
+
+  ?? Epoch  49/200 ??
+     Train: total=0.0114  pred=0.0040  sigreg=0.0743
+     Val:   total=0.0254  pred=0.0006  sigreg=0.2479
+     LR: 2.65e-04
+
+  E050 S0000 | total=0.0105  pred=0.0035  sigreg=0.0709  lr=2.64e-04
+  E050 S0020 | total=0.0107  pred=0.0034  sigreg=0.0726  lr=2.64e-04
+
+  ?? Epoch  50/200 ??
+     Train: total=0.0112  pred=0.0038  sigreg=0.0736
+     Val:   total=0.0258  pred=0.0010  sigreg=0.2476
+     LR: 2.64e-04
+
+  E051 S0000 | total=0.0113  pred=0.0039  sigreg=0.0736  lr=2.62e-04
+  E051 S0020 | total=0.0115  pred=0.0041  sigreg=0.0747  lr=2.62e-04
+
+  ?? Epoch  51/200 ??
+     Train: total=0.0109  pred=0.0037  sigreg=0.0725
+     Val:   total=0.0241  pred=0.0008  sigreg=0.2325
+     LR: 2.62e-04
+
+  E052 S0000 | total=0.0113  pred=0.0040  sigreg=0.0735  lr=2.61e-04
+  E052 S0020 | total=0.0105  pred=0.0033  sigreg=0.0722  lr=2.61e-04
+
+  ?? Epoch  52/200 ??
+     Train: total=0.0108  pred=0.0035  sigreg=0.0726
+     Val:   total=0.0239  pred=0.0009  sigreg=0.2304
+     LR: 2.61e-04
+
+  E053 S0000 | total=0.0120  pred=0.0042  sigreg=0.0777  lr=2.59e-04
+  E053 S0020 | total=0.0104  pred=0.0033  sigreg=0.0716  lr=2.59e-04
+
+  ?? Epoch  53/200 ??
+     Train: total=0.0105  pred=0.0032  sigreg=0.0727
+     Val:   total=0.0247  pred=0.0005  sigreg=0.2420
+     LR: 2.59e-04
+
+  E054 S0000 | total=0.0104  pred=0.0035  sigreg=0.0693  lr=2.57e-04
+  E054 S0020 | total=0.0102  pred=0.0030  sigreg=0.0722  lr=2.57e-04
+
+  ?? Epoch  54/200 ??
+     Train: total=0.0104  pred=0.0032  sigreg=0.0723
+     Val:   total=0.0244  pred=0.0007  sigreg=0.2366
+     LR: 2.57e-04
+
+  E055 S0000 | total=0.0108  pred=0.0035  sigreg=0.0731  lr=2.56e-04
+  E055 S0020 | total=0.0118  pred=0.0042  sigreg=0.0759  lr=2.56e-04
+
+  ?? Epoch  55/200 ??
+     Train: total=0.0107  pred=0.0034  sigreg=0.0734
+     Val:   total=0.0252  pred=0.0011  sigreg=0.2412
+     LR: 2.56e-04
+
+  E056 S0000 | total=0.0102  pred=0.0032  sigreg=0.0702  lr=2.54e-04
+  E056 S0020 | total=0.0101  pred=0.0029  sigreg=0.0723  lr=2.54e-04
+
+  ?? Epoch  56/200 ??
+     Train: total=0.0104  pred=0.0032  sigreg=0.0721
+     Val:   total=0.0235  pred=0.0005  sigreg=0.2292
+     LR: 2.54e-04
+
+  E057 S0000 | total=0.0105  pred=0.0031  sigreg=0.0738  lr=2.52e-04
+  E057 S0020 | total=0.0101  pred=0.0030  sigreg=0.0708  lr=2.52e-04
+
+  ?? Epoch  57/200 ??
+     Train: total=0.0104  pred=0.0031  sigreg=0.0729
+     Val:   total=0.0245  pred=0.0007  sigreg=0.2375
+     LR: 2.52e-04
+
+  E058 S0000 | total=0.0108  pred=0.0036  sigreg=0.0717  lr=2.50e-04
+  E058 S0020 | total=0.0108  pred=0.0036  sigreg=0.0723  lr=2.50e-04
+
+  ?? Epoch  58/200 ??
+     Train: total=0.0107  pred=0.0034  sigreg=0.0726
+     Val:   total=0.0229  pred=0.0006  sigreg=0.2224
+     LR: 2.50e-04
+
+  E059 S0000 | total=0.0108  pred=0.0036  sigreg=0.0716  lr=2.49e-04
+  E059 S0020 | total=0.0106  pred=0.0029  sigreg=0.0777  lr=2.49e-04
+
+  ?? Epoch  59/200 ??
+     Train: total=0.0106  pred=0.0032  sigreg=0.0736
+     Val:   total=0.0244  pred=0.0006  sigreg=0.2372
+     LR: 2.49e-04
+
+  E060 S0000 | total=0.0101  pred=0.0028  sigreg=0.0723  lr=2.47e-04
+  E060 S0020 | total=0.0107  pred=0.0032  sigreg=0.0746  lr=2.47e-04
+
+  ?? Epoch  60/200 ??
+     Train: total=0.0104  pred=0.0031  sigreg=0.0724
+     Val:   total=0.0249  pred=0.0020  sigreg=0.2294
+     LR: 2.47e-04
+
+  E061 S0000 | total=0.0111  pred=0.0038  sigreg=0.0733  lr=2.45e-04
+  E061 S0020 | total=0.0097  pred=0.0025  sigreg=0.0713  lr=2.45e-04
+
+  ?? Epoch  61/200 ??
+     Train: total=0.0102  pred=0.0030  sigreg=0.0723
+     Val:   total=0.0251  pred=0.0007  sigreg=0.2439
+     LR: 2.45e-04
+
+  E062 S0000 | total=0.0109  pred=0.0031  sigreg=0.0776  lr=2.43e-04
+  E062 S0020 | total=0.0102  pred=0.0034  sigreg=0.0683  lr=2.43e-04
+
+  ?? Epoch  62/200 ??
+     Train: total=0.0102  pred=0.0030  sigreg=0.0724
+     Val:   total=0.0240  pred=0.0005  sigreg=0.2352
+     LR: 2.43e-04
+
+  E063 S0000 | total=0.0103  pred=0.0028  sigreg=0.0751  lr=2.41e-04
+  E063 S0020 | total=0.0098  pred=0.0027  sigreg=0.0715  lr=2.41e-04
+
+  ?? Epoch  63/200 ??
+     Train: total=0.0102  pred=0.0028  sigreg=0.0734
+     Val:   total=0.0239  pred=0.0010  sigreg=0.2289
+     LR: 2.41e-04
+
+  E064 S0000 | total=0.0101  pred=0.0027  sigreg=0.0737  lr=2.39e-04
+  E064 S0020 | total=0.0102  pred=0.0029  sigreg=0.0726  lr=2.39e-04
+
+  ?? Epoch  64/200 ??
+     Train: total=0.0101  pred=0.0028  sigreg=0.0726
+     Val:   total=0.0229  pred=0.0007  sigreg=0.2227
+     LR: 2.39e-04
+
+  E065 S0000 | total=0.0102  pred=0.0030  sigreg=0.0719  lr=2.37e-04
+  E065 S0020 | total=0.0096  pred=0.0026  sigreg=0.0701  lr=2.37e-04
+
+  ?? Epoch  65/200 ??
+     Train: total=0.0103  pred=0.0029  sigreg=0.0731
+     Val:   total=0.0251  pred=0.0005  sigreg=0.2468
+     LR: 2.37e-04
+
+  E066 S0000 | total=0.0096  pred=0.0024  sigreg=0.0718  lr=2.35e-04
+  E066 S0020 | total=0.0094  pred=0.0023  sigreg=0.0702  lr=2.35e-04
+
+  ?? Epoch  66/200 ??
+     Train: total=0.0098  pred=0.0026  sigreg=0.0723
+     Val:   total=0.0244  pred=0.0008  sigreg=0.2355
+     LR: 2.35e-04
+
+  E067 S0000 | total=0.0104  pred=0.0030  sigreg=0.0747  lr=2.33e-04
+  E067 S0020 | total=0.0095  pred=0.0022  sigreg=0.0726  lr=2.33e-04
+
+  ?? Epoch  67/200 ??
+     Train: total=0.0100  pred=0.0028  sigreg=0.0721
+     Val:   total=0.0231  pred=0.0004  sigreg=0.2267
+     LR: 2.33e-04
+
+  E068 S0000 | total=0.0097  pred=0.0024  sigreg=0.0726  lr=2.31e-04
+  E068 S0020 | total=0.0103  pred=0.0026  sigreg=0.0768  lr=2.31e-04
+
+  ?? Epoch  68/200 ??
+     Train: total=0.0099  pred=0.0027  sigreg=0.0725
+     Val:   total=0.0224  pred=0.0004  sigreg=0.2199
+     LR: 2.31e-04
+
+  E069 S0000 | total=0.0094  pred=0.0023  sigreg=0.0718  lr=2.29e-04
+  E069 S0020 | total=0.0099  pred=0.0024  sigreg=0.0744  lr=2.29e-04
+
+  ?? Epoch  69/200 ??
+     Train: total=0.0097  pred=0.0025  sigreg=0.0724
+     Val:   total=0.0248  pred=0.0008  sigreg=0.2393
+     LR: 2.29e-04
+
+  E070 S0000 | total=0.0100  pred=0.0028  sigreg=0.0718  lr=2.27e-04
+  E070 S0020 | total=0.0097  pred=0.0025  sigreg=0.0729  lr=2.27e-04
+
+  ?? Epoch  70/200 ??
+     Train: total=0.0107  pred=0.0034  sigreg=0.0724
+     Val:   total=0.0271  pred=0.0008  sigreg=0.2625
+     LR: 2.27e-04
+
+  E071 S0000 | total=0.0093  pred=0.0024  sigreg=0.0696  lr=2.25e-04
+  E071 S0020 | total=0.0100  pred=0.0025  sigreg=0.0743  lr=2.25e-04
+
+  ?? Epoch  71/200 ??
+     Train: total=0.0099  pred=0.0025  sigreg=0.0740
+     Val:   total=0.0239  pred=0.0013  sigreg=0.2261
+     LR: 2.25e-04
+
+  E072 S0000 | total=0.0106  pred=0.0029  sigreg=0.0767  lr=2.23e-04
+  E072 S0020 | total=0.0097  pred=0.0025  sigreg=0.0722  lr=2.23e-04
+
+  ?? Epoch  72/200 ??
+     Train: total=0.0100  pred=0.0026  sigreg=0.0735
+     Val:   total=0.0242  pred=0.0010  sigreg=0.2315
+     LR: 2.23e-04
+
+  E073 S0000 | total=0.0100  pred=0.0027  sigreg=0.0733  lr=2.21e-04
+  E073 S0020 | total=0.0095  pred=0.0022  sigreg=0.0729  lr=2.21e-04
+
+  ?? Epoch  73/200 ??
+     Train: total=0.0097  pred=0.0025  sigreg=0.0724
+     Val:   total=0.0227  pred=0.0004  sigreg=0.2232
+     LR: 2.21e-04
+
+  E074 S0000 | total=0.0097  pred=0.0022  sigreg=0.0754  lr=2.19e-04
+  E074 S0020 | total=0.0096  pred=0.0022  sigreg=0.0735  lr=2.19e-04
+
+  ?? Epoch  74/200 ??
+     Train: total=0.0097  pred=0.0024  sigreg=0.0724
+     Val:   total=0.0223  pred=0.0008  sigreg=0.2146
+     LR: 2.19e-04
+
+  E075 S0000 | total=0.0100  pred=0.0030  sigreg=0.0703  lr=2.16e-04
+  E075 S0020 | total=0.0091  pred=0.0020  sigreg=0.0708  lr=2.16e-04
+
+  ?? Epoch  75/200 ??
+     Train: total=0.0100  pred=0.0027  sigreg=0.0728
+     Val:   total=0.0226  pred=0.0006  sigreg=0.2196
+     LR: 2.16e-04
+
+  E076 S0000 | total=0.0092  pred=0.0021  sigreg=0.0705  lr=2.14e-04
+  E076 S0020 | total=0.0096  pred=0.0021  sigreg=0.0748  lr=2.14e-04
+
+  ?? Epoch  76/200 ??
+     Train: total=0.0094  pred=0.0021  sigreg=0.0728
+     Val:   total=0.0236  pred=0.0004  sigreg=0.2314
+     LR: 2.14e-04
+
+  E077 S0000 | total=0.0093  pred=0.0020  sigreg=0.0722  lr=2.12e-04
+  E077 S0020 | total=0.0095  pred=0.0021  sigreg=0.0734  lr=2.12e-04
+
+  ?? Epoch  77/200 ??
+     Train: total=0.0095  pred=0.0022  sigreg=0.0727
+     Val:   total=0.0256  pred=0.0006  sigreg=0.2502
+     LR: 2.12e-04
+
+  E078 S0000 | total=0.0099  pred=0.0025  sigreg=0.0735  lr=2.10e-04
+  E078 S0020 | total=0.0091  pred=0.0019  sigreg=0.0717  lr=2.10e-04
+
+  ?? Epoch  78/200 ??
+     Train: total=0.0095  pred=0.0022  sigreg=0.0727
+     Val:   total=0.0244  pred=0.0004  sigreg=0.2408
+     LR: 2.10e-04
+
+  E079 S0000 | total=0.0095  pred=0.0022  sigreg=0.0728  lr=2.08e-04
+  E079 S0020 | total=0.0094  pred=0.0021  sigreg=0.0731  lr=2.08e-04
+
+  ?? Epoch  79/200 ??
+     Train: total=0.0094  pred=0.0022  sigreg=0.0723
+     Val:   total=0.0227  pred=0.0004  sigreg=0.2230
+     LR: 2.08e-04
+
+  E080 S0000 | total=0.0097  pred=0.0022  sigreg=0.0747  lr=2.05e-04
+  E080 S0020 | total=0.0093  pred=0.0021  sigreg=0.0719  lr=2.05e-04
+
+  ?? Epoch  80/200 ??
+     Train: total=0.0094  pred=0.0021  sigreg=0.0726
+     Val:   total=0.0262  pred=0.0012  sigreg=0.2495
+     LR: 2.05e-04
+
+  E081 S0000 | total=0.0098  pred=0.0025  sigreg=0.0724  lr=2.03e-04
+  E081 S0020 | total=0.0092  pred=0.0020  sigreg=0.0719  lr=2.03e-04
+
+  ?? Epoch  81/200 ??
+     Train: total=0.0093  pred=0.0021  sigreg=0.0721
+     Val:   total=0.0264  pred=0.0008  sigreg=0.2562
+     LR: 2.03e-04
+
+  E082 S0000 | total=0.0095  pred=0.0020  sigreg=0.0746  lr=2.01e-04
+  E082 S0020 | total=0.0088  pred=0.0019  sigreg=0.0689  lr=2.01e-04
+
+  ?? Epoch  82/200 ??
+     Train: total=0.0091  pred=0.0020  sigreg=0.0715
+     Val:   total=0.0256  pred=0.0007  sigreg=0.2495
+     LR: 2.01e-04
+
+  E083 S0000 | total=0.0097  pred=0.0023  sigreg=0.0742  lr=1.99e-04
+  E083 S0020 | total=0.0091  pred=0.0020  sigreg=0.0705  lr=1.99e-04
+
+  ?? Epoch  83/200 ??
+     Train: total=0.0093  pred=0.0021  sigreg=0.0723
+     Val:   total=0.0243  pred=0.0006  sigreg=0.2370
+     LR: 1.99e-04
+
+  E084 S0000 | total=0.0084  pred=0.0017  sigreg=0.0663  lr=1.96e-04
+  E084 S0020 | total=0.0090  pred=0.0020  sigreg=0.0708  lr=1.96e-04
+
+  ?? Epoch  84/200 ??
+     Train: total=0.0091  pred=0.0019  sigreg=0.0718
+     Val:   total=0.0249  pred=0.0004  sigreg=0.2446
+     LR: 1.96e-04
+
+  E085 S0000 | total=0.0090  pred=0.0018  sigreg=0.0722  lr=1.94e-04
+  E085 S0020 | total=0.0089  pred=0.0018  sigreg=0.0709  lr=1.94e-04
+
+  ?? Epoch  85/200 ??
+     Train: total=0.0092  pred=0.0020  sigreg=0.0714
+     Val:   total=0.0235  pred=0.0008  sigreg=0.2265
+     LR: 1.94e-04
+
+  E086 S0000 | total=0.0092  pred=0.0021  sigreg=0.0707  lr=1.92e-04
+  E086 S0020 | total=0.0092  pred=0.0018  sigreg=0.0735  lr=1.92e-04
+
+  ?? Epoch  86/200 ??
+     Train: total=0.0090  pred=0.0019  sigreg=0.0713
+     Val:   total=0.0252  pred=0.0005  sigreg=0.2471
+     LR: 1.92e-04
+
+  E087 S0000 | total=0.0093  pred=0.0019  sigreg=0.0741  lr=1.89e-04
+  E087 S0020 | total=0.0091  pred=0.0017  sigreg=0.0732  lr=1.89e-04
+
+  ?? Epoch  87/200 ??
+     Train: total=0.0090  pred=0.0018  sigreg=0.0718
+     Val:   total=0.0230  pred=0.0005  sigreg=0.2258
+     LR: 1.89e-04
+
+  E088 S0000 | total=0.0089  pred=0.0019  sigreg=0.0696  lr=1.87e-04
+  E088 S0020 | total=0.0090  pred=0.0017  sigreg=0.0726  lr=1.87e-04
+
+  ?? Epoch  88/200 ??
+     Train: total=0.0089  pred=0.0018  sigreg=0.0714
+     Val:   total=0.0229  pred=0.0004  sigreg=0.2247
+     LR: 1.87e-04
+
+  E089 S0000 | total=0.0090  pred=0.0018  sigreg=0.0717  lr=1.85e-04
+  E089 S0020 | total=0.0092  pred=0.0021  sigreg=0.0708  lr=1.85e-04
+
+  ?? Epoch  89/200 ??
+     Train: total=0.0089  pred=0.0018  sigreg=0.0714
+     Val:   total=0.0245  pred=0.0006  sigreg=0.2392
+     LR: 1.85e-04
+
+  E090 S0000 | total=0.0090  pred=0.0019  sigreg=0.0709  lr=1.82e-04
+  E090 S0020 | total=0.0086  pred=0.0016  sigreg=0.0701  lr=1.82e-04
+
+  ?? Epoch  90/200 ??
+     Train: total=0.0091  pred=0.0020  sigreg=0.0711
+     Val:   total=0.0256  pred=0.0006  sigreg=0.2501
+     LR: 1.82e-04
+
+  E091 S0000 | total=0.0089  pred=0.0018  sigreg=0.0710  lr=1.80e-04
+  E091 S0020 | total=0.0087  pred=0.0015  sigreg=0.0721  lr=1.80e-04
+
+  ?? Epoch  91/200 ??
+     Train: total=0.0089  pred=0.0017  sigreg=0.0714
+     Val:   total=0.0241  pred=0.0006  sigreg=0.2349
+     LR: 1.80e-04
+
+  E092 S0000 | total=0.0086  pred=0.0015  sigreg=0.0713  lr=1.78e-04
+  E092 S0020 | total=0.0088  pred=0.0017  sigreg=0.0717  lr=1.78e-04
+
+  ?? Epoch  92/200 ??
+     Train: total=0.0088  pred=0.0017  sigreg=0.0712
+     Val:   total=0.0254  pred=0.0005  sigreg=0.2489
+     LR: 1.78e-04
+
+  E093 S0000 | total=0.0088  pred=0.0016  sigreg=0.0720  lr=1.75e-04
+  E093 S0020 | total=0.0091  pred=0.0018  sigreg=0.0728  lr=1.75e-04
+
+  ?? Epoch  93/200 ??
+     Train: total=0.0089  pred=0.0018  sigreg=0.0719
+     Val:   total=0.0244  pred=0.0006  sigreg=0.2384
+     LR: 1.75e-04
+
+  E094 S0000 | total=0.0088  pred=0.0016  sigreg=0.0714  lr=1.73e-04
+  E094 S0020 | total=0.0088  pred=0.0016  sigreg=0.0725  lr=1.73e-04
+
+  ?? Epoch  94/200 ??
+     Train: total=0.0090  pred=0.0018  sigreg=0.0721
+     Val:   total=0.0233  pred=0.0004  sigreg=0.2291
+     LR: 1.73e-04
+
+  E095 S0000 | total=0.0088  pred=0.0017  sigreg=0.0712  lr=1.70e-04
+  E095 S0020 | total=0.0086  pred=0.0015  sigreg=0.0711  lr=1.70e-04
+
+  ?? Epoch  95/200 ??
+     Train: total=0.0089  pred=0.0016  sigreg=0.0723
+     Val:   total=0.0263  pred=0.0004  sigreg=0.2585
+     LR: 1.70e-04
+
+  E096 S0000 | total=0.0087  pred=0.0016  sigreg=0.0716  lr=1.68e-04
+  E096 S0020 | total=0.0088  pred=0.0014  sigreg=0.0732  lr=1.68e-04
+
+  ?? Epoch  96/200 ??
+     Train: total=0.0089  pred=0.0017  sigreg=0.0723
+     Val:   total=0.0255  pred=0.0007  sigreg=0.2479
+     LR: 1.68e-04
+
+  E097 S0000 | total=0.0093  pred=0.0019  sigreg=0.0733  lr=1.66e-04
+  E097 S0020 | total=0.0089  pred=0.0015  sigreg=0.0743  lr=1.66e-04
+
+  ?? Epoch  97/200 ??
+     Train: total=0.0088  pred=0.0016  sigreg=0.0720
+     Val:   total=0.0240  pred=0.0008  sigreg=0.2315
+     LR: 1.66e-04
+
+  E098 S0000 | total=0.0091  pred=0.0019  sigreg=0.0711  lr=1.63e-04
+  E098 S0020 | total=0.0091  pred=0.0016  sigreg=0.0748  lr=1.63e-04
+
+  ?? Epoch  98/200 ??
+     Train: total=0.0090  pred=0.0018  sigreg=0.0718
+     Val:   total=0.0255  pred=0.0003  sigreg=0.2513
+     LR: 1.63e-04
+
+  E099 S0000 | total=0.0085  pred=0.0015  sigreg=0.0700  lr=1.61e-04
+  E099 S0020 | total=0.0089  pred=0.0019  sigreg=0.0707  lr=1.61e-04
+
+  ?? Epoch  99/200 ??
+     Train: total=0.0088  pred=0.0016  sigreg=0.0714
+     Val:   total=0.0261  pred=0.0008  sigreg=0.2530
+     LR: 1.61e-04
+
+  E100 S0000 | total=0.0091  pred=0.0018  sigreg=0.0723  lr=1.58e-04
+  E100 S0020 | total=0.0085  pred=0.0015  sigreg=0.0706  lr=1.58e-04
+
+  ?? Epoch 100/200 ??
+     Train: total=0.0089  pred=0.0017  sigreg=0.0718
+     Val:   total=0.0279  pred=0.0010  sigreg=0.2685
+     LR: 1.58e-04
+
+  E101 S0000 | total=0.0090  pred=0.0018  sigreg=0.0721  lr=1.56e-04
+  E101 S0020 | total=0.0089  pred=0.0017  sigreg=0.0721  lr=1.56e-04
+
+  ?? Epoch 101/200 ??
+     Train: total=0.0087  pred=0.0016  sigreg=0.0712
+     Val:   total=0.0245  pred=0.0007  sigreg=0.2384
+     LR: 1.56e-04
+
+  E102 S0000 | total=0.0084  pred=0.0016  sigreg=0.0681  lr=1.54e-04
+  E102 S0020 | total=0.0086  pred=0.0014  sigreg=0.0715  lr=1.54e-04
+
+  ?? Epoch 102/200 ??
+     Train: total=0.0086  pred=0.0014  sigreg=0.0715
+     Val:   total=0.0245  pred=0.0004  sigreg=0.2408
+     LR: 1.54e-04
+
+  E103 S0000 | total=0.0082  pred=0.0014  sigreg=0.0682  lr=1.51e-04
+  E103 S0020 | total=0.0083  pred=0.0013  sigreg=0.0708  lr=1.51e-04
+
+  ?? Epoch 103/200 ??
+     Train: total=0.0085  pred=0.0014  sigreg=0.0712
+     Val:   total=0.0264  pred=0.0004  sigreg=0.2595
+     LR: 1.51e-04
+
+  E104 S0000 | total=0.0083  pred=0.0012  sigreg=0.0710  lr=1.49e-04
+  E104 S0020 | total=0.0083  pred=0.0014  sigreg=0.0688  lr=1.49e-04
+
+  ?? Epoch 104/200 ??
+     Train: total=0.0087  pred=0.0015  sigreg=0.0714
+     Val:   total=0.0245  pred=0.0005  sigreg=0.2392
+     LR: 1.49e-04
+
+  E105 S0000 | total=0.0098  pred=0.0024  sigreg=0.0743  lr=1.46e-04
+  E105 S0020 | total=0.0087  pred=0.0016  sigreg=0.0702  lr=1.46e-04
+
+  ?? Epoch 105/200 ??
+     Train: total=0.0086  pred=0.0015  sigreg=0.0716
+     Val:   total=0.0263  pred=0.0004  sigreg=0.2594
+     LR: 1.46e-04
+
+  E106 S0000 | total=0.0089  pred=0.0015  sigreg=0.0740  lr=1.44e-04
+  E106 S0020 | total=0.0088  pred=0.0016  sigreg=0.0722  lr=1.44e-04
+
+  ?? Epoch 106/200 ??
+     Train: total=0.0086  pred=0.0014  sigreg=0.0715
+     Val:   total=0.0247  pred=0.0004  sigreg=0.2432
+     LR: 1.44e-04
+
+  E107 S0000 | total=0.0087  pred=0.0015  sigreg=0.0717  lr=1.42e-04
+  E107 S0020 | total=0.0081  pred=0.0013  sigreg=0.0682  lr=1.42e-04
+
+  ?? Epoch 107/200 ??
+     Train: total=0.0088  pred=0.0016  sigreg=0.0719
+     Val:   total=0.0281  pred=0.0007  sigreg=0.2737
+     LR: 1.42e-04
+
+  E108 S0000 | total=0.0085  pred=0.0017  sigreg=0.0673  lr=1.39e-04
+  E108 S0020 | total=0.0082  pred=0.0014  sigreg=0.0677  lr=1.39e-04
+
+  ?? Epoch 108/200 ??
+     Train: total=0.0086  pred=0.0015  sigreg=0.0713
+     Val:   total=0.0266  pred=0.0003  sigreg=0.2628
+     LR: 1.39e-04
+
+  E109 S0000 | total=0.0085  pred=0.0013  sigreg=0.0718  lr=1.37e-04
+  E109 S0020 | total=0.0082  pred=0.0012  sigreg=0.0700  lr=1.37e-04
+
+  ?? Epoch 109/200 ??
+     Train: total=0.0094  pred=0.0022  sigreg=0.0717
+     Val:   total=0.0288  pred=0.0013  sigreg=0.2748
+     LR: 1.37e-04
+
+  E110 S0000 | total=0.0088  pred=0.0017  sigreg=0.0711  lr=1.34e-04
+  E110 S0020 | total=0.0090  pred=0.0015  sigreg=0.0747  lr=1.34e-04
+
+  ?? Epoch 110/200 ??
+     Train: total=0.0090  pred=0.0016  sigreg=0.0740
+     Val:   total=0.0216  pred=0.0003  sigreg=0.2127
+     LR: 1.34e-04
+
+  E111 S0000 | total=0.0087  pred=0.0014  sigreg=0.0729  lr=1.32e-04
+  E111 S0020 | total=0.0086  pred=0.0013  sigreg=0.0731  lr=1.32e-04
+
+  ?? Epoch 111/200 ??
+     Train: total=0.0086  pred=0.0014  sigreg=0.0723
+     Val:   total=0.0227  pred=0.0004  sigreg=0.2228
+     LR: 1.32e-04
+
+  E112 S0000 | total=0.0086  pred=0.0013  sigreg=0.0729  lr=1.30e-04
+  E112 S0020 | total=0.0085  pred=0.0012  sigreg=0.0731  lr=1.30e-04
+
+  ?? Epoch 112/200 ??
+     Train: total=0.0084  pred=0.0012  sigreg=0.0718
+     Val:   total=0.0244  pred=0.0002  sigreg=0.2415
+     LR: 1.30e-04
+
+  E113 S0000 | total=0.0087  pred=0.0013  sigreg=0.0741  lr=1.27e-04
+  E113 S0020 | total=0.0085  pred=0.0013  sigreg=0.0725  lr=1.27e-04
+
+  ?? Epoch 113/200 ??
+     Train: total=0.0084  pred=0.0012  sigreg=0.0715
+     Val:   total=0.0244  pred=0.0005  sigreg=0.2395
+     LR: 1.27e-04
+
+  E114 S0000 | total=0.0088  pred=0.0012  sigreg=0.0752  lr=1.25e-04
+  E114 S0020 | total=0.0083  pred=0.0012  sigreg=0.0711  lr=1.25e-04
+
+  ?? Epoch 114/200 ??
+     Train: total=0.0085  pred=0.0013  sigreg=0.0724
+     Val:   total=0.0252  pred=0.0004  sigreg=0.2474
+     LR: 1.25e-04
+
+  E115 S0000 | total=0.0085  pred=0.0015  sigreg=0.0694  lr=1.22e-04
+  E115 S0020 | total=0.0086  pred=0.0014  sigreg=0.0722  lr=1.22e-04
+
+  ?? Epoch 115/200 ??
+     Train: total=0.0084  pred=0.0013  sigreg=0.0712
+     Val:   total=0.0263  pred=0.0005  sigreg=0.2581
+     LR: 1.22e-04
+
+  E116 S0000 | total=0.0083  pred=0.0014  sigreg=0.0695  lr=1.20e-04
+  E116 S0020 | total=0.0084  pred=0.0012  sigreg=0.0719  lr=1.20e-04
+
+  ?? Epoch 116/200 ??
+     Train: total=0.0083  pred=0.0012  sigreg=0.0715
+     Val:   total=0.0252  pred=0.0004  sigreg=0.2482
+     LR: 1.20e-04
+
+  E117 S0000 | total=0.0083  pred=0.0012  sigreg=0.0715  lr=1.18e-04
+  E117 S0020 | total=0.0081  pred=0.0010  sigreg=0.0713  lr=1.18e-04
+
+  ?? Epoch 117/200 ??
+     Train: total=0.0085  pred=0.0014  sigreg=0.0716
+     Val:   total=0.0232  pred=0.0005  sigreg=0.2273
+     LR: 1.18e-04
+
+  E118 S0000 | total=0.0084  pred=0.0011  sigreg=0.0726  lr=1.15e-04
+  E118 S0020 | total=0.0085  pred=0.0011  sigreg=0.0738  lr=1.15e-04
+
+  ?? Epoch 118/200 ??
+     Train: total=0.0085  pred=0.0013  sigreg=0.0719
+     Val:   total=0.0231  pred=0.0005  sigreg=0.2258
+     LR: 1.15e-04
+
+  E119 S0000 | total=0.0082  pred=0.0011  sigreg=0.0712  lr=1.13e-04
+  E119 S0020 | total=0.0080  pred=0.0012  sigreg=0.0683  lr=1.13e-04
+
+  ?? Epoch 119/200 ??
+     Train: total=0.0084  pred=0.0012  sigreg=0.0715
+     Val:   total=0.0236  pred=0.0002  sigreg=0.2332
+     LR: 1.13e-04
+
+  E120 S0000 | total=0.0080  pred=0.0011  sigreg=0.0692  lr=1.11e-04
+  E120 S0020 | total=0.0087  pred=0.0013  sigreg=0.0740  lr=1.11e-04
+
+  ?? Epoch 120/200 ??
+     Train: total=0.0083  pred=0.0012  sigreg=0.0717
+     Val:   total=0.0259  pred=0.0003  sigreg=0.2559
+     LR: 1.11e-04
+
+  E121 S0000 | total=0.0084  pred=0.0014  sigreg=0.0700  lr=1.08e-04
+  E121 S0020 | total=0.0080  pred=0.0011  sigreg=0.0692  lr=1.08e-04
+
+  ?? Epoch 121/200 ??
+     Train: total=0.0084  pred=0.0013  sigreg=0.0712
+     Val:   total=0.0279  pred=0.0006  sigreg=0.2737
+     LR: 1.08e-04
+
+  E122 S0000 | total=0.0084  pred=0.0012  sigreg=0.0712  lr=1.06e-04
+  E122 S0020 | total=0.0084  pred=0.0011  sigreg=0.0729  lr=1.06e-04
+
+  ?? Epoch 122/200 ??
+     Train: total=0.0083  pred=0.0011  sigreg=0.0714
+     Val:   total=0.0271  pred=0.0002  sigreg=0.2687
+     LR: 1.06e-04
+
+  E123 S0000 | total=0.0081  pred=0.0011  sigreg=0.0691  lr=1.04e-04
+  E123 S0020 | total=0.0081  pred=0.0011  sigreg=0.0703  lr=1.04e-04
+
+  ?? Epoch 123/200 ??
+     Train: total=0.0082  pred=0.0011  sigreg=0.0712
+     Val:   total=0.0270  pred=0.0003  sigreg=0.2675
+     LR: 1.04e-04
+
+  E124 S0000 | total=0.0083  pred=0.0012  sigreg=0.0708  lr=1.01e-04
+  E124 S0020 | total=0.0086  pred=0.0012  sigreg=0.0738  lr=1.01e-04
+
+  ?? Epoch 124/200 ??
+     Train: total=0.0082  pred=0.0012  sigreg=0.0706
+     Val:   total=0.0285  pred=0.0003  sigreg=0.2813
+     LR: 1.01e-04
+
+  E125 S0000 | total=0.0083  pred=0.0011  sigreg=0.0714  lr=9.91e-05
+  E125 S0020 | total=0.0082  pred=0.0011  sigreg=0.0711  lr=9.91e-05
+
+  ?? Epoch 125/200 ??
+     Train: total=0.0083  pred=0.0012  sigreg=0.0712
+     Val:   total=0.0275  pred=0.0004  sigreg=0.2714
+     LR: 9.91e-05
+
+  E126 S0000 | total=0.0083  pred=0.0010  sigreg=0.0729  lr=9.68e-05
+  E126 S0020 | total=0.0080  pred=0.0011  sigreg=0.0692  lr=9.68e-05
+
+  ?? Epoch 126/200 ??
+     Train: total=0.0082  pred=0.0012  sigreg=0.0710
+     Val:   total=0.0243  pred=0.0004  sigreg=0.2396
+     LR: 9.68e-05
+
+  E127 S0000 | total=0.0083  pred=0.0012  sigreg=0.0710  lr=9.46e-05
+  E127 S0020 | total=0.0082  pred=0.0012  sigreg=0.0694  lr=9.46e-05
+
+  ?? Epoch 127/200 ??
+     Train: total=0.0081  pred=0.0011  sigreg=0.0709
+     Val:   total=0.0292  pred=0.0004  sigreg=0.2880
+     LR: 9.46e-05
+
+  E128 S0000 | total=0.0080  pred=0.0009  sigreg=0.0705  lr=9.23e-05
+  E128 S0020 | total=0.0085  pred=0.0010  sigreg=0.0746  lr=9.23e-05
+
+  ?? Epoch 128/200 ??
+     Train: total=0.0082  pred=0.0011  sigreg=0.0717
+     Val:   total=0.0274  pred=0.0005  sigreg=0.2687
+     LR: 9.23e-05
+
+  E129 S0000 | total=0.0081  pred=0.0012  sigreg=0.0690  lr=9.01e-05
+  E129 S0020 | total=0.0077  pred=0.0009  sigreg=0.0682  lr=9.01e-05
+
+  ?? Epoch 129/200 ??
+     Train: total=0.0082  pred=0.0011  sigreg=0.0709
+     Val:   total=0.0289  pred=0.0003  sigreg=0.2863
+     LR: 9.01e-05
+
+  E130 S0000 | total=0.0080  pred=0.0009  sigreg=0.0705  lr=8.79e-05
+  E130 S0020 | total=0.0082  pred=0.0011  sigreg=0.0710  lr=8.79e-05
+
+  ?? Epoch 130/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0702
+     Val:   total=0.0267  pred=0.0003  sigreg=0.2649
+     LR: 8.79e-05
+
+  E131 S0000 | total=0.0080  pred=0.0010  sigreg=0.0706  lr=8.57e-05
+  E131 S0020 | total=0.0081  pred=0.0010  sigreg=0.0711  lr=8.57e-05
+
+  ?? Epoch 131/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0709
+     Val:   total=0.0267  pred=0.0002  sigreg=0.2645
+     LR: 8.57e-05
+
+  E132 S0000 | total=0.0080  pred=0.0011  sigreg=0.0698  lr=8.35e-05
+  E132 S0020 | total=0.0078  pred=0.0011  sigreg=0.0669  lr=8.35e-05
+
+  ?? Epoch 132/200 ??
+     Train: total=0.0081  pred=0.0011  sigreg=0.0702
+     Val:   total=0.0286  pred=0.0005  sigreg=0.2807
+     LR: 8.35e-05
+
+  E133 S0000 | total=0.0078  pred=0.0010  sigreg=0.0684  lr=8.14e-05
+  E133 S0020 | total=0.0084  pred=0.0012  sigreg=0.0715  lr=8.14e-05
+
+  ?? Epoch 133/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0705
+     Val:   total=0.0278  pred=0.0003  sigreg=0.2752
+     LR: 8.14e-05
+
+  E134 S0000 | total=0.0080  pred=0.0010  sigreg=0.0702  lr=7.92e-05
+  E134 S0020 | total=0.0081  pred=0.0011  sigreg=0.0702  lr=7.92e-05
+
+  ?? Epoch 134/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0708
+     Val:   total=0.0276  pred=0.0004  sigreg=0.2716
+     LR: 7.92e-05
+
+  E135 S0000 | total=0.0080  pred=0.0010  sigreg=0.0693  lr=7.71e-05
+  E135 S0020 | total=0.0084  pred=0.0010  sigreg=0.0736  lr=7.71e-05
+
+  ?? Epoch 135/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0710
+     Val:   total=0.0251  pred=0.0002  sigreg=0.2487
+     LR: 7.71e-05
+
+  E136 S0000 | total=0.0082  pred=0.0011  sigreg=0.0717  lr=7.50e-05
+  E136 S0020 | total=0.0085  pred=0.0011  sigreg=0.0736  lr=7.50e-05
+
+  ?? Epoch 136/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0707
+     Val:   total=0.0270  pred=0.0003  sigreg=0.2674
+     LR: 7.50e-05
+
+  E137 S0000 | total=0.0081  pred=0.0009  sigreg=0.0719  lr=7.29e-05
+  E137 S0020 | total=0.0082  pred=0.0009  sigreg=0.0722  lr=7.29e-05
+
+  ?? Epoch 137/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0711
+     Val:   total=0.0273  pred=0.0005  sigreg=0.2681
+     LR: 7.29e-05
+
+  E138 S0000 | total=0.0080  pred=0.0010  sigreg=0.0704  lr=7.09e-05
+  E138 S0020 | total=0.0082  pred=0.0009  sigreg=0.0727  lr=7.09e-05
+
+  ?? Epoch 138/200 ??
+     Train: total=0.0083  pred=0.0011  sigreg=0.0714
+     Val:   total=0.0300  pred=0.0004  sigreg=0.2959
+     LR: 7.09e-05
+
+  E139 S0000 | total=0.0084  pred=0.0011  sigreg=0.0725  lr=6.88e-05
+  E139 S0020 | total=0.0082  pred=0.0009  sigreg=0.0730  lr=6.88e-05
+
+  ?? Epoch 139/200 ??
+     Train: total=0.0082  pred=0.0010  sigreg=0.0713
+     Val:   total=0.0262  pred=0.0002  sigreg=0.2599
+     LR: 6.88e-05
+
+  E140 S0000 | total=0.0083  pred=0.0010  sigreg=0.0727  lr=6.68e-05
+  E140 S0020 | total=0.0079  pred=0.0010  sigreg=0.0696  lr=6.68e-05
+
+  ?? Epoch 140/200 ??
+     Train: total=0.0082  pred=0.0011  sigreg=0.0707
+     Val:   total=0.0265  pred=0.0003  sigreg=0.2625
+     LR: 6.68e-05
+
+  E141 S0000 | total=0.0078  pred=0.0009  sigreg=0.0699  lr=6.48e-05
+  E141 S0020 | total=0.0081  pred=0.0011  sigreg=0.0698  lr=6.48e-05
+
+  ?? Epoch 141/200 ??
+     Train: total=0.0081  pred=0.0011  sigreg=0.0699
+     Val:   total=0.0265  pred=0.0003  sigreg=0.2617
+     LR: 6.48e-05
+
+  E142 S0000 | total=0.0080  pred=0.0010  sigreg=0.0700  lr=6.28e-05
+  E142 S0020 | total=0.0077  pred=0.0008  sigreg=0.0687  lr=6.28e-05
+
+  ?? Epoch 142/200 ??
+     Train: total=0.0084  pred=0.0013  sigreg=0.0710
+     Val:   total=0.0253  pred=0.0003  sigreg=0.2492
+     LR: 6.28e-05
+
+  E143 S0000 | total=0.0083  pred=0.0009  sigreg=0.0737  lr=6.09e-05
+  E143 S0020 | total=0.0082  pred=0.0010  sigreg=0.0726  lr=6.09e-05
+
+  ?? Epoch 143/200 ??
+     Train: total=0.0083  pred=0.0011  sigreg=0.0723
+     Val:   total=0.0240  pred=0.0002  sigreg=0.2375
+     LR: 6.09e-05
+
+  E144 S0000 | total=0.0084  pred=0.0012  sigreg=0.0727  lr=5.89e-05
+  E144 S0020 | total=0.0084  pred=0.0009  sigreg=0.0753  lr=5.89e-05
+
+  ?? Epoch 144/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0712
+     Val:   total=0.0248  pred=0.0002  sigreg=0.2457
+     LR: 5.89e-05
+
+  E145 S0000 | total=0.0080  pred=0.0010  sigreg=0.0708  lr=5.70e-05
+  E145 S0020 | total=0.0080  pred=0.0009  sigreg=0.0707  lr=5.70e-05
+
+  ?? Epoch 145/200 ??
+     Train: total=0.0080  pred=0.0010  sigreg=0.0706
+     Val:   total=0.0252  pred=0.0003  sigreg=0.2492
+     LR: 5.70e-05
+
+  E146 S0000 | total=0.0078  pred=0.0009  sigreg=0.0688  lr=5.51e-05
+  E146 S0020 | total=0.0079  pred=0.0009  sigreg=0.0694  lr=5.51e-05
+
+  ?? Epoch 146/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0700
+     Val:   total=0.0274  pred=0.0003  sigreg=0.2715
+     LR: 5.51e-05
+
+  E147 S0000 | total=0.0079  pred=0.0009  sigreg=0.0692  lr=5.33e-05
+  E147 S0020 | total=0.0083  pred=0.0009  sigreg=0.0746  lr=5.33e-05
+
+  ?? Epoch 147/200 ??
+     Train: total=0.0081  pred=0.0010  sigreg=0.0707
+     Val:   total=0.0298  pred=0.0003  sigreg=0.2944
+     LR: 5.33e-05
+
+  E148 S0000 | total=0.0081  pred=0.0008  sigreg=0.0730  lr=5.14e-05
+  E148 S0020 | total=0.0079  pred=0.0009  sigreg=0.0704  lr=5.14e-05
+
+  ?? Epoch 148/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0707
+     Val:   total=0.0254  pred=0.0004  sigreg=0.2493
+     LR: 5.14e-05
+
+  E149 S0000 | total=0.0078  pred=0.0009  sigreg=0.0690  lr=4.96e-05
+  E149 S0020 | total=0.0081  pred=0.0009  sigreg=0.0725  lr=4.96e-05
+
+  ?? Epoch 149/200 ??
+     Train: total=0.0080  pred=0.0010  sigreg=0.0700
+     Val:   total=0.0253  pred=0.0002  sigreg=0.2509
+     LR: 4.96e-05
+
+  E150 S0000 | total=0.0080  pred=0.0011  sigreg=0.0686  lr=4.78e-05
+  E150 S0020 | total=0.0075  pred=0.0008  sigreg=0.0672  lr=4.78e-05
+
+  ?? Epoch 150/200 ??
+     Train: total=0.0081  pred=0.0011  sigreg=0.0705
+     Val:   total=0.0240  pred=0.0005  sigreg=0.2349
+     LR: 4.78e-05
+
+  E151 S0000 | total=0.0079  pred=0.0011  sigreg=0.0673  lr=4.61e-05
+  E151 S0020 | total=0.0080  pred=0.0009  sigreg=0.0714  lr=4.61e-05
+
+  ?? Epoch 151/200 ??
+     Train: total=0.0080  pred=0.0010  sigreg=0.0701
+     Val:   total=0.0243  pred=0.0002  sigreg=0.2406
+     LR: 4.61e-05
+
+  E152 S0000 | total=0.0083  pred=0.0012  sigreg=0.0715  lr=4.44e-05
+  E152 S0020 | total=0.0083  pred=0.0010  sigreg=0.0731  lr=4.44e-05
+
+  ?? Epoch 152/200 ??
+     Train: total=0.0080  pred=0.0010  sigreg=0.0707
+     Val:   total=0.0255  pred=0.0004  sigreg=0.2507
+     LR: 4.44e-05
+
+  E153 S0000 | total=0.0084  pred=0.0011  sigreg=0.0730  lr=4.27e-05
+  E153 S0020 | total=0.0080  pred=0.0010  sigreg=0.0700  lr=4.27e-05
+
+  ?? Epoch 153/200 ??
+     Train: total=0.0080  pred=0.0010  sigreg=0.0705
+     Val:   total=0.0234  pred=0.0003  sigreg=0.2303
+     LR: 4.27e-05
+
+  E154 S0000 | total=0.0077  pred=0.0009  sigreg=0.0686  lr=4.10e-05
+  E154 S0020 | total=0.0086  pred=0.0010  sigreg=0.0756  lr=4.10e-05
+
+  ?? Epoch 154/200 ??
+     Train: total=0.0081  pred=0.0009  sigreg=0.0715
+     Val:   total=0.0273  pred=0.0003  sigreg=0.2698
+     LR: 4.10e-05
+
+  E155 S0000 | total=0.0079  pred=0.0008  sigreg=0.0713  lr=3.93e-05
+  E155 S0020 | total=0.0077  pred=0.0009  sigreg=0.0679  lr=3.93e-05
+
+  ?? Epoch 155/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0705
+     Val:   total=0.0273  pred=0.0003  sigreg=0.2700
+     LR: 3.93e-05
+
+  E156 S0000 | total=0.0078  pred=0.0008  sigreg=0.0702  lr=3.77e-05
+  E156 S0020 | total=0.0078  pred=0.0009  sigreg=0.0696  lr=3.77e-05
+
+  ?? Epoch 156/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0704
+     Val:   total=0.0271  pred=0.0003  sigreg=0.2686
+     LR: 3.77e-05
+
+  E157 S0000 | total=0.0081  pred=0.0009  sigreg=0.0725  lr=3.61e-05
+  E157 S0020 | total=0.0079  pred=0.0008  sigreg=0.0714  lr=3.61e-05
+
+  ?? Epoch 157/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0701
+     Val:   total=0.0281  pred=0.0003  sigreg=0.2778
+     LR: 3.61e-05
+
+  E158 S0000 | total=0.0080  pred=0.0009  sigreg=0.0711  lr=3.46e-05
+  E158 S0020 | total=0.0078  pred=0.0009  sigreg=0.0689  lr=3.46e-05
+
+  ?? Epoch 158/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0710
+     Val:   total=0.0268  pred=0.0002  sigreg=0.2656
+     LR: 3.46e-05
+
+  E159 S0000 | total=0.0078  pred=0.0008  sigreg=0.0701  lr=3.30e-05
+  E159 S0020 | total=0.0080  pred=0.0009  sigreg=0.0706  lr=3.30e-05
+
+  ?? Epoch 159/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0706
+     Val:   total=0.0258  pred=0.0003  sigreg=0.2547
+     LR: 3.30e-05
+
+  E160 S0000 | total=0.0079  pred=0.0009  sigreg=0.0708  lr=3.16e-05
+  E160 S0020 | total=0.0079  pred=0.0008  sigreg=0.0709  lr=3.16e-05
+
+  ?? Epoch 160/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0708
+     Val:   total=0.0273  pred=0.0003  sigreg=0.2699
+     LR: 3.16e-05
+
+  E161 S0000 | total=0.0081  pred=0.0009  sigreg=0.0717  lr=3.01e-05
+  E161 S0020 | total=0.0076  pred=0.0009  sigreg=0.0669  lr=3.01e-05
+
+  ?? Epoch 161/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0704
+     Val:   total=0.0260  pred=0.0002  sigreg=0.2575
+     LR: 3.01e-05
+
+  E162 S0000 | total=0.0078  pred=0.0009  sigreg=0.0693  lr=2.86e-05
+  E162 S0020 | total=0.0075  pred=0.0009  sigreg=0.0658  lr=2.86e-05
+
+  ?? Epoch 162/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0702
+     Val:   total=0.0252  pred=0.0004  sigreg=0.2480
+     LR: 2.86e-05
+
+  E163 S0000 | total=0.0079  pred=0.0010  sigreg=0.0689  lr=2.72e-05
+  E163 S0020 | total=0.0078  pred=0.0008  sigreg=0.0697  lr=2.72e-05
+
+  ?? Epoch 163/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0711
+     Val:   total=0.0276  pred=0.0004  sigreg=0.2721
+     LR: 2.72e-05
+
+  E164 S0000 | total=0.0081  pred=0.0010  sigreg=0.0716  lr=2.59e-05
+  E164 S0020 | total=0.0081  pred=0.0008  sigreg=0.0725  lr=2.59e-05
+
+  ?? Epoch 164/200 ??
+     Train: total=0.0080  pred=0.0010  sigreg=0.0706
+     Val:   total=0.0242  pred=0.0003  sigreg=0.2390
+     LR: 2.59e-05
+
+  E165 S0000 | total=0.0079  pred=0.0009  sigreg=0.0702  lr=2.45e-05
+  E165 S0020 | total=0.0080  pred=0.0010  sigreg=0.0706  lr=2.45e-05
+
+  ?? Epoch 165/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0702
+     Val:   total=0.0257  pred=0.0004  sigreg=0.2538
+     LR: 2.45e-05
+
+  E166 S0000 | total=0.0079  pred=0.0008  sigreg=0.0702  lr=2.32e-05
+  E166 S0020 | total=0.0078  pred=0.0009  sigreg=0.0691  lr=2.32e-05
+
+  ?? Epoch 166/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0705
+     Val:   total=0.0268  pred=0.0003  sigreg=0.2648
+     LR: 2.32e-05
+
+  E167 S0000 | total=0.0081  pred=0.0010  sigreg=0.0710  lr=2.19e-05
+  E167 S0020 | total=0.0082  pred=0.0012  sigreg=0.0699  lr=2.19e-05
+
+  ?? Epoch 167/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0702
+     Val:   total=0.0277  pred=0.0003  sigreg=0.2740
+     LR: 2.19e-05
+
+  E168 S0000 | total=0.0078  pred=0.0008  sigreg=0.0692  lr=2.07e-05
+  E168 S0020 | total=0.0079  pred=0.0009  sigreg=0.0691  lr=2.07e-05
+
+  ?? Epoch 168/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0710
+     Val:   total=0.0270  pred=0.0003  sigreg=0.2679
+     LR: 2.07e-05
+
+  E169 S0000 | total=0.0079  pred=0.0009  sigreg=0.0702  lr=1.95e-05
+  E169 S0020 | total=0.0080  pred=0.0009  sigreg=0.0717  lr=1.95e-05
+
+  ?? Epoch 169/200 ??
+     Train: total=0.0081  pred=0.0009  sigreg=0.0713
+     Val:   total=0.0265  pred=0.0003  sigreg=0.2621
+     LR: 1.95e-05
+
+  E170 S0000 | total=0.0077  pred=0.0008  sigreg=0.0689  lr=1.83e-05
+  E170 S0020 | total=0.0078  pred=0.0009  sigreg=0.0690  lr=1.83e-05
+
+  ?? Epoch 170/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0699
+     Val:   total=0.0274  pred=0.0003  sigreg=0.2714
+     LR: 1.83e-05
+
+  E171 S0000 | total=0.0080  pred=0.0009  sigreg=0.0702  lr=1.72e-05
+  E171 S0020 | total=0.0076  pred=0.0008  sigreg=0.0679  lr=1.72e-05
+
+  ?? Epoch 171/200 ??
+     Train: total=0.0078  pred=0.0009  sigreg=0.0695
+     Val:   total=0.0271  pred=0.0003  sigreg=0.2675
+     LR: 1.72e-05
+
+  E172 S0000 | total=0.0076  pred=0.0009  sigreg=0.0677  lr=1.61e-05
+  E172 S0020 | total=0.0075  pred=0.0009  sigreg=0.0661  lr=1.61e-05
+
+  ?? Epoch 172/200 ??
+     Train: total=0.0078  pred=0.0009  sigreg=0.0695
+     Val:   total=0.0281  pred=0.0002  sigreg=0.2786
+     LR: 1.61e-05
+
+  E173 S0000 | total=0.0079  pred=0.0009  sigreg=0.0707  lr=1.50e-05
+  E173 S0020 | total=0.0077  pred=0.0007  sigreg=0.0698  lr=1.50e-05
+
+  ?? Epoch 173/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0703
+     Val:   total=0.0251  pred=0.0002  sigreg=0.2487
+     LR: 1.50e-05
+
+  E174 S0000 | total=0.0075  pred=0.0007  sigreg=0.0675  lr=1.40e-05
+  E174 S0020 | total=0.0079  pred=0.0008  sigreg=0.0708  lr=1.40e-05
+
+  ?? Epoch 174/200 ??
+     Train: total=0.0081  pred=0.0011  sigreg=0.0706
+     Val:   total=0.0251  pred=0.0004  sigreg=0.2474
+     LR: 1.40e-05
+
+  E175 S0000 | total=0.0080  pred=0.0008  sigreg=0.0719  lr=1.30e-05
+  E175 S0020 | total=0.0079  pred=0.0009  sigreg=0.0701  lr=1.30e-05
+
+  ?? Epoch 175/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0706
+     Val:   total=0.0272  pred=0.0004  sigreg=0.2687
+     LR: 1.30e-05
+
+  E176 S0000 | total=0.0076  pred=0.0007  sigreg=0.0687  lr=1.20e-05
+  E176 S0020 | total=0.0082  pred=0.0009  sigreg=0.0731  lr=1.20e-05
+
+  ?? Epoch 176/200 ??
+     Train: total=0.0084  pred=0.0013  sigreg=0.0709
+     Val:   total=0.0296  pred=0.0004  sigreg=0.2920
+     LR: 1.20e-05
+
+  E177 S0000 | total=0.0076  pred=0.0009  sigreg=0.0678  lr=1.11e-05
+  E177 S0020 | total=0.0081  pred=0.0008  sigreg=0.0722  lr=1.11e-05
+
+  ?? Epoch 177/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0706
+     Val:   total=0.0276  pred=0.0002  sigreg=0.2733
+     LR: 1.11e-05
+
+  E178 S0000 | total=0.0079  pred=0.0008  sigreg=0.0703  lr=1.02e-05
+  E178 S0020 | total=0.0081  pred=0.0007  sigreg=0.0732  lr=1.02e-05
+
+  ?? Epoch 178/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0706
+     Val:   total=0.0258  pred=0.0003  sigreg=0.2549
+     LR: 1.02e-05
+
+  E179 S0000 | total=0.0075  pred=0.0008  sigreg=0.0671  lr=9.32e-06
+  E179 S0020 | total=0.0076  pred=0.0009  sigreg=0.0667  lr=9.32e-06
+
+  ?? Epoch 179/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0699
+     Val:   total=0.0287  pred=0.0004  sigreg=0.2836
+     LR: 9.32e-06
+
+  E180 S0000 | total=0.0076  pred=0.0009  sigreg=0.0673  lr=8.50e-06
+  E180 S0020 | total=0.0079  pred=0.0008  sigreg=0.0714  lr=8.50e-06
+
+  ?? Epoch 180/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0707
+     Val:   total=0.0265  pred=0.0002  sigreg=0.2629
+     LR: 8.50e-06
+
+  E181 S0000 | total=0.0080  pred=0.0009  sigreg=0.0713  lr=7.72e-06
+  E181 S0020 | total=0.0079  pred=0.0008  sigreg=0.0709  lr=7.72e-06
+
+  ?? Epoch 181/200 ??
+     Train: total=0.0078  pred=0.0009  sigreg=0.0692
+     Val:   total=0.0247  pred=0.0003  sigreg=0.2441
+     LR: 7.72e-06
+
+  E182 S0000 | total=0.0079  pred=0.0008  sigreg=0.0712  lr=6.97e-06
+  E182 S0020 | total=0.0077  pred=0.0009  sigreg=0.0680  lr=6.97e-06
+
+  ?? Epoch 182/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0698
+     Val:   total=0.0272  pred=0.0003  sigreg=0.2689
+     LR: 6.97e-06
+
+  E183 S0000 | total=0.0079  pred=0.0008  sigreg=0.0704  lr=6.26e-06
+  E183 S0020 | total=0.0077  pred=0.0007  sigreg=0.0700  lr=6.26e-06
+
+  ?? Epoch 183/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0698
+     Val:   total=0.0262  pred=0.0002  sigreg=0.2595
+     LR: 6.26e-06
+
+  E184 S0000 | total=0.0078  pred=0.0007  sigreg=0.0707  lr=5.59e-06
+  E184 S0020 | total=0.0080  pred=0.0008  sigreg=0.0717  lr=5.59e-06
+
+  ?? Epoch 184/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0700
+     Val:   total=0.0261  pred=0.0003  sigreg=0.2584
+     LR: 5.59e-06
+
+  E185 S0000 | total=0.0079  pred=0.0007  sigreg=0.0715  lr=4.96e-06
+  E185 S0020 | total=0.0079  pred=0.0009  sigreg=0.0700  lr=4.96e-06
+
+  ?? Epoch 185/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0701
+     Val:   total=0.0269  pred=0.0002  sigreg=0.2664
+     LR: 4.96e-06
+
+  E186 S0000 | total=0.0078  pred=0.0009  sigreg=0.0691  lr=4.36e-06
+  E186 S0020 | total=0.0077  pred=0.0009  sigreg=0.0688  lr=4.36e-06
+
+  ?? Epoch 186/200 ??
+     Train: total=0.0080  pred=0.0009  sigreg=0.0711
+     Val:   total=0.0265  pred=0.0003  sigreg=0.2630
+     LR: 4.36e-06
+
+  E187 S0000 | total=0.0078  pred=0.0008  sigreg=0.0704  lr=3.80e-06
+  E187 S0020 | total=0.0081  pred=0.0008  sigreg=0.0735  lr=3.80e-06
+
+  ?? Epoch 187/200 ??
+     Train: total=0.0079  pred=0.0009  sigreg=0.0699
+     Val:   total=0.0246  pred=0.0003  sigreg=0.2430
+     LR: 3.80e-06
+
+  E188 S0000 | total=0.0082  pred=0.0008  sigreg=0.0732  lr=3.28e-06
+  E188 S0020 | total=0.0075  pred=0.0008  sigreg=0.0670  lr=3.28e-06
+
+  ?? Epoch 188/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0700
+     Val:   total=0.0265  pred=0.0002  sigreg=0.2629
+     LR: 3.28e-06
+
+  E189 S0000 | total=0.0076  pred=0.0007  sigreg=0.0684  lr=2.79e-06
+  E189 S0020 | total=0.0078  pred=0.0008  sigreg=0.0699  lr=2.79e-06
+
+  ?? Epoch 189/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0700
+     Val:   total=0.0278  pred=0.0003  sigreg=0.2753
+     LR: 2.79e-06
+
+  E190 S0000 | total=0.0076  pred=0.0008  sigreg=0.0677  lr=2.35e-06
+  E190 S0020 | total=0.0078  pred=0.0007  sigreg=0.0705  lr=2.35e-06
+
+  ?? Epoch 190/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0696
+     Val:   total=0.0264  pred=0.0003  sigreg=0.2611
+     LR: 2.35e-06
+
+  E191 S0000 | total=0.0075  pred=0.0007  sigreg=0.0680  lr=1.94e-06
+  E191 S0020 | total=0.0078  pred=0.0007  sigreg=0.0707  lr=1.94e-06
+
+  ?? Epoch 191/200 ??
+     Train: total=0.0080  pred=0.0010  sigreg=0.0704
+     Val:   total=0.0249  pred=0.0003  sigreg=0.2456
+     LR: 1.94e-06
+
+  E192 S0000 | total=0.0075  pred=0.0008  sigreg=0.0676  lr=1.57e-06
+  E192 S0020 | total=0.0076  pred=0.0007  sigreg=0.0691  lr=1.57e-06
+
+  ?? Epoch 192/200 ??
+     Train: total=0.0080  pred=0.0011  sigreg=0.0695
+     Val:   total=0.0273  pred=0.0003  sigreg=0.2706
+     LR: 1.57e-06
+
+  E193 S0000 | total=0.0076  pred=0.0007  sigreg=0.0694  lr=1.24e-06
+  E193 S0020 | total=0.0080  pred=0.0009  sigreg=0.0711  lr=1.24e-06
+
+  ?? Epoch 193/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0700
+     Val:   total=0.0274  pred=0.0003  sigreg=0.2718
+     LR: 1.24e-06
+
+  E194 S0000 | total=0.0082  pred=0.0010  sigreg=0.0722  lr=9.53e-07
+  E194 S0020 | total=0.0076  pred=0.0008  sigreg=0.0678  lr=9.53e-07
+
+  ?? Epoch 194/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0699
+     Val:   total=0.0266  pred=0.0003  sigreg=0.2631
+     LR: 9.53e-07
+
+  E195 S0000 | total=0.0077  pred=0.0008  sigreg=0.0694  lr=7.00e-07
+  E195 S0020 | total=0.0079  pred=0.0007  sigreg=0.0714  lr=7.00e-07
+
+  ?? Epoch 195/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0697
+     Val:   total=0.0254  pred=0.0003  sigreg=0.2516
+     LR: 7.00e-07
+
+  E196 S0000 | total=0.0081  pred=0.0009  sigreg=0.0720  lr=4.86e-07
+  E196 S0020 | total=0.0074  pred=0.0008  sigreg=0.0662  lr=4.86e-07
+
+  ?? Epoch 196/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0696
+     Val:   total=0.0265  pred=0.0003  sigreg=0.2624
+     LR: 4.86e-07
+
+  E197 S0000 | total=0.0079  pred=0.0009  sigreg=0.0703  lr=3.11e-07
+  E197 S0020 | total=0.0074  pred=0.0007  sigreg=0.0664  lr=3.11e-07
+
+  ?? Epoch 197/200 ??
+     Train: total=0.0079  pred=0.0008  sigreg=0.0707
+     Val:   total=0.0256  pred=0.0003  sigreg=0.2537
+     LR: 3.11e-07
+
+  E198 S0000 | total=0.0082  pred=0.0007  sigreg=0.0748  lr=1.75e-07
+  E198 S0020 | total=0.0077  pred=0.0009  sigreg=0.0685  lr=1.75e-07
+
+  ?? Epoch 198/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0699
+     Val:   total=0.0266  pred=0.0003  sigreg=0.2629
+     LR: 1.75e-07
+
+  E199 S0000 | total=0.0076  pred=0.0008  sigreg=0.0674  lr=7.79e-08
+  E199 S0020 | total=0.0077  pred=0.0010  sigreg=0.0677  lr=7.79e-08
+
+  ?? Epoch 199/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0697
+     Val:   total=0.0263  pred=0.0002  sigreg=0.2605
+     LR: 7.79e-08
+
+  E200 S0000 | total=0.0079  pred=0.0008  sigreg=0.0714  lr=1.95e-08
+  E200 S0020 | total=0.0076  pred=0.0009  sigreg=0.0668  lr=1.95e-08
+
+  ?? Epoch 200/200 ??
+     Train: total=0.0078  pred=0.0008  sigreg=0.0698
+     Val:   total=0.0254  pred=0.0002  sigreg=0.2517
+     LR: 1.95e-08
+
+  Checkpoint saved [final epoch=0.0254]
+
+============================================================
+Training complete.
+  Best val loss: 0.0151 at epoch 22
+  Checkpoint:    ./experiments/checkpoints/eurusd/best_model.pt
+  Loss history:  ./experiments/checkpoints/eurusd/loss_history.json
+============================================================
+
+  E164 S0000 | total=0.0069  pred=0.0007  sigreg=0.0620  lr=2.59e-05
+  E164 S0020 | total=0.0073  pred=0.0008  sigreg=0.0654  lr=2.59e-05
+  E164 S0040 | total=0.0072  pred=0.0007  sigreg=0.0653  lr=2.59e-05
+
+  ?? Epoch 164/200 ??
+     Train: total=0.0075  pred=0.0008  sigreg=0.0667
+     Val:   total=0.0211  pred=0.0001  sigreg=0.2100
+     LR: 2.59e-05
+
+  E165 S0000 | total=0.0074  pred=0.0008  sigreg=0.0661  lr=2.45e-05
+  E165 S0020 | total=0.0075  pred=0.0010  sigreg=0.0656  lr=2.45e-05
+  E165 S0040 | total=0.0077  pred=0.0011  sigreg=0.0657  lr=2.45e-05
+
+  ?? Epoch 165/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0668
+     Val:   total=0.0204  pred=0.0001  sigreg=0.2024
+     LR: 2.45e-05
+
+  E166 S0000 | total=0.0074  pred=0.0007  sigreg=0.0666  lr=2.32e-05
+  E166 S0020 | total=0.0071  pred=0.0008  sigreg=0.0629  lr=2.32e-05
+  E166 S0040 | total=0.0074  pred=0.0007  sigreg=0.0663  lr=2.32e-05
+
+  ?? Epoch 166/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0672
+     Val:   total=0.0238  pred=0.0001  sigreg=0.2368
+     LR: 2.32e-05
+
+  E167 S0000 | total=0.0072  pred=0.0009  sigreg=0.0633  lr=2.19e-05
+  E167 S0020 | total=0.0078  pred=0.0011  sigreg=0.0671  lr=2.19e-05
+  E167 S0040 | total=0.0076  pred=0.0007  sigreg=0.0690  lr=2.19e-05
+
+  ?? Epoch 167/200 ??
+     Train: total=0.0075  pred=0.0008  sigreg=0.0677
+     Val:   total=0.0223  pred=0.0001  sigreg=0.2223
+     LR: 2.19e-05
+
+  E168 S0000 | total=0.0072  pred=0.0009  sigreg=0.0635  lr=2.07e-05
+  E168 S0020 | total=0.0070  pred=0.0006  sigreg=0.0643  lr=2.07e-05
+  E168 S0040 | total=0.0075  pred=0.0008  sigreg=0.0671  lr=2.07e-05
+
+  ?? Epoch 168/200 ??
+     Train: total=0.0075  pred=0.0008  sigreg=0.0669
+     Val:   total=0.0222  pred=0.0001  sigreg=0.2209
+     LR: 2.07e-05
+
+  E169 S0000 | total=0.0075  pred=0.0006  sigreg=0.0693  lr=1.95e-05
+  E169 S0020 | total=0.0075  pred=0.0008  sigreg=0.0667  lr=1.95e-05
+  E169 S0040 | total=0.0073  pred=0.0008  sigreg=0.0654  lr=1.95e-05
+
+  ?? Epoch 169/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0666
+     Val:   total=0.0240  pred=0.0002  sigreg=0.2385
+     LR: 1.95e-05
+
+  E170 S0000 | total=0.0075  pred=0.0008  sigreg=0.0670  lr=1.83e-05
+  E170 S0020 | total=0.0078  pred=0.0008  sigreg=0.0692  lr=1.83e-05
+  E170 S0040 | total=0.0075  pred=0.0007  sigreg=0.0674  lr=1.83e-05
+
+  ?? Epoch 170/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0671
+     Val:   total=0.0192  pred=0.0001  sigreg=0.1907
+     LR: 1.83e-05
+
+  E171 S0000 | total=0.0079  pred=0.0009  sigreg=0.0704  lr=1.72e-05
+  E171 S0020 | total=0.0075  pred=0.0007  sigreg=0.0681  lr=1.72e-05
+  E171 S0040 | total=0.0073  pred=0.0008  sigreg=0.0646  lr=1.72e-05
+
+  ?? Epoch 171/200 ??
+     Train: total=0.0075  pred=0.0008  sigreg=0.0667
+     Val:   total=0.0235  pred=0.0002  sigreg=0.2335
+     LR: 1.72e-05
+
+  E172 S0000 | total=0.0074  pred=0.0008  sigreg=0.0665  lr=1.61e-05
+  E172 S0020 | total=0.0075  pred=0.0008  sigreg=0.0674  lr=1.61e-05
+  E172 S0040 | total=0.0073  pred=0.0008  sigreg=0.0653  lr=1.61e-05
+
+  ?? Epoch 172/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0665
+     Val:   total=0.0206  pred=0.0001  sigreg=0.2049
+     LR: 1.61e-05
+
+  E173 S0000 | total=0.0072  pred=0.0007  sigreg=0.0653  lr=1.50e-05
+  E173 S0020 | total=0.0074  pred=0.0006  sigreg=0.0678  lr=1.50e-05
+  E173 S0040 | total=0.0073  pred=0.0007  sigreg=0.0661  lr=1.50e-05
+
+  ?? Epoch 173/200 ??
+     Train: total=0.0075  pred=0.0008  sigreg=0.0670
+     Val:   total=0.0216  pred=0.0002  sigreg=0.2148
+     LR: 1.50e-05
+
+  E174 S0000 | total=0.0075  pred=0.0008  sigreg=0.0672  lr=1.40e-05
+  E174 S0020 | total=0.0073  pred=0.0008  sigreg=0.0653  lr=1.40e-05
+  E174 S0040 | total=0.0074  pred=0.0007  sigreg=0.0678  lr=1.40e-05
+
+  ?? Epoch 174/200 ??
+     Train: total=0.0074  pred=0.0008  sigreg=0.0666
+     Val:   total=0.0194  pred=0.0001  sigreg=0.1927
+     LR: 1.40e-05
+
+  E175 S0000 | total=0.0072  pred=0.0007  sigreg=0.0646  lr=1.30e-05
+  E175 S0020 | total=0.0071  pred=0.0007  sigreg=0.0647  lr=1.30e-05
+  E175 S0040 | total=0.0073  pred=0.0007  sigreg=0.0663  lr=1.30e-05
+
+  ?? Epoch 175/200 ??
+     Train: total=0.0077  pred=0.0010  sigreg=0.0670
+     Val:   total=0.0180  pred=0.0002  sigreg=0.1780
+     LR: 1.30e-05
+
+  Checkpoint saved [val=0.0180]
+  E176 S0000 | total=0.0073  pred=0.0007  sigreg=0.0668  lr=1.20e-05
+  E176 S0020 | total=0.0074  pred=0.0008  sigreg=0.0658  lr=1.20e-05
+  E176 S0040 | total=0.0074  pred=0.0006  sigreg=0.0673  lr=1.20e-05
+
+  ?? Epoch 176/200 ??
+     Train: total=0.0074  pred=0.0008  sigreg=0.0662
+     Val:   total=0.0207  pred=0.0001  sigreg=0.2064
+     LR: 1.20e-05
+
+  E177 S0000 | total=0.0074  pred=0.0007  sigreg=0.0668  lr=1.11e-05
+  E177 S0020 | total=0.0076  pred=0.0008  sigreg=0.0681  lr=1.11e-05
+  E177 S0040 | total=0.0073  pred=0.0006  sigreg=0.0669  lr=1.11e-05
+
+  ?? Epoch 177/200 ??
+     Train: total=0.0089  pred=0.0021  sigreg=0.0676
+     Val:   total=0.0255  pred=0.0005  sigreg=0.2494
+     LR: 1.11e-05
+
+  E178 S0000 | total=0.0074  pred=0.0009  sigreg=0.0648  lr=1.02e-05
+  E178 S0020 | total=0.0077  pred=0.0010  sigreg=0.0668  lr=1.02e-05
+  E178 S0040 | total=0.0073  pred=0.0007  sigreg=0.0657  lr=1.02e-05
+
+  ?? Epoch 178/200 ??
+     Train: total=0.0076  pred=0.0010  sigreg=0.0665
+     Val:   total=0.0251  pred=0.0002  sigreg=0.2493
+     LR: 1.02e-05
+
+  E179 S0000 | total=0.0078  pred=0.0007  sigreg=0.0701  lr=9.32e-06
+  E179 S0020 | total=0.0070  pred=0.0007  sigreg=0.0631  lr=9.32e-06
+  E179 S0040 | total=0.0074  pred=0.0008  sigreg=0.0664  lr=9.32e-06
+
+  ?? Epoch 179/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0667
+     Val:   total=0.0199  pred=0.0001  sigreg=0.1976
+     LR: 9.32e-06
+
+  E180 S0000 | total=0.0074  pred=0.0007  sigreg=0.0667  lr=8.50e-06
+  E180 S0020 | total=0.0072  pred=0.0007  sigreg=0.0650  lr=8.50e-06
+  E180 S0040 | total=0.0072  pred=0.0007  sigreg=0.0652  lr=8.50e-06
+
+  ?? Epoch 180/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0663
+     Val:   total=0.0208  pred=0.0001  sigreg=0.2070
+     LR: 8.50e-06
+
+  E181 S0000 | total=0.0071  pred=0.0008  sigreg=0.0633  lr=7.72e-06
+  E181 S0020 | total=0.0072  pred=0.0008  sigreg=0.0648  lr=7.72e-06
+  E181 S0040 | total=0.0074  pred=0.0008  sigreg=0.0657  lr=7.72e-06
+
+  ?? Epoch 181/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0666
+     Val:   total=0.0198  pred=0.0001  sigreg=0.1968
+     LR: 7.72e-06
+
+  E182 S0000 | total=0.0072  pred=0.0008  sigreg=0.0640  lr=6.97e-06
+  E182 S0020 | total=0.0073  pred=0.0007  sigreg=0.0659  lr=6.97e-06
+  E182 S0040 | total=0.0075  pred=0.0007  sigreg=0.0677  lr=6.97e-06
+
+  ?? Epoch 182/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0668
+     Val:   total=0.0198  pred=0.0001  sigreg=0.1974
+     LR: 6.97e-06
+
+  E183 S0000 | total=0.0072  pred=0.0007  sigreg=0.0645  lr=6.26e-06
+  E183 S0020 | total=0.0073  pred=0.0008  sigreg=0.0652  lr=6.26e-06
+  E183 S0040 | total=0.0072  pred=0.0007  sigreg=0.0648  lr=6.26e-06
+
+  ?? Epoch 183/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0671
+     Val:   total=0.0202  pred=0.0001  sigreg=0.2008
+     LR: 6.26e-06
+
+  E184 S0000 | total=0.0084  pred=0.0020  sigreg=0.0636  lr=5.59e-06
+  E184 S0020 | total=0.0080  pred=0.0006  sigreg=0.0741  lr=5.59e-06
+  E184 S0040 | total=0.0072  pred=0.0006  sigreg=0.0658  lr=5.59e-06
+
+  ?? Epoch 184/200 ??
+     Train: total=0.0075  pred=0.0008  sigreg=0.0672
+     Val:   total=0.0198  pred=0.0001  sigreg=0.1973
+     LR: 5.59e-06
+
+  E185 S0000 | total=0.0076  pred=0.0009  sigreg=0.0675  lr=4.96e-06
+  E185 S0020 | total=0.0073  pred=0.0007  sigreg=0.0654  lr=4.96e-06
+  E185 S0040 | total=0.0077  pred=0.0007  sigreg=0.0693  lr=4.96e-06
+
+  ?? Epoch 185/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0670
+     Val:   total=0.0229  pred=0.0001  sigreg=0.2276
+     LR: 4.96e-06
+
+  E186 S0000 | total=0.0073  pred=0.0007  sigreg=0.0659  lr=4.36e-06
+  E186 S0020 | total=0.0072  pred=0.0006  sigreg=0.0655  lr=4.36e-06
+  E186 S0040 | total=0.0074  pred=0.0007  sigreg=0.0671  lr=4.36e-06
+
+  ?? Epoch 186/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0666
+     Val:   total=0.0217  pred=0.0001  sigreg=0.2156
+     LR: 4.36e-06
+
+  E187 S0000 | total=0.0072  pred=0.0009  sigreg=0.0634  lr=3.80e-06
+  E187 S0020 | total=0.0074  pred=0.0007  sigreg=0.0669  lr=3.80e-06
+  E187 S0040 | total=0.0075  pred=0.0006  sigreg=0.0694  lr=3.80e-06
+
+  ?? Epoch 187/200 ??
+     Train: total=0.0073  pred=0.0007  sigreg=0.0662
+     Val:   total=0.0231  pred=0.0001  sigreg=0.2306
+     LR: 3.80e-06
+
+  E188 S0000 | total=0.0071  pred=0.0008  sigreg=0.0634  lr=3.28e-06
+  E188 S0020 | total=0.0073  pred=0.0006  sigreg=0.0669  lr=3.28e-06
+  E188 S0040 | total=0.0079  pred=0.0007  sigreg=0.0717  lr=3.28e-06
+
+  ?? Epoch 188/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0668
+     Val:   total=0.0213  pred=0.0001  sigreg=0.2122
+     LR: 3.28e-06
+
+  E189 S0000 | total=0.0077  pred=0.0010  sigreg=0.0675  lr=2.79e-06
+  E189 S0020 | total=0.0075  pred=0.0006  sigreg=0.0691  lr=2.79e-06
+  E189 S0040 | total=0.0078  pred=0.0009  sigreg=0.0687  lr=2.79e-06
+
+  ?? Epoch 189/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0669
+     Val:   total=0.0196  pred=0.0001  sigreg=0.1947
+     LR: 2.79e-06
+
+  E190 S0000 | total=0.0078  pred=0.0009  sigreg=0.0689  lr=2.35e-06
+  E190 S0020 | total=0.0071  pred=0.0006  sigreg=0.0656  lr=2.35e-06
+  E190 S0040 | total=0.0070  pred=0.0007  sigreg=0.0633  lr=2.35e-06
+
+  ?? Epoch 190/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0670
+     Val:   total=0.0236  pred=0.0001  sigreg=0.2354
+     LR: 2.35e-06
+
+  E191 S0000 | total=0.0075  pred=0.0007  sigreg=0.0677  lr=1.94e-06
+  E191 S0020 | total=0.0076  pred=0.0007  sigreg=0.0689  lr=1.94e-06
+  E191 S0040 | total=0.0078  pred=0.0010  sigreg=0.0679  lr=1.94e-06
+
+  ?? Epoch 191/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0664
+     Val:   total=0.0206  pred=0.0001  sigreg=0.2054
+     LR: 1.94e-06
+
+  E192 S0000 | total=0.0072  pred=0.0007  sigreg=0.0650  lr=1.57e-06
+  E192 S0020 | total=0.0076  pred=0.0007  sigreg=0.0691  lr=1.57e-06
+  E192 S0040 | total=0.0073  pred=0.0006  sigreg=0.0671  lr=1.57e-06
+
+  ?? Epoch 192/200 ??
+     Train: total=0.0073  pred=0.0007  sigreg=0.0663
+     Val:   total=0.0210  pred=0.0001  sigreg=0.2093
+     LR: 1.57e-06
+
+  E193 S0000 | total=0.0076  pred=0.0005  sigreg=0.0709  lr=1.24e-06
+  E193 S0020 | total=0.0072  pred=0.0007  sigreg=0.0657  lr=1.24e-06
+  E193 S0040 | total=0.0075  pred=0.0009  sigreg=0.0660  lr=1.24e-06
+
+  ?? Epoch 193/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0669
+     Val:   total=0.0212  pred=0.0001  sigreg=0.2109
+     LR: 1.24e-06
+
+  E194 S0000 | total=0.0075  pred=0.0006  sigreg=0.0686  lr=9.53e-07
+  E194 S0020 | total=0.0073  pred=0.0007  sigreg=0.0663  lr=9.53e-07
+  E194 S0040 | total=0.0075  pred=0.0010  sigreg=0.0650  lr=9.53e-07
+
+  ?? Epoch 194/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0665
+     Val:   total=0.0207  pred=0.0001  sigreg=0.2062
+     LR: 9.53e-07
+
+  E195 S0000 | total=0.0074  pred=0.0007  sigreg=0.0666  lr=7.00e-07
+  E195 S0020 | total=0.0071  pred=0.0008  sigreg=0.0629  lr=7.00e-07
+  E195 S0040 | total=0.0071  pred=0.0006  sigreg=0.0647  lr=7.00e-07
+
+  ?? Epoch 195/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0666
+     Val:   total=0.0185  pred=0.0001  sigreg=0.1835
+     LR: 7.00e-07
+
+  E196 S0000 | total=0.0074  pred=0.0007  sigreg=0.0675  lr=4.86e-07
+  E196 S0020 | total=0.0073  pred=0.0006  sigreg=0.0667  lr=4.86e-07
+  E196 S0040 | total=0.0079  pred=0.0007  sigreg=0.0720  lr=4.86e-07
+
+  ?? Epoch 196/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0668
+     Val:   total=0.0190  pred=0.0001  sigreg=0.1884
+     LR: 4.86e-07
+
+  E197 S0000 | total=0.0076  pred=0.0006  sigreg=0.0697  lr=3.11e-07
+  E197 S0020 | total=0.0071  pred=0.0007  sigreg=0.0637  lr=3.11e-07
+  E197 S0040 | total=0.0078  pred=0.0010  sigreg=0.0675  lr=3.11e-07
+
+  ?? Epoch 197/200 ??
+     Train: total=0.0073  pred=0.0007  sigreg=0.0664
+     Val:   total=0.0223  pred=0.0001  sigreg=0.2216
+     LR: 3.11e-07
+
+  E198 S0000 | total=0.0082  pred=0.0017  sigreg=0.0650  lr=1.75e-07
+  E198 S0020 | total=0.0072  pred=0.0007  sigreg=0.0655  lr=1.75e-07
+  E198 S0040 | total=0.0074  pred=0.0008  sigreg=0.0663  lr=1.75e-07
+
+  ?? Epoch 198/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0667
+     Val:   total=0.0205  pred=0.0001  sigreg=0.2038
+     LR: 1.75e-07
+
+  E199 S0000 | total=0.0074  pred=0.0006  sigreg=0.0680  lr=7.79e-08
+  E199 S0020 | total=0.0074  pred=0.0009  sigreg=0.0654  lr=7.79e-08
+  E199 S0040 | total=0.0075  pred=0.0006  sigreg=0.0687  lr=7.79e-08
+
+  ?? Epoch 199/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0666
+     Val:   total=0.0231  pred=0.0001  sigreg=0.2297
+     LR: 7.79e-08
+
+  E200 S0000 | total=0.0071  pred=0.0006  sigreg=0.0648  lr=1.95e-08
+  E200 S0020 | total=0.0070  pred=0.0007  sigreg=0.0636  lr=1.95e-08
+  E200 S0040 | total=0.0069  pred=0.0005  sigreg=0.0637  lr=1.95e-08
+
+  ?? Epoch 200/200 ??
+     Train: total=0.0074  pred=0.0007  sigreg=0.0672
+     Val:   total=0.0212  pred=0.0001  sigreg=0.2112
+     LR: 1.95e-08
+
+  Checkpoint saved [final epoch=0.0212]
+
+============================================================
+Training complete.
+  Best val loss: 0.0180 at epoch 175
+  Checkpoint:    ./experiments/checkpoints/eurusd/best_model.pt
+  Loss history:  ./experiments/checkpoints/eurusd/loss_history.json
+============================================================

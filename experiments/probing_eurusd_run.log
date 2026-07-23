@@ -1,0 +1,253 @@
+=================================================================
+MarketWorldModel - O2 Probing Experiments  [EURUSD]
+=================================================================
+
+[0/4] Pre-loading checkpoint for split config...
+  Using split_dates from checkpoint: {'train_end': '2024-10-31', 'val_end': '2024-11-14'}
+
+[1/4] Loading data pipeline...
+
+=======================================================
+DataPipeline.build()  [EURUSD]
+=======================================================
+
+[1/5] Fetching market data...
+
+=======================================================
+DataFetcher: 2024-05-13 -> 2026-05-12  |  interval=1h  |  EURUSD
+=======================================================
+  Loading eurusd from cache (EURUSD_X_1h_2024-05-13_2026-05-12.parquet)...
+
+  EURUSD bars: 12,296
+  Date range: 2024-05-12 -> 2026-05-11
+  Loading dxy from cache (DX_Y.NYB_1h_2024-05-13_2026-05-12.parquet)...
+  dxy     : 11,889 bars
+  Downloading evz (^VIX)... (14 chunks)  7,090 bars downloaded
+  evz     : 7,090 bars
+  Loading tlt from cache (TLT_1h_2024-05-13_2026-05-12.parquet)...
+  tlt     : 3,467 bars
+  Loading shy from cache (SHY_1h_2024-05-13_2026-05-12.parquet)...
+  shy     : 3,467 bars
+  Loading gbpusd from cache (GBPUSD_X_1h_2024-05-13_2026-05-12.parquet)...
+  gbpusd  : 12,298 bars
+
+  Macro columns:  ['dxy', 'evz', 'tlt', 'shy', 'gbpusd']
+  Missing values: {'dxy': 36, 'evz': 26, 'tlt': 337, 'shy': 337, 'gbpusd': 0}
+  Raw bars: 12,296
+
+[2/5] Computing 52 features...
+  Computing Group A: Returns...
+  Computing Group B: Volatility...
+  Computing Group C: Momentum/Trend...
+  Computing Group D: Price Structure...
+  Computing Group E: Session/Time...
+  Computing Group F: Macro (eurusd)...
+
+  Feature matrix shape: (12046, 52)
+  NaN count after cleanup: 0
+  Timestamp range: 2024-05-27 11:00:00 -> 2026-05-11 22:00:00
+  After warm-up trim: (12046, 52)
+
+[3/5] Building action vectors...
+  Action shape: (12046, 5)  (5 macro signals per bar)
+
+[4/5] Applying rolling z-score normalization...
+  Clipped 1,658 values beyond +-5 sigma
+  Normalized stats: mean=0.0028  std=1.0450
+
+[5/5] Creating walk-forward train/val/test splits...
+  Using date-based splits: train_end=2024-10-31, val_end=2024-11-14
+  Train: 2,679 bars  (2024-05-27 -> 2024-10-31)
+  Val:   238 bars  (2024-10-31 -> 2024-11-14)
+  Test:  9,129 bars  (2024-11-14 -> 2026-05-11)
+  MarketWindowDataset: 2679 bars -> 2630 samples (lookback=48, stride=1, history_len=1)
+  MarketWindowDataset: 238 bars -> 48 samples (lookback=48, stride=4, history_len=1)
+  MarketWindowDataset: 9129 bars -> 9080 samples (lookback=48, stride=1, history_len=1)
+
+----------------------------------------
+Pipeline complete.
+  Train samples: 2,630
+  Val samples:   48
+  Test samples:  9,080
+  Feature dim:   52
+  Action dim:    5
+  Lookback:      48 bars
+----------------------------------------
+
+[2/4] Loading trained encoder...
+
+Building MarketEncoder:
+  PatchEmbedding: 48 bars ? 52 features -> 12 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 13 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     888,448
+  Trainable parameters: 888,448
+  Loaded from epoch 175  (val_loss=0.0161)
+
+  Building random encoder (control baseline)...
+
+Building MarketEncoder:
+  PatchEmbedding: 48 bars ? 52 features -> 12 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 13 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     888,448
+  Trainable parameters: 888,448
+
+[3/4] Extracting embeddings...
+  Trained encoder ? train: (2630, 128)  val: (48, 128)
+  Random encoder  ? train: (2630, 128)   val: (48, 128)
+
+  Probe target distributions (val set):
+    session             : {0: 16, 1: 8, 2: 24}
+    high_vol            : {0: 34, 1: 14}
+    ret_direction       : {0: 24, 1: 24}
+    realized_vol        : mean=1.270  std=1.789
+    dxy_direction       : {0: 25, 1: 23}
+
+[4/4] Running probing experiments...
+      (20 experiments: 5 targets ? 2 probes ? 2 encoders)
+
+  session              | linear | trained ...  acc=0.500  auc=0.502
+  session              | linear | random  ...  acc=0.479  auc=0.523
+  session              | mlp    | trained ...  acc=0.500  auc=0.500
+  session              | mlp    | random  ...  acc=0.500  auc=0.506
+  high_vol             | linear | trained ...  acc=0.500  auc=0.172
+  high_vol             | linear | random  ...  acc=0.938  auc=0.981
+  high_vol             | mlp    | trained ...  acc=0.458  auc=0.000
+  high_vol             | mlp    | random  ...  acc=0.958  auc=0.996
+  ret_direction        | linear | trained ...  acc=0.479  auc=0.483
+  ret_direction        | linear | random  ...  acc=0.500  auc=0.559
+  ret_direction        | mlp    | trained ...  acc=0.438  auc=0.335
+  ret_direction        | mlp    | random  ...  acc=0.562  auc=0.566
+  realized_vol         | linear | trained ...  r=0.497  mse=3.5248
+  realized_vol         | linear | random  ...  r=0.665  mse=2.4029
+  realized_vol         | mlp    | trained ...  r=0.181  mse=3.8060
+  realized_vol         | mlp    | random  ...  r=0.479  mse=3.0041
+  dxy_direction        | linear | trained ...  acc=0.479  auc=0.748
+  dxy_direction        | linear | random  ...  acc=0.542  auc=0.663
+  dxy_direction        | mlp    | trained ...  acc=0.604  auc=0.753
+  dxy_direction        | mlp    | random  ...  acc=0.521  auc=0.631
+
+=================================================================
+PROBING RESULTS ? TRAINED vs RANDOM ENCODER
+=================================================================
+
+?? LINEAR PROBE ??
+  Target                        Trained   Random   Chance   ?(T-R)   ?(T-C)  metric
+  ---------------------------- -------- -------- -------- -------- --------  ------
+  Session (Asian/London/NY)       0.500    0.479    0.333   +0.021   +0.167  Acc ?
+  High Volatility (vol > median)    0.500    0.938    0.500   -0.438   +0.000  Acc ~
+  Return Direction (next bar ?/?)    0.479    0.500    0.500   -0.021   -0.021  Acc ~
+  Realized Volatility (rv_32)     0.497    0.665    0.000   -0.167   +0.497  r   ?
+  DXY Direction (dollar ?/?)      0.479    0.542    0.500   -0.062   -0.021  Acc ~
+
+?? MLP PROBE ??
+  Target                        Trained   Random   Chance   ?(T-R)   ?(T-C)  metric
+  ---------------------------- -------- -------- -------- -------- --------  ------
+  Session (Asian/London/NY)       0.500    0.500    0.333   +0.000   +0.167  Acc ?
+  High Volatility (vol > median)    0.458    0.958    0.500   -0.500   -0.042  Acc ?
+  Return Direction (next bar ?/?)    0.438    0.562    0.500   -0.125   -0.062  Acc ?
+  Realized Volatility (rv_32)     0.181    0.479    0.000   -0.297   +0.181  r   ?
+  DXY Direction (dollar ?/?)      0.604    0.521    0.500   +0.083   +0.104  Acc ?
+
+Full results saved to: ./experiments/probing_results_eurusd.json
+
+-- EMBEDDING STATISTICS --
+
+=======================================================
+DataPipeline.build()  [EURUSD]
+=======================================================
+
+[1/5] Fetching market data...
+
+=======================================================
+DataFetcher: 2024-05-13 -> 2026-05-12  |  interval=1h  |  EURUSD
+=======================================================
+  Loading eurusd from cache (EURUSD_X_1h_2024-05-13_2026-05-12.parquet)...
+
+  EURUSD bars: 12,296
+  Date range: 2024-05-12 -> 2026-05-11
+  Loading dxy from cache (DX_Y.NYB_1h_2024-05-13_2026-05-12.parquet)...
+  dxy     : 11,889 bars
+  Loading evz from cache (VIX_1h_2024-05-13_2026-05-12.parquet)...
+  evz     : 7,090 bars
+  Loading tlt from cache (TLT_1h_2024-05-13_2026-05-12.parquet)...
+  tlt     : 3,467 bars
+  Loading shy from cache (SHY_1h_2024-05-13_2026-05-12.parquet)...
+  shy     : 3,467 bars
+  Loading gbpusd from cache (GBPUSD_X_1h_2024-05-13_2026-05-12.parquet)...
+  gbpusd  : 12,298 bars
+
+  Macro columns:  ['dxy', 'evz', 'tlt', 'shy', 'gbpusd']
+  Missing values: {'dxy': 36, 'evz': 26, 'tlt': 337, 'shy': 337, 'gbpusd': 0}
+  Raw bars: 12,296
+
+[2/5] Computing 52 features...
+  Computing Group A: Returns...
+  Computing Group B: Volatility...
+  Computing Group C: Momentum/Trend...
+  Computing Group D: Price Structure...
+  Computing Group E: Session/Time...
+  Computing Group F: Macro (eurusd)...
+
+  Feature matrix shape: (12046, 52)
+  NaN count after cleanup: 0
+  Timestamp range: 2024-05-27 11:00:00 -> 2026-05-11 22:00:00
+  After warm-up trim: (12046, 52)
+
+[3/5] Building action vectors...
+  Action shape: (12046, 5)  (5 macro signals per bar)
+
+[4/5] Applying rolling z-score normalization...
+  Clipped 1,658 values beyond +-5 sigma
+  Normalized stats: mean=0.0028  std=1.0450
+
+[5/5] Creating walk-forward train/val/test splits...
+  Train: 8,432 bars  (2024-05-27 -> 2025-10-07)
+  Val:   1,806 bars  (2025-10-07 -> 2026-01-22)
+  Test:  1,808 bars  (2026-01-22 -> 2026-05-11)
+  MarketWindowDataset: 8432 bars -> 2096 samples (lookback=48, stride=4, history_len=1)
+  MarketWindowDataset: 1806 bars -> 440 samples (lookback=48, stride=4, history_len=1)
+  MarketWindowDataset: 1808 bars -> 440 samples (lookback=48, stride=4, history_len=1)
+
+----------------------------------------
+Pipeline complete.
+  Train samples: 2,096
+  Val samples:   440
+  Test samples:  440
+  Feature dim:   52
+  Action dim:    5
+  Lookback:      48 bars
+----------------------------------------
+
+Building MarketEncoder:
+  PatchEmbedding: 48 bars ? 52 features -> 12 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 13 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     888,448
+  Trainable parameters: 888,448
+
+Building MarketEncoder:
+  PatchEmbedding: 48 bars ? 52 features -> 12 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 13 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     888,448
+  Trainable parameters: 888,448
+  trained_var_mean              : 0.8750
+  random_var_mean               : 0.0335
+  trained_temporal_cos          : 0.9910
+  random_temporal_cos           : 0.9786
+
+O2 probing complete  [EURUSD]

@@ -1,0 +1,74 @@
+[
+  {
+    "instrument": "usdjpy",
+    "horizon": 1,
+    "probe": "linear",
+    "trained_r": 0.16898674128481064,
+    "random_r": 0.136504919353653,
+    "delta_TR": 0.032481821931157645,
+    "n_samples": 109803
+  },
+  {
+    "instrument": "usdjpy",
+    "horizon": 1,
+    "probe": "mlp",
+    "trained_r": 0.1174046160838413,
+    "random_r": 0.16500317390045516,
+    "delta_TR": -0.04759855781661386,
+    "n_samples": 109803
+  },
+  {
+    "instrument": "usdjpy",
+    "horizon": 4,
+    "probe": "linear",
+    "trained_r": 0.2136078510964707,
+    "random_r": 0.19421837367744246,
+    "delta_TR": 0.019389477419028245,
+    "n_samples": 109801
+  },
+  {
+    "instrument": "usdjpy",
+    "horizon": 4,
+    "probe": "mlp",
+    "trained_r": 0.19803822550641426,
+    "random_r": 0.16840981720095813,
+    "delta_TR": 0.029628408305456128,
+    "n_samples": 109801
+  },
+  {
+    "instrument": "usdjpy",
+    "horizon": 12,
+    "probe": "linear",
+    "trained_r": 0.2933580190860907,
+    "random_r": 0.25460232565541174,
+    "delta_TR": 0.03875569343067897,
+    "n_samples": 109791
+  },
+  {
+    "instrument": "usdjpy",
+    "horizon": 12,
+    "probe": "mlp",
+    "trained_r": 0.28409290532149833,
+    "random_r": 0.19020985736337895,
+    "delta_TR": 0.09388304795811939,
+    "n_samples": 109791
+  },
+  {
+    "instrument": "usdjpy",
+    "horizon": 24,
+    "probe": "linear",
+    "trained_r": 0.3332671648521421,
+    "random_r": 0.2917420422912924,
+    "delta_TR": 0.04152512256084967,
+    "n_samples": 109776
+  },
+  {
+    "instrument": "usdjpy",
+    "horizon": 24,
+    "probe": "mlp",
+    "trained_r": 0.31435520174359816,
+    "random_r": 0.2218299748420452,
+    "delta_TR": 0.09252522690155296,
+    "n_samples": 109776
+  }
+]

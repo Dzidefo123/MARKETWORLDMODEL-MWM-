@@ -1,0 +1,92 @@
+21:41:59  INFO     ============================================================
+21:41:59  INFO     M15 EXECUTION HEAD TRAINING
+21:41:59  INFO       Encoder:  experiments\checkpoints\m15_warmstart\best_model.pt
+21:41:59  INFO       Horizon:  12 M15 bars (180 min)
+21:41:59  INFO       Epochs:   200
+21:41:59  INFO     ============================================================
+21:41:59  INFO     Loading M15 warmstart encoder: experiments\checkpoints\m15_warmstart\best_model.pt
+21:41:59  INFO       Encoder loaded from epoch 172  val_loss=0.005363
+21:41:59  INFO     Fetching M15 data from MT5...
+21:41:59  INFO     Connecting to MT5...
+21:41:59  INFO     Connected to MT5: MetaTrader 5 build 5836
+21:41:59  INFO     Fetching 50000 M15 bars from MT5...
+21:41:59  INFO       Got 50000 M15 bars: 2024-04-15 05:45:00+00:00 \u2192 2026-05-29 22:30:00+00:00
+21:41:59  INFO     MT5 connection closed.
+21:41:59  INFO       yfinance window: 2024-06-01 \u2192 2026-05-30 (M15 data starts 2024-04-15; early bars use constant macro)
+21:41:59  INFO     Fetching H1 macro from yfinance (2024-06-01 \u2192 2026-05-30)...
+21:42:00  INFO       dxy: 11864 H1 bars
+21:42:01  INFO       gvz: 3465 H1 bars
+21:42:01  INFO       tlt: 3460 H1 bars
+21:42:02  INFO       silver: 11380 H1 bars
+21:42:02  INFO     Building M15 feature splits...
+21:42:02  INFO     Computing M15 features...
+21:42:02  INFO       Feature matrix: (49750, 52)
+21:42:02  INFO     Building action vectors...
+21:42:02  INFO     Applying rolling z-score normalization...
+21:42:03  INFO       Train: 42241 bars  (2024-04-17 \u2192 2026-01-30)
+21:42:03  INFO       Val:   1730 bars  (2026-02-02 \u2192 2026-02-26)
+21:42:03  INFO       Test:  5779 bars  (2026-02-27 \u2192 2026-05-29)
+21:42:03  INFO     Encoding train split (42241 bars)...
+21:42:18  INFO       Z_train: (42146, 128)
+21:42:18  INFO     Encoding val split (1730 bars)...
+21:42:19  INFO       Z_val:   (1635, 128)
+21:42:19  INFO     Computing M15 labels (horizon=12 bars = 180 min)...
+21:42:19  INFO       Dir label balance: 0.503  (0.5=perfect)
+21:42:19  INFO       Vol thresholds p33/p67: -0.5861 / 0.2615
+21:42:19  INFO       Train labeled: 42134  vol-labeled: 42146
+21:42:19  INFO       Val   labeled: 1623  vol-labeled: 1635
+21:42:19  INFO     ============================================================
+21:42:19  INFO     Training heads  (epochs=200  lr=1e-03)
+21:42:19  INFO     ============================================================
+21:42:19  INFO       VolatilityHead  (3-class)...
+21:42:25  INFO         val acc=0.371  AUC=0.578
+21:42:25  INFO       DirectionalHead (binary)...
+21:42:33  INFO         val acc=0.543  AUC=0.556
+21:42:33  INFO       MagnitudeHead   (regress)...
+21:42:37  INFO         val MAE=0.03604  r=0.073
+21:42:37  INFO       Magnitude threshold (p50): 0.042192
+21:42:37  INFO     Done. Heads saved to experiments/heads_gold_m15_h12
+
+Building MarketEncoder:
+  PatchEmbedding: 96 bars ? 52 features -> 24 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 25 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     889,984
+  Trainable parameters: 889,984
+  CausalPredictor: 1,424,448 parameters  (6 layers ? 4 heads ? 128 dims  history=3  cond_dim=64)
+  Computing Group A: Returns...
+  Computing Group B: Volatility...
+  Computing Group C: Momentum/Trend...
+  Computing Group D: Price Structure...
+  Computing Group E: Session/Time...
+  Computing Group F: Macro...
+
+  Feature matrix shape: (49750, 52)
+  NaN count after cleanup: 0
+  Timestamp range: 2024-04-17 22:15:00+00:00 -> 2026-05-29 22:30:00+00:00
+
+=======================================================
+EXECUTION HEAD TRAINING RESULTS
+=======================================================
+
+  VolatilityHead  (3-class)  (chance=0.333)
+    val accuracy : 0.371  (chance=0.333)
+    val AUC      : 0.578
+
+  DirectionalHead (binary)
+    val accuracy : 0.543  (chance=0.500)
+    val AUC      : 0.556
+
+  MagnitudeHead   (regression)
+    val MAE      : 0.03604
+    val Pearson r: 0.073
+
+  Vol thresholds (p33/p67): -0.586 / 0.261
+  Train labeled: 42,134  Val labeled: 1,623
+=======================================================
+
+Saved execution layer: experiments\heads_gold_m15_h12\execution_layer.pt
+Saved metrics:         experiments\heads_gold_m15_h12\metrics.json

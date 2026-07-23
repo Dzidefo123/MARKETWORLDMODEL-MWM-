@@ -1,0 +1,154 @@
+2026-06-17 08:56:49  INFO      Logging to experiments\live_20260617_115649.log
+2026-06-17 08:56:49  INFO      Loaded encoder + predictor from ./experiments/checkpoints/best_model.pt (epoch 180)
+2026-06-17 08:56:49  INFO      Loaded execution heads from ./experiments/heads_gold  Dir AUC=0.543  Vol AUC=0.641
+2026-06-17 08:56:49  INFO      Config D: loaded M15 encoder (epoch 172)
+2026-06-17 08:56:49  INFO      Connected to MT5: MetaTrader 5 build 5836
+2026-06-17 08:56:49  INFO      Config D M15 execution layer enabled  S_t gate=0.000200
+2026-06-17 08:56:49  INFO      Warming up: fetching 548 bars for XAUUSD ...
+2026-06-17 08:56:52  INFO      Warm-up complete. Surprise buffer: 250 bars.
+2026-06-17 08:56:52  INFO      M15 warm-up: fetching 596 M15 bars...
+2026-06-17 08:56:55  INFO      M15 warm-up complete. Surprise buffer: 250 bars.
+2026-06-17 08:56:55  INFO      Live trader started. symbol=XAUUSD  dry_run=True  poll=10s  m15=enabled
+2026-06-17 09:00:06  INFO      S_t check: S_t=1.914167  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=251
+2026-06-17 09:00:06  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-17 09:00:06  INFO      Bar close: dir_prob=0.857  S_t=1.91417  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 10:00:09  INFO      S_t check: S_t=0.011884  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=252
+2026-06-17 10:00:09  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-17 10:00:09  INFO      Bar close: dir_prob=0.891  S_t=0.01188  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 11:00:10  INFO      S_t check: S_t=0.009952  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=253
+2026-06-17 11:00:10  INFO      Post-shock cooldown: 1/8 bars elapsed — skipping entry
+2026-06-17 11:00:10  INFO      Bar close: dir_prob=0.573  S_t=0.00995  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 12:00:02  INFO      S_t check: S_t=0.000377  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=254
+2026-06-17 12:00:02  INFO      Post-shock cooldown: 2/8 bars elapsed — skipping entry
+2026-06-17 12:00:02  INFO      Bar close: dir_prob=0.564  S_t=0.00038  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 13:00:03  INFO      S_t check: S_t=0.001809  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=255
+2026-06-17 13:00:03  INFO      Post-shock cooldown: 3/8 bars elapsed — skipping entry
+2026-06-17 13:00:03  INFO      Bar close: dir_prob=0.579  S_t=0.00181  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 14:00:05  INFO      S_t check: S_t=0.004715  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=256
+2026-06-17 14:00:05  INFO      Post-shock cooldown: 4/8 bars elapsed — skipping entry
+2026-06-17 14:00:05  INFO      Bar close: dir_prob=0.573  S_t=0.00471  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 15:00:01  INFO      S_t check: S_t=0.009873  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=257
+2026-06-17 15:00:01  INFO      Post-shock cooldown: 5/8 bars elapsed — skipping entry
+2026-06-17 15:00:01  INFO      Bar close: dir_prob=0.556  S_t=0.00987  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 16:00:03  INFO      S_t check: S_t=0.005650  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=258
+2026-06-17 16:00:03  INFO      Post-shock cooldown: 6/8 bars elapsed — skipping entry
+2026-06-17 16:00:03  INFO      Bar close: dir_prob=0.527  S_t=0.00565  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 17:00:05  INFO      S_t check: S_t=0.000179  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=259
+2026-06-17 17:00:05  INFO      Post-shock cooldown: 7/8 bars elapsed — skipping entry
+2026-06-17 17:00:05  INFO      Bar close: dir_prob=0.507  S_t=0.00018  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 18:00:06  INFO      S_t check: S_t=0.000170  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=260
+2026-06-17 18:00:06  INFO      Bar close: dir_prob=0.499  S_t=0.00017  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 19:00:08  INFO      S_t check: S_t=0.002063  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=261
+2026-06-17 19:00:08  INFO      Bar close: dir_prob=0.512  S_t=0.00206  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-17 20:00:09  INFO      S_t check: S_t=0.007214  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=262
+2026-06-17 20:00:09  INFO      Bar close: dir_prob=0.518  S_t=0.00721  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 06:00:07  INFO      S_t check: S_t=0.084079  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=263
+2026-06-18 06:00:07  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-18 06:00:07  INFO      Bar close: dir_prob=0.535  S_t=0.08408  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 07:00:09  INFO      S_t check: S_t=0.029352  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=264
+2026-06-18 07:00:09  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-18 07:00:09  INFO      Bar close: dir_prob=0.518  S_t=0.02935  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 08:02:40  ERROR     $DX-Y.NYB: possibly delisted; no price data found  (1h 2026-06-03 23:00:10.008714+00:00 -> 2026-06-18 11:00:10.008714+00:00)
+2026-06-18 08:02:40  ERROR     
+1 Failed download:
+2026-06-18 08:02:40  ERROR     ['DX-Y.NYB']: possibly delisted; no price data found  (1h 2026-06-03 23:00:10.008714+00:00 -> 2026-06-18 11:00:10.008714+00:00)
+2026-06-18 08:02:40  WARNING   yfinance returned empty data for dxy (DX-Y.NYB)
+2026-06-18 08:02:41  INFO      S_t check: S_t=0.000781  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=265
+2026-06-18 08:02:41  INFO      Post-shock cooldown: 1/8 bars elapsed — skipping entry
+2026-06-18 08:02:41  INFO      Bar close: dir_prob=0.498  S_t=0.00078  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 09:00:10  INFO      S_t check: S_t=0.034333  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=266
+2026-06-18 09:00:10  INFO      Post-shock cooldown: 1/8 bars elapsed — skipping entry
+2026-06-18 09:00:10  INFO      Bar close: dir_prob=0.504  S_t=0.03433  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 10:00:01  INFO      S_t check: S_t=0.000176  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=267
+2026-06-18 10:00:01  INFO      Post-shock cooldown: 2/8 bars elapsed — skipping entry
+2026-06-18 10:00:01  INFO      Bar close: dir_prob=0.485  S_t=0.00018  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 12:00:09  INFO      S_t check: S_t=0.044130  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=268
+2026-06-18 12:00:09  INFO      Post-shock cooldown: 2/8 bars elapsed — skipping entry
+2026-06-18 12:00:09  INFO      Bar close: dir_prob=0.506  S_t=0.04413  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 13:00:01  INFO      S_t check: S_t=0.000743  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=269
+2026-06-18 13:00:01  INFO      Post-shock cooldown: 3/8 bars elapsed — skipping entry
+2026-06-18 13:00:01  INFO      Bar close: dir_prob=0.506  S_t=0.00074  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 14:00:03  INFO      S_t check: S_t=0.016463  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=270
+2026-06-18 14:00:03  INFO      Post-shock cooldown: 3/8 bars elapsed — skipping entry
+2026-06-18 14:00:03  INFO      Bar close: dir_prob=0.501  S_t=0.01646  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 15:00:04  INFO      S_t check: S_t=0.007469  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=271
+2026-06-18 15:00:04  INFO      Post-shock cooldown: 4/8 bars elapsed — skipping entry
+2026-06-18 15:00:04  INFO      Bar close: dir_prob=0.497  S_t=0.00747  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 16:00:06  INFO      S_t check: S_t=0.015976  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=272
+2026-06-18 16:00:06  INFO      Post-shock cooldown: 4/8 bars elapsed — skipping entry
+2026-06-18 16:00:06  INFO      Bar close: dir_prob=0.496  S_t=0.01598  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 17:00:08  INFO      S_t check: S_t=0.000249  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=273
+2026-06-18 17:00:08  INFO      Post-shock cooldown: 5/8 bars elapsed — skipping entry
+2026-06-18 17:00:08  INFO      Bar close: dir_prob=0.490  S_t=0.00025  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 18:00:06  INFO      S_t check: S_t=0.000302  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=274
+2026-06-18 18:00:06  INFO      Post-shock cooldown: 6/8 bars elapsed — skipping entry
+2026-06-18 18:00:06  INFO      Bar close: dir_prob=0.504  S_t=0.00030  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 19:00:07  INFO      S_t check: S_t=0.008518  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=275
+2026-06-18 19:00:07  INFO      Post-shock cooldown: 7/8 bars elapsed — skipping entry
+2026-06-18 19:00:07  INFO      Bar close: dir_prob=0.503  S_t=0.00852  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 20:00:09  INFO      S_t check: S_t=0.067871  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=276
+2026-06-18 20:00:09  INFO      Post-shock cooldown: 7/8 bars elapsed — skipping entry
+2026-06-18 20:00:09  INFO      Bar close: dir_prob=0.473  S_t=0.06787  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 21:00:11  INFO      S_t check: S_t=0.000412  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=277
+2026-06-18 21:00:11  INFO      Bar close: dir_prob=0.478  S_t=0.00041  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-18 22:00:02  INFO      S_t check: S_t=0.000176  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=278
+2026-06-18 22:00:02  INFO      Bar close: dir_prob=0.549  S_t=0.00018  signal=1.000  eff=1.000  lots=0.24  action=m15_pending(dir=LONG lots=0.24)
+2026-06-18 22:15:03  INFO      M15 bar: S_t=2.616266  gate=0.000200  pending=LONG
+2026-06-18 22:30:05  INFO      M15 bar: S_t=0.202174  gate=0.000200  pending=LONG
+2026-06-18 22:45:06  INFO      M15 bar: S_t=0.016804  gate=0.000200  pending=LONG
+2026-06-18 23:00:08  INFO      S_t check: S_t=0.000361  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=279
+2026-06-18 23:00:08  INFO      Bar close: dir_prob=0.556  S_t=0.00036  signal=1.000  eff=1.000  lots=0.24  action=m15_pending(dir=LONG lots=0.24)
+2026-06-18 23:15:10  INFO      M15 bar: S_t=0.016395  gate=0.000200  pending=LONG
+2026-06-18 23:30:01  INFO      M15 bar: S_t=0.009277  gate=0.000200  pending=LONG
+2026-06-18 23:45:02  INFO      M15 bar: S_t=0.079360  gate=0.000200  pending=LONG
+2026-06-19 00:00:03  INFO      S_t check: S_t=0.026093  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=280
+2026-06-19 00:00:03  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-19 00:00:03  INFO      H1 fallback skipped — signal dissolved during M15 scan
+2026-06-19 00:00:03  INFO      Bar close: dir_prob=0.530  S_t=0.02609  signal=0.000  eff=0.000  lots=0.00  action=m15_fallback_skipped(signal_dissolved)
+2026-06-19 01:00:03  INFO      S_t check: S_t=0.072328  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=281
+2026-06-19 01:00:03  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-19 01:00:03  INFO      Bar close: dir_prob=0.548  S_t=0.07233  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 02:00:04  INFO      S_t check: S_t=0.033443  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=282
+2026-06-19 02:00:04  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-19 02:00:04  INFO      Bar close: dir_prob=0.601  S_t=0.03344  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 03:00:05  INFO      S_t check: S_t=0.004571  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=283
+2026-06-19 03:00:05  INFO      Post-shock cooldown: 1/8 bars elapsed — skipping entry
+2026-06-19 03:00:05  INFO      Bar close: dir_prob=0.532  S_t=0.00457  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 04:00:07  INFO      S_t check: S_t=0.000706  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=284
+2026-06-19 04:00:07  INFO      Post-shock cooldown: 2/8 bars elapsed — skipping entry
+2026-06-19 04:00:07  INFO      Bar close: dir_prob=0.491  S_t=0.00071  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 05:00:08  INFO      S_t check: S_t=0.000646  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=285
+2026-06-19 05:00:08  INFO      Post-shock cooldown: 3/8 bars elapsed — skipping entry
+2026-06-19 05:00:08  INFO      Bar close: dir_prob=0.486  S_t=0.00065  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 06:00:10  INFO      S_t check: S_t=0.002878  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=286
+2026-06-19 06:00:10  INFO      Post-shock cooldown: 4/8 bars elapsed — skipping entry
+2026-06-19 06:00:10  INFO      Bar close: dir_prob=0.485  S_t=0.00288  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 07:00:01  INFO      S_t check: S_t=0.000050  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=287
+2026-06-19 07:00:01  INFO      Post-shock cooldown: 5/8 bars elapsed — skipping entry
+2026-06-19 07:00:01  INFO      Bar close: dir_prob=0.493  S_t=0.00005  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 08:00:03  INFO      S_t check: S_t=0.001251  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=288
+2026-06-19 08:00:03  INFO      Post-shock cooldown: 6/8 bars elapsed — skipping entry
+2026-06-19 08:00:03  INFO      Bar close: dir_prob=0.504  S_t=0.00125  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 09:00:05  INFO      S_t check: S_t=0.003338  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q4-half  buffer_len=289
+2026-06-19 09:00:05  INFO      Post-shock cooldown: 7/8 bars elapsed — skipping entry
+2026-06-19 09:00:05  INFO      Bar close: dir_prob=0.492  S_t=0.00334  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 10:00:07  INFO      S_t check: S_t=0.001338  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=290
+2026-06-19 10:00:07  INFO      Bar close: dir_prob=0.506  S_t=0.00134  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 11:00:08  INFO      S_t check: S_t=0.011416  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=291
+2026-06-19 11:00:08  INFO      Post-shock cooldown: 0/8 bars elapsed — skipping entry
+2026-06-19 11:00:08  INFO      Bar close: dir_prob=0.542  S_t=0.01142  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 12:00:10  INFO      S_t check: S_t=0.001087  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=292
+2026-06-19 12:00:10  INFO      Post-shock cooldown: 1/8 bars elapsed — skipping entry
+2026-06-19 12:00:10  INFO      Bar close: dir_prob=0.553  S_t=0.00109  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 13:00:02  INFO      S_t check: S_t=0.000055  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=293
+2026-06-19 13:00:02  INFO      Post-shock cooldown: 2/8 bars elapsed — skipping entry
+2026-06-19 13:00:02  INFO      Bar close: dir_prob=0.517  S_t=0.00005  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 14:00:03  INFO      S_t check: S_t=0.016987  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q5-CB  buffer_len=294
+2026-06-19 14:00:03  INFO      Post-shock cooldown: 2/8 bars elapsed — skipping entry
+2026-06-19 14:00:03  INFO      Bar close: dir_prob=0.526  S_t=0.01699  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 15:00:09  INFO      S_t check: S_t=0.000775  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q2-skip  buffer_len=295
+2026-06-19 15:00:09  INFO      Post-shock cooldown: 3/8 bars elapsed — skipping entry
+2026-06-19 15:00:09  INFO      Bar close: dir_prob=0.538  S_t=0.00077  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-06-19 16:00:11  INFO      S_t check: S_t=0.000037  p20=0.000500  p60=0.003000  p90=0.010000  zone=Q1  buffer_len=296
+2026-06-19 16:00:11  INFO      Post-shock cooldown: 4/8 bars elapsed — skipping entry
+2026-06-19 16:00:11  INFO      Bar close: dir_prob=0.536  S_t=0.00004  signal=1.000  eff=0.000  lots=0.00  action=hold

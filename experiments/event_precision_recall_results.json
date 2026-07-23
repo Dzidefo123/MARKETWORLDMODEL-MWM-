@@ -1,0 +1,1415 @@
+{
+  "params": {
+    "window": 2,
+    "spike_pct": 95.0,
+    "react_sigma": 3.0,
+    "top_n": 15,
+    "merge_days": 3
+  },
+  "results": {
+    "gold": {
+      "asset": "gold",
+      "window_start": "2026-01-22",
+      "window_end": "2026-05-06",
+      "spike_threshold_smooth": 0.0012799428955380164,
+      "spike_pct": 95.0,
+      "precision": 0.6,
+      "precision_hits": 3,
+      "precision_den": 5,
+      "recall": 0.5,
+      "recall_hits": 4,
+      "recall_den": 8,
+      "n_relevant_events": 9,
+      "n_reacted_events": 8,
+      "top_episodes": [
+        {
+          "peak_day": "2026-03-18",
+          "peak_smooth": 0.0034504784465146563,
+          "peak_x_mean": 9.900001973411877,
+          "span_days": 1,
+          "event": "FOMC Mar 2026 [VERIFY]",
+          "event_cat": "FOMC",
+          "delta_days": 0
+        },
+        {
+          "peak_day": "2026-01-27",
+          "peak_smooth": 0.0022245843041067324,
+          "peak_x_mean": 6.382705860088377,
+          "span_days": 3,
+          "event": "FOMC Jan 2026 [VERIFY]",
+          "event_cat": "FOMC",
+          "delta_days": 1
+        },
+        {
+          "peak_day": "2026-03-05",
+          "peak_smooth": 0.0018546145159537748,
+          "peak_x_mean": 5.321200422627446,
+          "span_days": 6,
+          "event": "NFP Feb 2026 [VERIFY]",
+          "event_cat": "NFP",
+          "delta_days": 1
+        },
+        {
+          "peak_day": "2026-02-20",
+          "peak_smooth": 0.001595102672581561,
+          "peak_x_mean": 4.576617373832054,
+          "span_days": 2,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2026-02-10",
+          "peak_smooth": 0.0012986339521982397,
+          "peak_x_mean": 3.725998840099588,
+          "span_days": 1,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        }
+      ],
+      "events_detail": [
+        {
+          "date": "2026-01-28",
+          "name": "FOMC Jan 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "3.5319325497027094",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2026-02-06",
+          "name": "NFP Jan 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "1.6035970949146037",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-02-13",
+          "name": "CPI Jan 2026 [shutdown-rescheduled from Feb 11]",
+          "category": "CPI",
+          "max_retz": "4.401036076471004",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-03-06",
+          "name": "NFP Feb 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "3.287982171218956",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2026-03-11",
+          "name": "CPI Feb 2026 [VERIFY]",
+          "category": "CPI",
+          "max_retz": "4.429574240916277",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2026-03-18",
+          "name": "FOMC Mar 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "4.510800727199651",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2026-04-03",
+          "name": "NFP Mar 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "4.802817225048936",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-04-10",
+          "name": "CPI Mar 2026 [VERIFY]",
+          "category": "CPI",
+          "max_retz": "4.458430272081487",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-04-29",
+          "name": "FOMC Apr 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "3.3482926986539763",
+          "reacted": "True",
+          "model_spiked": "False"
+        }
+      ]
+    },
+    "eurusd": {
+      "asset": "eurusd",
+      "window_start": "2024-11-14",
+      "window_end": "2026-05-08",
+      "spike_threshold_smooth": 0.004492448630905221,
+      "spike_pct": 95.0,
+      "precision": 0.5333333333333333,
+      "precision_hits": 8,
+      "precision_den": 15,
+      "recall": 0.3409090909090909,
+      "recall_hits": 15,
+      "recall_den": 44,
+      "n_relevant_events": 54,
+      "n_reacted_events": 44,
+      "top_episodes": [
+        {
+          "peak_day": "2025-08-22",
+          "peak_smooth": 0.03480558284597161,
+          "peak_x_mean": 34.11891538375304,
+          "span_days": 2,
+          "event": "Powell Jackson Hole 2025",
+          "event_cat": "OTHER",
+          "delta_days": 0
+        },
+        {
+          "peak_day": "2025-07-25",
+          "peak_smooth": 0.02760727486262719,
+          "peak_x_mean": 27.06262036129093,
+          "span_days": 5,
+          "event": "ECB Jul 2025",
+          "event_cat": "ECB",
+          "delta_days": 1
+        },
+        {
+          "peak_day": "2025-01-03",
+          "peak_smooth": 0.025138187998284895,
+          "peak_x_mean": 24.64224526881116,
+          "span_days": 8,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-02-05",
+          "peak_smooth": 0.02063694371220966,
+          "peak_x_mean": 20.22980449464444,
+          "span_days": 2,
+          "event": "NFP Jan 2025",
+          "event_cat": "NFP",
+          "delta_days": 2
+        },
+        {
+          "peak_day": "2024-12-18",
+          "peak_smooth": 0.019803759215089183,
+          "peak_x_mean": 19.413057610039445,
+          "span_days": 6,
+          "event": "FOMC Dec 2024",
+          "event_cat": "FOMC",
+          "delta_days": 0
+        },
+        {
+          "peak_day": "2025-08-27",
+          "peak_smooth": 0.014727354699668163,
+          "peak_x_mean": 14.436803746346483,
+          "span_days": 1,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-05-12",
+          "peak_smooth": 0.013537577217599997,
+          "peak_x_mean": 13.270498978061966,
+          "span_days": 2,
+          "event": "CPI Apr 2025",
+          "event_cat": "CPI",
+          "delta_days": 1
+        },
+        {
+          "peak_day": "2025-10-13",
+          "peak_smooth": 0.013459514045583395,
+          "peak_x_mean": 13.193975887717277,
+          "span_days": 2,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-09-11",
+          "peak_smooth": 0.012570830969101129,
+          "peak_x_mean": 12.322825336276903,
+          "span_days": 2,
+          "event": "CPI Aug 2025",
+          "event_cat": "CPI",
+          "delta_days": 0
+        },
+        {
+          "peak_day": "2024-11-14",
+          "peak_smooth": 0.011723371067394813,
+          "peak_x_mean": 11.49208468166988,
+          "span_days": 2,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-04-02",
+          "peak_smooth": 0.010530631639994681,
+          "peak_x_mean": 10.322876403261716,
+          "span_days": 2,
+          "event": "NFP Mar 2025",
+          "event_cat": "NFP",
+          "delta_days": 2
+        },
+        {
+          "peak_day": "2025-05-28",
+          "peak_smooth": 0.010456044925376773,
+          "peak_x_mean": 10.249761184474478,
+          "span_days": 1,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-04-17",
+          "peak_smooth": 0.009604362673902264,
+          "peak_x_mean": 9.414881481396433,
+          "span_days": 5,
+          "event": "ECB Apr 2025",
+          "event_cat": "ECB",
+          "delta_days": 0
+        },
+        {
+          "peak_day": "2026-03-26",
+          "peak_smooth": 0.00951815361622721,
+          "peak_x_mean": 9.330373212790649,
+          "span_days": 2,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-09-01",
+          "peak_smooth": 0.009158986814630529,
+          "peak_x_mean": 8.978292290412167,
+          "span_days": 2,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        }
+      ],
+      "events_detail": [
+        {
+          "date": "2024-12-06",
+          "name": "NFP Nov 2024",
+          "category": "NFP",
+          "max_retz": "2.846854781016147",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-12-11",
+          "name": "CPI Nov 2024",
+          "category": "CPI",
+          "max_retz": "3.839109798337965",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2024-12-12",
+          "name": "ECB Dec 2024",
+          "category": "ECB",
+          "max_retz": "3.839109798337965",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2024-12-18",
+          "name": "FOMC Dec 2024",
+          "category": "FOMC",
+          "max_retz": "4.922992221697062",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-01-10",
+          "name": "NFP Dec 2024",
+          "category": "NFP",
+          "max_retz": "4.484747179545448",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-01-15",
+          "name": "CPI Dec 2024",
+          "category": "CPI",
+          "max_retz": "5.149703548542791",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-01-29",
+          "name": "FOMC Jan 2025",
+          "category": "FOMC",
+          "max_retz": "4.8113252958885555",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-01-30",
+          "name": "ECB Jan 2025",
+          "category": "ECB",
+          "max_retz": "4.8113252958885555",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-02-07",
+          "name": "NFP Jan 2025",
+          "category": "NFP",
+          "max_retz": "2.6044983831224258",
+          "reacted": "False",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-02-12",
+          "name": "CPI Jan 2025",
+          "category": "CPI",
+          "max_retz": "4.96853715521765",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-03-06",
+          "name": "ECB Mar 2025",
+          "category": "ECB",
+          "max_retz": "2.505363086411274",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-03-07",
+          "name": "NFP Feb 2025",
+          "category": "NFP",
+          "max_retz": "2.505363086411274",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-03-12",
+          "name": "CPI Feb 2025",
+          "category": "CPI",
+          "max_retz": "3.6078737578693376",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-03-19",
+          "name": "FOMC Mar 2025",
+          "category": "FOMC",
+          "max_retz": "3.6134818785495346",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-04-04",
+          "name": "NFP Mar 2025",
+          "category": "NFP",
+          "max_retz": "2.868355754337172",
+          "reacted": "False",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-04-10",
+          "name": "CPI Mar 2025",
+          "category": "CPI",
+          "max_retz": "3.128536648819127",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-04-17",
+          "name": "ECB Apr 2025",
+          "category": "ECB",
+          "max_retz": "4.279356695817786",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-05-02",
+          "name": "NFP Apr 2025",
+          "category": "NFP",
+          "max_retz": "4.250388619444895",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-05-07",
+          "name": "FOMC May 2025",
+          "category": "FOMC",
+          "max_retz": "6.15985112288872",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-05-13",
+          "name": "CPI Apr 2025",
+          "category": "CPI",
+          "max_retz": "4.044005763849091",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-06-05",
+          "name": "ECB Jun 2025",
+          "category": "ECB",
+          "max_retz": "4.541738431593582",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-06-06",
+          "name": "NFP May 2025",
+          "category": "NFP",
+          "max_retz": "2.515799325780559",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-06-11",
+          "name": "CPI May 2025",
+          "category": "CPI",
+          "max_retz": "4.584896553590866",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-06-18",
+          "name": "FOMC Jun 2025",
+          "category": "FOMC",
+          "max_retz": "3.4445147278399997",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-07-03",
+          "name": "NFP Jun 2025",
+          "category": "NFP",
+          "max_retz": "4.1330078603319285",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-07-15",
+          "name": "CPI Jun 2025",
+          "category": "CPI",
+          "max_retz": "3.3941253762200194",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-07-24",
+          "name": "ECB Jul 2025",
+          "category": "ECB",
+          "max_retz": "4.928272189807743",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-07-30",
+          "name": "FOMC Jul 2025",
+          "category": "FOMC",
+          "max_retz": "3.9543181634780247",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-08-01",
+          "name": "NFP Jul 2025",
+          "category": "NFP",
+          "max_retz": "3.4414353027439253",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-08-12",
+          "name": "CPI Jul 2025",
+          "category": "CPI",
+          "max_retz": "2.6106452830669076",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-08-22",
+          "name": "Powell Jackson Hole 2025",
+          "category": "OTHER",
+          "max_retz": "5.897884842345671",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-09-05",
+          "name": "NFP Aug 2025",
+          "category": "NFP",
+          "max_retz": "4.337770573412785",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-09-11",
+          "name": "CPI Aug 2025",
+          "category": "CPI",
+          "max_retz": "3.141686008898367",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-09-11",
+          "name": "ECB Sep 2025",
+          "category": "ECB",
+          "max_retz": "3.141686008898367",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-09-17",
+          "name": "FOMC Sep 2025",
+          "category": "FOMC",
+          "max_retz": "4.019842331606306",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-10-24",
+          "name": "CPI Sep 2025 [shutdown-delayed from Oct 15]",
+          "category": "CPI",
+          "max_retz": "3.434448440320354",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-10-29",
+          "name": "FOMC Oct 2025",
+          "category": "FOMC",
+          "max_retz": "5.330086756497324",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-10-30",
+          "name": "ECB Oct 2025",
+          "category": "ECB",
+          "max_retz": "4.570793085391525",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-11-20",
+          "name": "NFP Sep 2025 [shutdown-delayed from Oct 3; Oct NFP cancelled]",
+          "category": "NFP",
+          "max_retz": "3.7626883786356187",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-12-10",
+          "name": "FOMC Dec 2025",
+          "category": "FOMC",
+          "max_retz": "4.174486492231673",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-12-16",
+          "name": "NFP Nov 2025 [shutdown-rescheduled from Dec 5]",
+          "category": "NFP",
+          "max_retz": "3.9908666159594093",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-12-18",
+          "name": "CPI Nov 2025 [shutdown-rescheduled from Dec 10; Oct CPI cancelled]",
+          "category": "CPI",
+          "max_retz": "3.9908666159594093",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-12-18",
+          "name": "ECB Dec 2025",
+          "category": "ECB",
+          "max_retz": "3.9908666159594093",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2026-01-09",
+          "name": "NFP Dec 2025 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "4.78996518875829",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-01-13",
+          "name": "CPI Dec 2025 [VERIFY]",
+          "category": "CPI",
+          "max_retz": "4.960189728187082",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-01-28",
+          "name": "FOMC Jan 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "2.602796095135624",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-02-06",
+          "name": "NFP Jan 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "2.518539807575867",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-02-13",
+          "name": "CPI Jan 2026 [shutdown-rescheduled from Feb 11]",
+          "category": "CPI",
+          "max_retz": "2.5488642557623535",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-03-06",
+          "name": "NFP Feb 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "3.3361903033375575",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-03-11",
+          "name": "CPI Feb 2026 [VERIFY]",
+          "category": "CPI",
+          "max_retz": "3.294727425917532",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-03-18",
+          "name": "FOMC Mar 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "4.4588501838111005",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-04-03",
+          "name": "NFP Mar 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "5.605789315286486",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-04-10",
+          "name": "CPI Mar 2026 [VERIFY]",
+          "category": "CPI",
+          "max_retz": "4.540369203063019",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-04-29",
+          "name": "FOMC Apr 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "4.664753865217655",
+          "reacted": "True",
+          "model_spiked": "True"
+        }
+      ]
+    },
+    "usdjpy": {
+      "asset": "usdjpy",
+      "window_start": "2024-08-14",
+      "window_end": "2026-05-13",
+      "spike_threshold_smooth": 0.02075814390458009,
+      "spike_pct": 95.0,
+      "precision": 0.5333333333333333,
+      "precision_hits": 8,
+      "precision_den": 15,
+      "recall": 0.39622641509433965,
+      "recall_hits": 21,
+      "recall_den": 53,
+      "n_relevant_events": 66,
+      "n_reacted_events": 53,
+      "top_episodes": [
+        {
+          "peak_day": "2025-04-21",
+          "peak_smooth": 0.14101661289654052,
+          "peak_x_mean": 24.839816691072713,
+          "span_days": 6,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-07-29",
+          "peak_smooth": 0.13907432781221965,
+          "peak_x_mean": 24.49768675003001,
+          "span_days": 5,
+          "event": "FOMC Jul 2025",
+          "event_cat": "FOMC",
+          "delta_days": 1
+        },
+        {
+          "peak_day": "2024-09-16",
+          "peak_smooth": 0.11677953684314464,
+          "peak_x_mean": 20.570500374876385,
+          "span_days": 1,
+          "event": "FOMC Sep 2024 (50bp cut)",
+          "event_cat": "FOMC",
+          "delta_days": 2
+        },
+        {
+          "peak_day": "2025-08-14",
+          "peak_smooth": 0.10534970948356204,
+          "peak_x_mean": 18.557157332585767,
+          "span_days": 2,
+          "event": "CPI Jul 2025",
+          "event_cat": "CPI",
+          "delta_days": 2
+        },
+        {
+          "peak_day": "2025-08-26",
+          "peak_smooth": 0.10086112570328017,
+          "peak_x_mean": 17.766501565052017,
+          "span_days": 5,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-12-22",
+          "peak_smooth": 0.09503497724654153,
+          "peak_x_mean": 16.74023624277725,
+          "span_days": 1,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2024-10-24",
+          "peak_smooth": 0.09259012113519323,
+          "peak_x_mean": 16.309579340767442,
+          "span_days": 1,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-12-09",
+          "peak_smooth": 0.08417765327491604,
+          "peak_x_mean": 14.827738618056733,
+          "span_days": 5,
+          "event": "FOMC Dec 2025",
+          "event_cat": "FOMC",
+          "delta_days": 1
+        },
+        {
+          "peak_day": "2025-03-12",
+          "peak_smooth": 0.07439721755023736,
+          "peak_x_mean": 13.104932875033548,
+          "span_days": 1,
+          "event": "CPI Feb 2025",
+          "event_cat": "CPI",
+          "delta_days": 0
+        },
+        {
+          "peak_day": "2026-02-06",
+          "peak_smooth": 0.07406329580893119,
+          "peak_x_mean": 13.046113175192263,
+          "span_days": 1,
+          "event": "NFP Jan 2026 [VERIFY]",
+          "event_cat": "NFP",
+          "delta_days": 0
+        },
+        {
+          "peak_day": "2025-11-06",
+          "peak_smooth": 0.07258346676826477,
+          "peak_x_mean": 12.785444014664003,
+          "span_days": 1,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-02-04",
+          "peak_smooth": 0.06800172039462875,
+          "peak_x_mean": 11.978377827862278,
+          "span_days": 1,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-05-29",
+          "peak_smooth": 0.06234866881762476,
+          "peak_x_mean": 10.98260320220891,
+          "span_days": 7,
+          "event": null,
+          "event_cat": null,
+          "delta_days": null
+        },
+        {
+          "peak_day": "2025-09-03",
+          "peak_smooth": 0.05874815674421067,
+          "peak_x_mean": 10.348379630527916,
+          "span_days": 2,
+          "event": "NFP Aug 2025",
+          "event_cat": "NFP",
+          "delta_days": 2
+        },
+        {
+          "peak_day": "2025-11-21",
+          "peak_smooth": 0.049963395208275564,
+          "peak_x_mean": 8.800960062398666,
+          "span_days": 1,
+          "event": "NFP Sep 2025 [shutdown-delayed from Oct 3; Oct NFP cancelled]",
+          "event_cat": "NFP",
+          "delta_days": 1
+        }
+      ],
+      "events_detail": [
+        {
+          "date": "2024-08-23",
+          "name": "Powell Jackson Hole 2024",
+          "category": "OTHER",
+          "max_retz": "4.580529753468753",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-09-06",
+          "name": "NFP Aug 2024",
+          "category": "NFP",
+          "max_retz": "4.941455234608255",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-09-11",
+          "name": "CPI Aug 2024",
+          "category": "CPI",
+          "max_retz": "3.1554167626969782",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2024-09-18",
+          "name": "FOMC Sep 2024 (50bp cut)",
+          "category": "FOMC",
+          "max_retz": "4.559166498308543",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2024-09-20",
+          "name": "BOJ Sep 2024",
+          "category": "BOJ",
+          "max_retz": "2.3447410627153356",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-10-04",
+          "name": "NFP Sep 2024",
+          "category": "NFP",
+          "max_retz": "5.789756883913665",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-10-10",
+          "name": "CPI Sep 2024",
+          "category": "CPI",
+          "max_retz": "2.91588821793683",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-10-31",
+          "name": "BOJ Oct 2024",
+          "category": "BOJ",
+          "max_retz": "4.351226042517167",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2024-11-01",
+          "name": "NFP Oct 2024",
+          "category": "NFP",
+          "max_retz": "4.351226042517167",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-11-07",
+          "name": "FOMC Nov 2024",
+          "category": "FOMC",
+          "max_retz": "2.459685740685441",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-11-13",
+          "name": "CPI Oct 2024",
+          "category": "CPI",
+          "max_retz": "3.894143798925923",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2024-12-06",
+          "name": "NFP Nov 2024",
+          "category": "NFP",
+          "max_retz": "3.5229011722593713",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-12-11",
+          "name": "CPI Nov 2024",
+          "category": "CPI",
+          "max_retz": "5.2365182251855",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-12-18",
+          "name": "FOMC Dec 2024",
+          "category": "FOMC",
+          "max_retz": "6.382237732073746",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2024-12-19",
+          "name": "BOJ Dec 2024",
+          "category": "BOJ",
+          "max_retz": "4.997586135113594",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-01-10",
+          "name": "NFP Dec 2024",
+          "category": "NFP",
+          "max_retz": "3.4951651178329692",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-01-15",
+          "name": "CPI Dec 2024",
+          "category": "CPI",
+          "max_retz": "3.6659966328087483",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-01-24",
+          "name": "BOJ Jan 2025 (hike)",
+          "category": "BOJ",
+          "max_retz": "3.842131282918215",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-01-29",
+          "name": "FOMC Jan 2025",
+          "category": "FOMC",
+          "max_retz": "3.0311734818501015",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-02-07",
+          "name": "NFP Jan 2025",
+          "category": "NFP",
+          "max_retz": "2.4591379776805393",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-02-12",
+          "name": "CPI Jan 2025",
+          "category": "CPI",
+          "max_retz": "4.5097727313064935",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-03-07",
+          "name": "NFP Feb 2025",
+          "category": "NFP",
+          "max_retz": "2.7097807942760612",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-03-12",
+          "name": "CPI Feb 2025",
+          "category": "CPI",
+          "max_retz": "2.0959990214056603",
+          "reacted": "False",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-03-19",
+          "name": "FOMC Mar 2025",
+          "category": "FOMC",
+          "max_retz": "5.46122690581481",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-03-19",
+          "name": "BOJ Mar 2025",
+          "category": "BOJ",
+          "max_retz": "5.46122690581481",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-04-04",
+          "name": "NFP Mar 2025",
+          "category": "NFP",
+          "max_retz": "3.541292883811368",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-04-10",
+          "name": "CPI Mar 2025",
+          "category": "CPI",
+          "max_retz": "2.8319434986183376",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-05-01",
+          "name": "BOJ Apr/May 2025",
+          "category": "BOJ",
+          "max_retz": "4.146972511987547",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-05-02",
+          "name": "NFP Apr 2025",
+          "category": "NFP",
+          "max_retz": "3.780766408609937",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-05-07",
+          "name": "FOMC May 2025",
+          "category": "FOMC",
+          "max_retz": "5.449337241338729",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-05-13",
+          "name": "CPI Apr 2025",
+          "category": "CPI",
+          "max_retz": "3.4575306403312074",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-06-06",
+          "name": "NFP May 2025",
+          "category": "NFP",
+          "max_retz": "2.646639535622425",
+          "reacted": "False",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-06-11",
+          "name": "CPI May 2025",
+          "category": "CPI",
+          "max_retz": "3.6676219128488063",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-06-17",
+          "name": "BOJ Jun 2025",
+          "category": "BOJ",
+          "max_retz": "4.889632884283244",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-06-18",
+          "name": "FOMC Jun 2025",
+          "category": "FOMC",
+          "max_retz": "4.889632884283244",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-07-03",
+          "name": "NFP Jun 2025",
+          "category": "NFP",
+          "max_retz": "4.7292564156056285",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-07-15",
+          "name": "CPI Jun 2025",
+          "category": "CPI",
+          "max_retz": "2.6085950425184965",
+          "reacted": "False",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-07-30",
+          "name": "FOMC Jul 2025",
+          "category": "FOMC",
+          "max_retz": "4.266006267373914",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-07-31",
+          "name": "BOJ Jul 2025",
+          "category": "BOJ",
+          "max_retz": "4.266006267373914",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-08-01",
+          "name": "NFP Jul 2025",
+          "category": "NFP",
+          "max_retz": "4.266006267373914",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-08-12",
+          "name": "CPI Jul 2025",
+          "category": "CPI",
+          "max_retz": "3.4658804860705774",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-08-22",
+          "name": "Powell Jackson Hole 2025",
+          "category": "OTHER",
+          "max_retz": "6.200330593929463",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-09-05",
+          "name": "NFP Aug 2025",
+          "category": "NFP",
+          "max_retz": "4.769525414443911",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-09-11",
+          "name": "CPI Aug 2025",
+          "category": "CPI",
+          "max_retz": "3.0592184680593406",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-09-17",
+          "name": "FOMC Sep 2025",
+          "category": "FOMC",
+          "max_retz": "3.894401297321118",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-09-19",
+          "name": "BOJ Sep 2025",
+          "category": "BOJ",
+          "max_retz": "2.825323669949917",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-10-24",
+          "name": "CPI Sep 2025 [shutdown-delayed from Oct 15]",
+          "category": "CPI",
+          "max_retz": "3.3234099176946224",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-10-29",
+          "name": "FOMC Oct 2025",
+          "category": "FOMC",
+          "max_retz": "3.912476081736887",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-10-30",
+          "name": "BOJ Oct 2025",
+          "category": "BOJ",
+          "max_retz": "3.912476081736887",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-11-20",
+          "name": "NFP Sep 2025 [shutdown-delayed from Oct 3; Oct NFP cancelled]",
+          "category": "NFP",
+          "max_retz": "3.335498671407443",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-12-10",
+          "name": "FOMC Dec 2025",
+          "category": "FOMC",
+          "max_retz": "2.8477191007733293",
+          "reacted": "False",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2025-12-16",
+          "name": "NFP Nov 2025 [shutdown-rescheduled from Dec 5]",
+          "category": "NFP",
+          "max_retz": "4.648843496310378",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-12-18",
+          "name": "CPI Nov 2025 [shutdown-rescheduled from Dec 10; Oct CPI cancelled]",
+          "category": "CPI",
+          "max_retz": "4.648843496310378",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2025-12-19",
+          "name": "BOJ Dec 2025",
+          "category": "BOJ",
+          "max_retz": "4.648843496310378",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-01-09",
+          "name": "NFP Dec 2025 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "4.082432750569062",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2026-01-13",
+          "name": "CPI Dec 2025 [VERIFY]",
+          "category": "CPI",
+          "max_retz": "4.398993884558574",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2026-01-28",
+          "name": "FOMC Jan 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "3.736259744095872",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-02-06",
+          "name": "NFP Jan 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "3.431032940877759",
+          "reacted": "True",
+          "model_spiked": "True"
+        },
+        {
+          "date": "2026-02-13",
+          "name": "CPI Jan 2026 [shutdown-rescheduled from Feb 11]",
+          "category": "CPI",
+          "max_retz": "2.3528778260240193",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-03-06",
+          "name": "NFP Feb 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "5.379670685590338",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-03-11",
+          "name": "CPI Feb 2026 [VERIFY]",
+          "category": "CPI",
+          "max_retz": "3.2688965960117597",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-03-18",
+          "name": "FOMC Mar 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "4.7008797542194385",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-03-19",
+          "name": "BOJ Mar 2026 [VERIFY]",
+          "category": "BOJ",
+          "max_retz": "4.7008797542194385",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-04-03",
+          "name": "NFP Mar 2026 [VERIFY]",
+          "category": "NFP",
+          "max_retz": "5.3836104312696635",
+          "reacted": "True",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-04-10",
+          "name": "CPI Mar 2026 [VERIFY]",
+          "category": "CPI",
+          "max_retz": "2.9343827204088657",
+          "reacted": "False",
+          "model_spiked": "False"
+        },
+        {
+          "date": "2026-04-29",
+          "name": "FOMC Apr 2026 [VERIFY]",
+          "category": "FOMC",
+          "max_retz": "4.3556637751909095",
+          "reacted": "True",
+          "model_spiked": "False"
+        }
+      ]
+    }
+  }
+}

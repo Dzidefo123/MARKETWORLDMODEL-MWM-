@@ -1,0 +1,222 @@
+[
+  {
+    "target":"session",
+    "label":"Session (Asian\/London\/NY)",
+    "probe":"linear",
+    "encoder":"trained",
+    "task":"classification",
+    "accuracy":0.4993523316,
+    "auc":0.4997748046,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"session",
+    "label":"Session (Asian\/London\/NY)",
+    "probe":"linear",
+    "encoder":"random",
+    "task":"classification",
+    "accuracy":0.4961139896,
+    "auc":0.5469074441,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"session",
+    "label":"Session (Asian\/London\/NY)",
+    "probe":"mlp",
+    "encoder":"trained",
+    "task":"classification",
+    "accuracy":0.4993523316,
+    "auc":0.4973766676,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"session",
+    "label":"Session (Asian\/London\/NY)",
+    "probe":"mlp",
+    "encoder":"random",
+    "task":"classification",
+    "accuracy":0.4993523316,
+    "auc":0.5364462731,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"high_vol",
+    "label":"High Volatility (vol > median)",
+    "probe":"linear",
+    "encoder":"trained",
+    "task":"classification",
+    "accuracy":0.7091968912,
+    "auc":0.7628171292,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"high_vol",
+    "label":"High Volatility (vol > median)",
+    "probe":"linear",
+    "encoder":"random",
+    "task":"classification",
+    "accuracy":0.8212435233,
+    "auc":0.8971229132,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"high_vol",
+    "label":"High Volatility (vol > median)",
+    "probe":"mlp",
+    "encoder":"trained",
+    "task":"classification",
+    "accuracy":0.6256476684,
+    "auc":0.6985504598,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"high_vol",
+    "label":"High Volatility (vol > median)",
+    "probe":"mlp",
+    "encoder":"random",
+    "task":"classification",
+    "accuracy":0.7992227979,
+    "auc":0.8817883753,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"ret_direction",
+    "label":"Return Direction (next bar ?\/?)",
+    "probe":"linear",
+    "encoder":"trained",
+    "task":"classification",
+    "accuracy":0.5019430052,
+    "auc":0.5015585161,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"ret_direction",
+    "label":"Return Direction (next bar ?\/?)",
+    "probe":"linear",
+    "encoder":"random",
+    "task":"classification",
+    "accuracy":0.5012953368,
+    "auc":0.505414102,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"ret_direction",
+    "label":"Return Direction (next bar ?\/?)",
+    "probe":"mlp",
+    "encoder":"trained",
+    "task":"classification",
+    "accuracy":0.4974093264,
+    "auc":0.4883652618,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"ret_direction",
+    "label":"Return Direction (next bar ?\/?)",
+    "probe":"mlp",
+    "encoder":"random",
+    "task":"classification",
+    "accuracy":0.4935233161,
+    "auc":0.4925918031,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"realized_vol",
+    "label":"Realized Volatility (rv_32)",
+    "probe":"linear",
+    "encoder":"trained",
+    "task":"regression",
+    "accuracy":null,
+    "auc":null,
+    "mse":0.9729321003,
+    "pearson_r":0.5028415322
+  },
+  {
+    "target":"realized_vol",
+    "label":"Realized Volatility (rv_32)",
+    "probe":"linear",
+    "encoder":"random",
+    "task":"regression",
+    "accuracy":null,
+    "auc":null,
+    "mse":0.5523970127,
+    "pearson_r":0.7559922338
+  },
+  {
+    "target":"realized_vol",
+    "label":"Realized Volatility (rv_32)",
+    "probe":"mlp",
+    "encoder":"trained",
+    "task":"regression",
+    "accuracy":null,
+    "auc":null,
+    "mse":1.0659775734,
+    "pearson_r":0.4290139079
+  },
+  {
+    "target":"realized_vol",
+    "label":"Realized Volatility (rv_32)",
+    "probe":"mlp",
+    "encoder":"random",
+    "task":"regression",
+    "accuracy":null,
+    "auc":null,
+    "mse":0.6163286567,
+    "pearson_r":0.7302005887
+  },
+  {
+    "target":"dxy_direction",
+    "label":"DXY Direction (dollar ?\/?)",
+    "probe":"linear",
+    "encoder":"trained",
+    "task":"classification",
+    "accuracy":0.5045336788,
+    "auc":0.5388880227,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"dxy_direction",
+    "label":"DXY Direction (dollar ?\/?)",
+    "probe":"linear",
+    "encoder":"random",
+    "task":"classification",
+    "accuracy":0.560880829,
+    "auc":0.5763274355,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"dxy_direction",
+    "label":"DXY Direction (dollar ?\/?)",
+    "probe":"mlp",
+    "encoder":"trained",
+    "task":"classification",
+    "accuracy":0.5446891192,
+    "auc":0.5554232494,
+    "mse":null,
+    "pearson_r":null
+  },
+  {
+    "target":"dxy_direction",
+    "label":"DXY Direction (dollar ?\/?)",
+    "probe":"mlp",
+    "encoder":"random",
+    "task":"classification",
+    "accuracy":0.524611399,
+    "auc":0.5327252199,
+    "mse":null,
+    "pearson_r":null
+  }
+]

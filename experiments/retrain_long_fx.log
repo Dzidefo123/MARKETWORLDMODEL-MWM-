@@ -1,0 +1,513 @@
+
+######################################################################
+# RETRAIN-LONG  [EURUSD]  epochs=40
+######################################################################
+[eurusd] loaded combined cache: 71,267 H1 bars (2015-01-01 -> 2026-07-01)
+
+[2/5] Computing 52 features...
+  Computing Group A: Returns...
+  Computing Group B: Volatility...
+  Computing Group C: Momentum/Trend...
+  Computing Group D: Price Structure...
+  Computing Group E: Session/Time...
+  Computing Group F: Macro (eurusd)...
+
+  Feature matrix shape: (71017, 52)
+  NaN count after cleanup: 0
+  Timestamp range: 2015-01-16 07:00:00+00:00 -> 2026-07-01 03:00:00+00:00
+  After warm-up trim: (71017, 52)
+
+[3/5] Building action vectors...
+  Action shape: (71017, 5)  (5 macro signals per bar)
+
+[4/5] Applying rolling z-score normalization...
+  Clipped 10,739 values beyond +-5 sigma
+  Normalized stats: mean=-0.0004  std=1.0183
+
+[5/5] Creating walk-forward train/val/test splits...
+  Using date-based splits: train_end=2022-12-31, val_end=2023-12-31
+  Train: 49,239 bars  (2015-01-16 -> 2022-12-30)
+  Val:   6,225 bars  (2023-01-01 -> 2023-12-29)
+  Test:  15,553 bars  (2024-01-01 -> 2026-07-01)
+  MarketWindowDataset: 49239 bars -> 49190 samples (lookback=48, stride=1, history_len=3)
+  MarketWindowDataset: 6225 bars -> 1544 samples (lookback=48, stride=4, history_len=3)
+  MarketWindowDataset: 15553 bars -> 15504 samples (lookback=48, stride=1, history_len=3)
+
+----------------------------------------
+Pipeline complete.
+  Train samples: 49,190
+  Val samples:   1,544
+  Test samples:  15,504
+  Feature dim:   52
+  Action dim:    5
+  Lookback:      48 bars
+----------------------------------------
+============================================================
+MarketWorldModel - O1 Training  [EURUSD]
+Log: ./experiments/retrain_long_eurusd.log
+============================================================
+
+Device: cpu
+
+[DATA]
+  Using caller-supplied pre-built dataset (skipping fetch/build)
+Train batches per epoch: 769
+Val   batches per epoch: 13
+
+[MODELS]
+
+Building MarketEncoder:
+  PatchEmbedding: 48 bars ? 52 features -> 12 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 13 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     888,448
+  Trainable parameters: 888,448
+  CausalPredictor: 1,424,448 parameters  (6 layers ? 4 heads ? 128 dims  history=3  cond_dim=64)
+
+Total trainable parameters: 2,312,896
+
+[TRAINING] 40 epochs
+------------------------------------------------------------
+  E001 S0000 | total=0.5352  pred=0.5208  sigreg=0.1444  lr=6.00e-05
+  E001 S0020 | total=0.1612  pred=0.1457  sigreg=0.1547  lr=6.00e-05
+  E001 S0040 | total=0.0892  pred=0.0723  sigreg=0.1692  lr=6.00e-05
+  E001 S0060 | total=0.0725  pred=0.0547  sigreg=0.1785  lr=6.00e-05
+  E001 S0080 | total=0.0576  pred=0.0389  sigreg=0.1865  lr=6.00e-05
+  E001 S0100 | total=0.0524  pred=0.0337  sigreg=0.1868  lr=6.00e-05
+  E001 S0120 | total=0.0456  pred=0.0264  sigreg=0.1917  lr=6.00e-05
+  E001 S0140 | total=0.0418  pred=0.0226  sigreg=0.1917  lr=6.00e-05
+  E001 S0160 | total=0.0393  pred=0.0200  sigreg=0.1932  lr=6.00e-05
+  E001 S0180 | total=0.0367  pred=0.0174  sigreg=0.1931  lr=6.00e-05
+  E001 S0200 | total=0.0360  pred=0.0169  sigreg=0.1911  lr=6.00e-05
+  E001 S0220 | total=0.0352  pred=0.0160  sigreg=0.1921  lr=6.00e-05
+  E001 S0240 | total=0.0324  pred=0.0131  sigreg=0.1923  lr=6.00e-05
+  E001 S0260 | total=0.0317  pred=0.0125  sigreg=0.1919  lr=6.00e-05
+  E001 S0280 | total=0.0321  pred=0.0131  sigreg=0.1903  lr=6.00e-05
+  E001 S0300 | total=0.0302  pred=0.0112  sigreg=0.1903  lr=6.00e-05
+  E001 S0320 | total=0.0298  pred=0.0111  sigreg=0.1871  lr=6.00e-05
+  E001 S0340 | total=0.0293  pred=0.0107  sigreg=0.1860  lr=6.00e-05
+  E001 S0360 | total=0.0293  pred=0.0107  sigreg=0.1856  lr=6.00e-05
+  E001 S0380 | total=0.0275  pred=0.0092  sigreg=0.1833  lr=6.00e-05
+  E001 S0400 | total=0.0276  pred=0.0095  sigreg=0.1816  lr=6.00e-05
+  E001 S0420 | total=0.0277  pred=0.0095  sigreg=0.1820  lr=6.00e-05
+  E001 S0440 | total=0.0270  pred=0.0092  sigreg=0.1778  lr=6.00e-05
+  E001 S0460 | total=0.0272  pred=0.0094  sigreg=0.1772  lr=6.00e-05
+  E001 S0480 | total=0.0258  pred=0.0082  sigreg=0.1758  lr=6.00e-05
+  E001 S0500 | total=0.0269  pred=0.0100  sigreg=0.1695  lr=6.00e-05
+  E001 S0520 | total=0.0259  pred=0.0090  sigreg=0.1693  lr=6.00e-05
+  E001 S0540 | total=0.0253  pred=0.0083  sigreg=0.1702  lr=6.00e-05
+  E001 S0560 | total=0.0241  pred=0.0078  sigreg=0.1633  lr=6.00e-05
+  E001 S0580 | total=0.0243  pred=0.0083  sigreg=0.1606  lr=6.00e-05
+  E001 S0600 | total=0.0241  pred=0.0082  sigreg=0.1598  lr=6.00e-05
+  E001 S0620 | total=0.0236  pred=0.0079  sigreg=0.1569  lr=6.00e-05
+  E001 S0640 | total=0.0239  pred=0.0083  sigreg=0.1551  lr=6.00e-05
+  E001 S0660 | total=0.0233  pred=0.0084  sigreg=0.1497  lr=6.00e-05
+  E001 S0680 | total=0.0232  pred=0.0082  sigreg=0.1502  lr=6.00e-05
+  E001 S0700 | total=0.0246  pred=0.0101  sigreg=0.1452  lr=6.00e-05
+  E001 S0720 | total=0.0215  pred=0.0075  sigreg=0.1405  lr=6.00e-05
+  E001 S0740 | total=0.0221  pred=0.0080  sigreg=0.1406  lr=6.00e-05
+  E001 S0760 | total=0.0216  pred=0.0075  sigreg=0.1407  lr=6.00e-05
+
+  ?? Epoch   1/40 ??
+     Train: total=0.0412  pred=0.0239  sigreg=0.1732
+     Val:   total=0.0183  pred=0.0016  sigreg=0.1674
+     LR: 6.00e-05
+
+  Checkpoint saved [val=0.0183]
+  E002 S0000 | total=0.0256  pred=0.0119  sigreg=0.1374  lr=1.20e-04
+  E002 S0020 | total=0.0211  pred=0.0081  sigreg=0.1298  lr=1.20e-04
+  E002 S0040 | total=0.0209  pred=0.0079  sigreg=0.1298  lr=1.20e-04
+  E002 S0060 | total=0.0221  pred=0.0094  sigreg=0.1267  lr=1.20e-04
+  E002 S0080 | total=0.0199  pred=0.0078  sigreg=0.1207  lr=1.20e-04
+  E002 S0100 | total=0.0186  pred=0.0066  sigreg=0.1199  lr=1.20e-04
+  E002 S0120 | total=0.0202  pred=0.0083  sigreg=0.1186  lr=1.20e-04
+  E002 S0140 | total=0.0192  pred=0.0081  sigreg=0.1116  lr=1.20e-04
+  E002 S0160 | total=0.0196  pred=0.0087  sigreg=0.1091  lr=1.20e-04
+  E002 S0180 | total=0.0179  pred=0.0072  sigreg=0.1069  lr=1.20e-04
+  E002 S0200 | total=0.0186  pred=0.0082  sigreg=0.1044  lr=1.20e-04
+  E002 S0220 | total=0.0167  pred=0.0064  sigreg=0.1038  lr=1.20e-04
+  E002 S0240 | total=0.0198  pred=0.0095  sigreg=0.1036  lr=1.20e-04
+  E002 S0260 | total=0.0165  pred=0.0068  sigreg=0.0970  lr=1.20e-04
+  E002 S0280 | total=0.0169  pred=0.0073  sigreg=0.0954  lr=1.20e-04
+  E002 S0300 | total=0.0165  pred=0.0072  sigreg=0.0935  lr=1.20e-04
+  E002 S0320 | total=0.0176  pred=0.0077  sigreg=0.0987  lr=1.20e-04
+  E002 S0340 | total=0.0155  pred=0.0061  sigreg=0.0942  lr=1.20e-04
+  E002 S0360 | total=0.0154  pred=0.0062  sigreg=0.0919  lr=1.20e-04
+  E002 S0380 | total=0.0155  pred=0.0062  sigreg=0.0924  lr=1.20e-04
+  E002 S0400 | total=0.0174  pred=0.0086  sigreg=0.0887  lr=1.20e-04
+  E002 S0420 | total=0.0152  pred=0.0067  sigreg=0.0856  lr=1.20e-04
+  E002 S0440 | total=0.0152  pred=0.0061  sigreg=0.0904  lr=1.20e-04
+  E002 S0460 | total=0.0148  pred=0.0062  sigreg=0.0853  lr=1.20e-04
+  E002 S0480 | total=0.0145  pred=0.0059  sigreg=0.0859  lr=1.20e-04
+  E002 S0500 | total=0.0149  pred=0.0068  sigreg=0.0813  lr=1.20e-04
+  E002 S0520 | total=0.0148  pred=0.0064  sigreg=0.0840  lr=1.20e-04
+  E002 S0540 | total=0.0145  pred=0.0061  sigreg=0.0838  lr=1.20e-04
+  E002 S0560 | total=0.0143  pred=0.0063  sigreg=0.0801  lr=1.20e-04
+  E002 S0580 | total=0.0145  pred=0.0061  sigreg=0.0847  lr=1.20e-04
+  E002 S0600 | total=0.0140  pred=0.0060  sigreg=0.0807  lr=1.20e-04
+  E002 S0620 | total=0.0135  pred=0.0055  sigreg=0.0798  lr=1.20e-04
+  E002 S0640 | total=0.0143  pred=0.0066  sigreg=0.0775  lr=1.20e-04
+  E002 S0660 | total=0.0138  pred=0.0059  sigreg=0.0795  lr=1.20e-04
+  E002 S0680 | total=0.0155  pred=0.0076  sigreg=0.0782  lr=1.20e-04
+  E002 S0700 | total=0.0139  pred=0.0060  sigreg=0.0788  lr=1.20e-04
+  E002 S0720 | total=0.0142  pred=0.0069  sigreg=0.0727  lr=1.20e-04
+  E002 S0740 | total=0.0138  pred=0.0060  sigreg=0.0780  lr=1.20e-04
+  E002 S0760 | total=0.0129  pred=0.0053  sigreg=0.0761  lr=1.20e-04
+
+  ?? Epoch   2/40 ??
+     Train: total=0.0165  pred=0.0070  sigreg=0.0954
+     Val:   total=0.0158  pred=0.0021  sigreg=0.1373
+     LR: 1.20e-04
+
+  Checkpoint saved [val=0.0158]
+  E003 S0000 | total=0.0147  pred=0.0069  sigreg=0.0786  lr=1.80e-04
+  E003 S0020 | total=0.0141  pred=0.0064  sigreg=0.0768  lr=1.80e-04
+  E003 S0040 | total=0.0144  pred=0.0066  sigreg=0.0773  lr=1.80e-04
+  E003 S0060 | total=0.0128  pred=0.0049  sigreg=0.0782  lr=1.80e-04
+  E003 S0080 | total=0.0128  pred=0.0052  sigreg=0.0756  lr=1.80e-04
+  E003 S0100 | total=0.0131  pred=0.0058  sigreg=0.0731  lr=1.80e-04
+  E003 S0120 | total=0.0129  pred=0.0053  sigreg=0.0767  lr=1.80e-04
+  E003 S0140 | total=0.0126  pred=0.0052  sigreg=0.0732  lr=1.80e-04
+  E003 S0160 | total=0.0126  pred=0.0049  sigreg=0.0771  lr=1.80e-04
+  E003 S0180 | total=0.0127  pred=0.0054  sigreg=0.0725  lr=1.80e-04
+  E003 S0200 | total=0.0135  pred=0.0059  sigreg=0.0759  lr=1.80e-04
+  E003 S0220 | total=0.0127  pred=0.0053  sigreg=0.0735  lr=1.80e-04
+  E003 S0240 | total=0.0128  pred=0.0052  sigreg=0.0768  lr=1.80e-04
+  E003 S0260 | total=0.0131  pred=0.0054  sigreg=0.0761  lr=1.80e-04
+  E003 S0280 | total=0.0119  pred=0.0045  sigreg=0.0740  lr=1.80e-04
+  E003 S0300 | total=0.0120  pred=0.0045  sigreg=0.0743  lr=1.80e-04
+  E003 S0320 | total=0.0122  pred=0.0047  sigreg=0.0754  lr=1.80e-04
+  E003 S0340 | total=0.0117  pred=0.0042  sigreg=0.0750  lr=1.80e-04
+  E003 S0360 | total=0.0121  pred=0.0043  sigreg=0.0775  lr=1.80e-04
+  E003 S0380 | total=0.0123  pred=0.0052  sigreg=0.0712  lr=1.80e-04
+  E003 S0400 | total=0.0112  pred=0.0038  sigreg=0.0738  lr=1.80e-04
+  E003 S0420 | total=0.0135  pred=0.0055  sigreg=0.0802  lr=1.80e-04
+  E003 S0440 | total=0.0114  pred=0.0041  sigreg=0.0731  lr=1.80e-04
+  E003 S0460 | total=0.0115  pred=0.0043  sigreg=0.0719  lr=1.80e-04
+  E003 S0480 | total=0.0113  pred=0.0040  sigreg=0.0725  lr=1.80e-04
+  E003 S0500 | total=0.0117  pred=0.0044  sigreg=0.0732  lr=1.80e-04
+  E003 S0520 | total=0.0106  pred=0.0036  sigreg=0.0700  lr=1.80e-04
+  E003 S0540 | total=0.0109  pred=0.0040  sigreg=0.0697  lr=1.80e-04
+  E003 S0560 | total=0.0115  pred=0.0042  sigreg=0.0727  lr=1.80e-04
+  E003 S0580 | total=0.0110  pred=0.0040  sigreg=0.0704  lr=1.80e-04
+  E003 S0600 | total=0.0112  pred=0.0039  sigreg=0.0727  lr=1.80e-04
+  E003 S0620 | total=0.0111  pred=0.0037  sigreg=0.0745  lr=1.80e-04
+  E003 S0640 | total=0.0117  pred=0.0042  sigreg=0.0749  lr=1.80e-04
+  E003 S0660 | total=0.0104  pred=0.0034  sigreg=0.0704  lr=1.80e-04
+  E003 S0680 | total=0.0119  pred=0.0045  sigreg=0.0740  lr=1.80e-04
+  E003 S0700 | total=0.0112  pred=0.0042  sigreg=0.0706  lr=1.80e-04
+  E003 S0720 | total=0.0105  pred=0.0034  sigreg=0.0710  lr=1.80e-04
+  E003 S0740 | total=0.0106  pred=0.0037  sigreg=0.0686  lr=1.80e-04
+  E003 S0760 | total=0.0107  pred=0.0034  sigreg=0.0722  lr=1.80e-04
+
+  ?? Epoch   3/40 ??
+     Train: total=0.0121  pred=0.0047  sigreg=0.0740
+     Val:   total=0.0158  pred=0.0011  sigreg=0.1472
+     LR: 1.80e-04
+
+  E004 S0000 | total=0.0107  pred=0.0037  sigreg=0.0700  lr=2.40e-04
+  E004 S0020 | total=0.0112  pred=0.0041  sigreg=0.0710  lr=2.40e-04
+  E004 S0040 | total=0.0107  pred=0.0038  sigreg=0.0689  lr=2.40e-04
+  E004 S0060 | total=0.0109  pred=0.0039  sigreg=0.0703  lr=2.40e-04
+  E004 S0080 | total=0.0111  pred=0.0036  sigreg=0.0746  lr=2.40e-04
+  E004 S0100 | total=0.0112  pred=0.0043  sigreg=0.0690  lr=2.40e-04
+  E004 S0120 | total=0.0105  pred=0.0032  sigreg=0.0735  lr=2.40e-04
+  E004 S0140 | total=0.0110  pred=0.0039  sigreg=0.0713  lr=2.40e-04
+  E004 S0160 | total=0.0109  pred=0.0039  sigreg=0.0703  lr=2.40e-04
+  E004 S0180 | total=0.0129  pred=0.0052  sigreg=0.0768  lr=2.40e-04
+  E004 S0200 | total=0.0108  pred=0.0035  sigreg=0.0731  lr=2.40e-04
+  E004 S0220 | total=0.0103  pred=0.0032  sigreg=0.0709  lr=2.40e-04
+  E004 S0240 | total=0.0112  pred=0.0039  sigreg=0.0729  lr=2.40e-04
+  E004 S0260 | total=0.0101  pred=0.0030  sigreg=0.0713  lr=2.40e-04
+  E004 S0280 | total=0.0106  pred=0.0031  sigreg=0.0745  lr=2.40e-04
+  E004 S0300 | total=0.0102  pred=0.0032  sigreg=0.0709  lr=2.40e-04
+  E004 S0320 | total=0.0100  pred=0.0027  sigreg=0.0728  lr=2.40e-04
+  E004 S0340 | total=0.0102  pred=0.0030  sigreg=0.0720  lr=2.40e-04
+  E004 S0360 | total=0.0103  pred=0.0028  sigreg=0.0747  lr=2.40e-04
+  E004 S0380 | total=0.0097  pred=0.0027  sigreg=0.0700  lr=2.40e-04
+  E004 S0400 | total=0.0106  pred=0.0032  sigreg=0.0740  lr=2.40e-04
+  E004 S0420 | total=0.0105  pred=0.0031  sigreg=0.0736  lr=2.40e-04
+  E004 S0440 | total=0.0094  pred=0.0024  sigreg=0.0696  lr=2.40e-04
+  E004 S0460 | total=0.0097  pred=0.0027  sigreg=0.0704  lr=2.40e-04
+  E004 S0480 | total=0.0095  pred=0.0024  sigreg=0.0706  lr=2.40e-04
+  E004 S0500 | total=0.0098  pred=0.0027  sigreg=0.0704  lr=2.40e-04
+  E004 S0520 | total=0.0093  pred=0.0023  sigreg=0.0694  lr=2.40e-04
+  E004 S0540 | total=0.0096  pred=0.0024  sigreg=0.0719  lr=2.40e-04
+  E004 S0560 | total=0.0091  pred=0.0023  sigreg=0.0681  lr=2.40e-04
+  E004 S0580 | total=0.0093  pred=0.0022  sigreg=0.0707  lr=2.40e-04
+  E004 S0600 | total=0.0098  pred=0.0028  sigreg=0.0695  lr=2.40e-04
+  E004 S0620 | total=0.0101  pred=0.0032  sigreg=0.0693  lr=2.40e-04
+  E004 S0640 | total=0.0095  pred=0.0024  sigreg=0.0711  lr=2.40e-04
+  E004 S0660 | total=0.0096  pred=0.0021  sigreg=0.0749  lr=2.40e-04
+  E004 S0680 | total=0.0094  pred=0.0023  sigreg=0.0711  lr=2.40e-04
+  E004 S0700 | total=0.0094  pred=0.0025  sigreg=0.0687  lr=2.40e-04
+  E004 S0720 | total=0.0096  pred=0.0024  sigreg=0.0719  lr=2.40e-04
+  E004 S0740 | total=0.0093  pred=0.0018  sigreg=0.0755  lr=2.40e-04
+  E004 S0760 | total=0.0091  pred=0.0018  sigreg=0.0733  lr=2.40e-04
+
+  ?? Epoch   4/40 ??
+     Train: total=0.0102  pred=0.0031  sigreg=0.0711
+     Val:   total=0.0164  pred=0.0006  sigreg=0.1583
+     LR: 2.40e-04
+
+  E005 S0000 | total=0.0086  pred=0.0018  sigreg=0.0679  lr=3.00e-04
+  E005 S0020 | total=0.0090  pred=0.0020  sigreg=0.0700  lr=3.00e-04
+  E005 S0040 | total=0.0094  pred=0.0024  sigreg=0.0695  lr=3.00e-04
+  E005 S0060 | total=0.0090  pred=0.0020  sigreg=0.0703  lr=3.00e-04
+  E005 S0080 | total=0.0093  pred=0.0023  sigreg=0.0695  lr=3.00e-04
+  E005 S0100 | total=0.0086  pred=0.0017  sigreg=0.0693  lr=3.00e-04
+  E005 S0120 | total=0.0087  pred=0.0019  sigreg=0.0687  lr=3.00e-04
+  E005 S0140 | total=0.0085  pred=0.0018  sigreg=0.0666  lr=3.00e-04
+  E005 S0160 | total=0.0085  pred=0.0017  sigreg=0.0686  lr=3.00e-04
+  E005 S0180 | total=0.0087  pred=0.0018  sigreg=0.0685  lr=3.00e-04
+  E005 S0200 | total=0.0092  pred=0.0019  sigreg=0.0724  lr=3.00e-04
+  E005 S0220 | total=0.0090  pred=0.0018  sigreg=0.0717  lr=3.00e-04
+  E005 S0240 | total=0.0089  pred=0.0021  sigreg=0.0688  lr=3.00e-04
+  E005 S0260 | total=0.0089  pred=0.0018  sigreg=0.0711  lr=3.00e-04
+  E005 S0280 | total=0.0095  pred=0.0025  sigreg=0.0699  lr=3.00e-04
+  E005 S0300 | total=0.0091  pred=0.0024  sigreg=0.0672  lr=3.00e-04
+  E005 S0320 | total=0.0089  pred=0.0019  sigreg=0.0707  lr=3.00e-04
+  E005 S0340 | total=0.0089  pred=0.0023  sigreg=0.0658  lr=3.00e-04
+  E005 S0360 | total=0.0096  pred=0.0025  sigreg=0.0710  lr=3.00e-04
+  E005 S0380 | total=0.0089  pred=0.0020  sigreg=0.0696  lr=3.00e-04
+  E005 S0400 | total=0.0084  pred=0.0019  sigreg=0.0648  lr=3.00e-04
+  E005 S0420 | total=0.0084  pred=0.0017  sigreg=0.0675  lr=3.00e-04
+  E005 S0440 | total=0.0101  pred=0.0028  sigreg=0.0724  lr=3.00e-04
+  E005 S0460 | total=0.0085  pred=0.0017  sigreg=0.0681  lr=3.00e-04
+  E005 S0480 | total=0.0084  pred=0.0015  sigreg=0.0683  lr=3.00e-04
+  E005 S0500 | total=0.0084  pred=0.0016  sigreg=0.0677  lr=3.00e-04
+  E005 S0520 | total=0.0088  pred=0.0020  sigreg=0.0680  lr=3.00e-04
+  E005 S0540 | total=0.0086  pred=0.0016  sigreg=0.0693  lr=3.00e-04
+  E005 S0560 | total=0.0082  pred=0.0014  sigreg=0.0681  lr=3.00e-04
+  E005 S0580 | total=0.0084  pred=0.0017  sigreg=0.0675  lr=3.00e-04
+  E005 S0600 | total=0.0086  pred=0.0015  sigreg=0.0712  lr=3.00e-04
+  E005 S0620 | total=0.0079  pred=0.0015  sigreg=0.0645  lr=3.00e-04
+  E005 S0640 | total=0.0091  pred=0.0022  sigreg=0.0694  lr=3.00e-04
+  E005 S0660 | total=0.0085  pred=0.0016  sigreg=0.0693  lr=3.00e-04
+  E005 S0680 | total=0.0088  pred=0.0018  sigreg=0.0699  lr=3.00e-04
+  E005 S0700 | total=0.0083  pred=0.0017  sigreg=0.0665  lr=3.00e-04
+  E005 S0720 | total=0.0089  pred=0.0018  sigreg=0.0711  lr=3.00e-04
+  E005 S0740 | total=0.0085  pred=0.0017  sigreg=0.0678  lr=3.00e-04
+  E005 S0760 | total=0.0081  pred=0.0016  sigreg=0.0656  lr=3.00e-04
+
+  ?? Epoch   5/40 ??
+     Train: total=0.0087  pred=0.0019  sigreg=0.0683
+     Val:   total=0.0183  pred=0.0008  sigreg=0.1747
+     LR: 3.00e-04
+
+  E006 S0000 | total=0.0089  pred=0.0017  sigreg=0.0723  lr=3.00e-04
+  E006 S0020 | total=0.0080  pred=0.0018  sigreg=0.0622  lr=3.00e-04
+  E006 S0040 | total=0.0078  pred=0.0014  sigreg=0.0645  lr=3.00e-04
+  E006 S0060 | total=0.0083  pred=0.0016  sigreg=0.0666  lr=3.00e-04
+  E006 S0080 | total=0.0079  pred=0.0016  sigreg=0.0636  lr=3.00e-04
+  E006 S0100 | total=0.0081  pred=0.0014  sigreg=0.0661  lr=3.00e-04
+  E006 S0120 | total=0.0084  pred=0.0017  sigreg=0.0673  lr=3.00e-04
+  E006 S0140 | total=0.0081  pred=0.0017  sigreg=0.0644  lr=3.00e-04
+  E006 S0160 | total=0.0081  pred=0.0013  sigreg=0.0678  lr=3.00e-04
+  E006 S0180 | total=0.0081  pred=0.0019  sigreg=0.0619  lr=3.00e-04
+  E006 S0200 | total=0.0082  pred=0.0013  sigreg=0.0682  lr=3.00e-04
+  E006 S0220 | total=0.0079  pred=0.0016  sigreg=0.0635  lr=3.00e-04
+  E006 S0240 | total=0.0083  pred=0.0019  sigreg=0.0640  lr=3.00e-04
+  E006 S0260 | total=0.0082  pred=0.0019  sigreg=0.0625  lr=3.00e-04
+  E006 S0280 | total=0.0080  pred=0.0017  sigreg=0.0626  lr=3.00e-04
+  E006 S0300 | total=0.0080  pred=0.0016  sigreg=0.0644  lr=3.00e-04
+  E006 S0320 | total=0.0083  pred=0.0020  sigreg=0.0635  lr=3.00e-04
+  E006 S0340 | total=0.0087  pred=0.0024  sigreg=0.0630  lr=3.00e-04
+  E006 S0360 | total=0.0082  pred=0.0016  sigreg=0.0660  lr=3.00e-04
+  E006 S0380 | total=0.0078  pred=0.0017  sigreg=0.0607  lr=3.00e-04
+  E006 S0400 | total=0.0082  pred=0.0019  sigreg=0.0635  lr=3.00e-04
+  E006 S0420 | total=0.0083  pred=0.0018  sigreg=0.0648  lr=3.00e-04
+  E006 S0440 | total=0.0079  pred=0.0017  sigreg=0.0624  lr=3.00e-04
+  E006 S0460 | total=0.0080  pred=0.0019  sigreg=0.0606  lr=3.00e-04
+  E006 S0480 | total=0.0076  pred=0.0013  sigreg=0.0632  lr=3.00e-04
+  E006 S0500 | total=0.0080  pred=0.0016  sigreg=0.0634  lr=3.00e-04
+  E006 S0520 | total=0.0076  pred=0.0015  sigreg=0.0612  lr=3.00e-04
+  E006 S0540 | total=0.0072  pred=0.0015  sigreg=0.0567  lr=3.00e-04
+  E006 S0560 | total=0.0090  pred=0.0025  sigreg=0.0649  lr=3.00e-04
+  E006 S0580 | total=0.0073  pred=0.0012  sigreg=0.0611  lr=3.00e-04
+  E006 S0600 | total=0.0076  pred=0.0013  sigreg=0.0628  lr=3.00e-04
+  E006 S0620 | total=0.0074  pred=0.0015  sigreg=0.0595  lr=3.00e-04
+  E006 S0640 | total=0.0079  pred=0.0017  sigreg=0.0622  lr=3.00e-04
+  E006 S0660 | total=0.0074  pred=0.0013  sigreg=0.0613  lr=3.00e-04
+  E006 S0680 | total=0.0081  pred=0.0020  sigreg=0.0609  lr=3.00e-04
+  E006 S0700 | total=0.0072  pred=0.0014  sigreg=0.0581  lr=3.00e-04
+  E006 S0720 | total=0.0075  pred=0.0015  sigreg=0.0605  lr=3.00e-04
+  E006 S0740 | total=0.0082  pred=0.0021  sigreg=0.0611  lr=3.00e-04
+  E006 S0760 | total=0.0077  pred=0.0014  sigreg=0.0628  lr=3.00e-04
+
+  ?? Epoch   6/40 ??
+     Train: total=0.0080  pred=0.0017  sigreg=0.0636
+     Val:   total=0.0191  pred=0.0007  sigreg=0.1844
+     LR: 3.00e-04
+
+  E007 S0000 | total=0.0073  pred=0.0013  sigreg=0.0598  lr=2.99e-04
+  E007 S0020 | total=0.0077  pred=0.0014  sigreg=0.0621  lr=2.99e-04
+  E007 S0040 | total=0.0076  pred=0.0015  sigreg=0.0606  lr=2.99e-04
+  E007 S0060 | total=0.0073  pred=0.0016  sigreg=0.0577  lr=2.99e-04
+  E007 S0080 | total=0.0079  pred=0.0018  sigreg=0.0614  lr=2.99e-04
+  E007 S0100 | total=0.0081  pred=0.0021  sigreg=0.0598  lr=2.99e-04
+  E007 S0120 | total=0.0080  pred=0.0012  sigreg=0.0678  lr=2.99e-04
+  E007 S0140 | total=0.0078  pred=0.0014  sigreg=0.0639  lr=2.99e-04
+  E007 S0160 | total=0.0079  pred=0.0013  sigreg=0.0663  lr=2.99e-04
+  E007 S0180 | total=0.0077  pred=0.0016  sigreg=0.0612  lr=2.99e-04
+  E007 S0200 | total=0.0078  pred=0.0015  sigreg=0.0635  lr=2.99e-04
+  E007 S0220 | total=0.0076  pred=0.0015  sigreg=0.0609  lr=2.99e-04
+  E007 S0240 | total=0.0073  pred=0.0012  sigreg=0.0615  lr=2.99e-04
+  E007 S0260 | total=0.0071  pred=0.0012  sigreg=0.0584  lr=2.99e-04
+  E007 S0280 | total=0.0075  pred=0.0016  sigreg=0.0594  lr=2.99e-04
+  E007 S0300 | total=0.0072  pred=0.0013  sigreg=0.0596  lr=2.99e-04
+  E007 S0320 | total=0.0078  pred=0.0013  sigreg=0.0643  lr=2.99e-04
+  E007 S0340 | total=0.0072  pred=0.0012  sigreg=0.0595  lr=2.99e-04
+  E007 S0360 | total=0.0079  pred=0.0021  sigreg=0.0582  lr=2.99e-04
+  E007 S0380 | total=0.0077  pred=0.0019  sigreg=0.0586  lr=2.99e-04
+  E007 S0400 | total=0.0078  pred=0.0018  sigreg=0.0606  lr=2.99e-04
+  E007 S0420 | total=0.0076  pred=0.0016  sigreg=0.0604  lr=2.99e-04
+  E007 S0440 | total=0.0081  pred=0.0018  sigreg=0.0621  lr=2.99e-04
+  E007 S0460 | total=0.0077  pred=0.0018  sigreg=0.0591  lr=2.99e-04
+  E007 S0480 | total=0.0076  pred=0.0017  sigreg=0.0594  lr=2.99e-04
+  E007 S0500 | total=0.0076  pred=0.0014  sigreg=0.0627  lr=2.99e-04
+  E007 S0520 | total=0.0079  pred=0.0015  sigreg=0.0640  lr=2.99e-04
+  E007 S0540 | total=0.0077  pred=0.0018  sigreg=0.0594  lr=2.99e-04
+  E007 S0560 | total=0.0071  pred=0.0012  sigreg=0.0590  lr=2.99e-04
+  E007 S0580 | total=0.0071  pred=0.0014  sigreg=0.0568  lr=2.99e-04
+  E007 S0600 | total=0.0074  pred=0.0015  sigreg=0.0581  lr=2.99e-04
+  E007 S0620 | total=0.0071  pred=0.0013  sigreg=0.0572  lr=2.99e-04
+  E007 S0640 | total=0.0073  pred=0.0018  sigreg=0.0552  lr=2.99e-04
+  E007 S0660 | total=0.0074  pred=0.0014  sigreg=0.0603  lr=2.99e-04
+  E007 S0680 | total=0.0081  pred=0.0026  sigreg=0.0553  lr=2.99e-04
+  E007 S0700 | total=0.0069  pred=0.0012  sigreg=0.0572  lr=2.99e-04
+  E007 S0720 | total=0.0074  pred=0.0013  sigreg=0.0605  lr=2.99e-04
+  E007 S0740 | total=0.0081  pred=0.0021  sigreg=0.0597  lr=2.99e-04
+  E007 S0760 | total=0.0069  pred=0.0014  sigreg=0.0551  lr=2.99e-04
+
+  ?? Epoch   7/40 ??
+     Train: total=0.0076  pred=0.0016  sigreg=0.0597
+     Val:   total=0.0180  pred=0.0006  sigreg=0.1741
+     LR: 2.99e-04
+
+  E008 S0000 | total=0.0077  pred=0.0016  sigreg=0.0609  lr=2.98e-04
+  E008 S0020 | total=0.0074  pred=0.0018  sigreg=0.0561  lr=2.98e-04
+  E008 S0040 | total=0.0076  pred=0.0016  sigreg=0.0603  lr=2.98e-04
+  E008 S0060 | total=0.0071  pred=0.0014  sigreg=0.0569  lr=2.98e-04
+  E008 S0080 | total=0.0076  pred=0.0015  sigreg=0.0610  lr=2.98e-04
+  E008 S0100 | total=0.0073  pred=0.0016  sigreg=0.0565  lr=2.98e-04
+  E008 S0120 | total=0.0078  pred=0.0015  sigreg=0.0635  lr=2.98e-04
+  E008 S0140 | total=0.0075  pred=0.0018  sigreg=0.0567  lr=2.98e-04
+  E008 S0160 | total=0.0074  pred=0.0014  sigreg=0.0601  lr=2.98e-04
+  E008 S0180 | total=0.0079  pred=0.0018  sigreg=0.0609  lr=2.98e-04
+  E008 S0200 | total=0.0078  pred=0.0015  sigreg=0.0626  lr=2.98e-04
+  E008 S0220 | total=0.0076  pred=0.0016  sigreg=0.0601  lr=2.98e-04
+  E008 S0240 | total=0.0078  pred=0.0018  sigreg=0.0593  lr=2.98e-04
+  E008 S0260 | total=0.0076  pred=0.0016  sigreg=0.0601  lr=2.98e-04
+  E008 S0280 | total=0.0075  pred=0.0016  sigreg=0.0583  lr=2.98e-04
+  E008 S0300 | total=0.0080  pred=0.0017  sigreg=0.0631  lr=2.98e-04
+  E008 S0320 | total=0.0071  pred=0.0014  sigreg=0.0574  lr=2.98e-04
+  E008 S0340 | total=0.0072  pred=0.0016  sigreg=0.0556  lr=2.98e-04
+  E008 S0360 | total=0.0073  pred=0.0013  sigreg=0.0596  lr=2.98e-04
+  E008 S0380 | total=0.0070  pred=0.0012  sigreg=0.0585  lr=2.98e-04
+  E008 S0400 | total=0.0077  pred=0.0024  sigreg=0.0528  lr=2.98e-04
+  E008 S0420 | total=0.0072  pred=0.0015  sigreg=0.0565  lr=2.98e-04
+  E008 S0440 | total=0.0077  pred=0.0017  sigreg=0.0607  lr=2.98e-04
+  E008 S0460 | total=0.0077  pred=0.0020  sigreg=0.0565  lr=2.98e-04
+  E008 S0480 | total=0.0072  pred=0.0013  sigreg=0.0595  lr=2.98e-04
+  E008 S0500 | total=0.0072  pred=0.0014  sigreg=0.0581  lr=2.98e-04
+  E008 S0520 | total=0.0078  pred=0.0019  sigreg=0.0582  lr=2.98e-04
+  E008 S0540 | total=0.0066  pred=0.0014  sigreg=0.0520  lr=2.98e-04
+  E008 S0560 | total=0.0074  pred=0.0019  sigreg=0.0547  lr=2.98e-04
+  E008 S0580 | total=0.0077  pred=0.0014  sigreg=0.0628  lr=2.98e-04
+  E008 S0600 | total=0.0070  pred=0.0015  sigreg=0.0547  lr=2.98e-04
+  E008 S0620 | total=0.0074  pred=0.0017  sigreg=0.0567  lr=2.98e-04
+  E008 S0640 | total=0.0081  pred=0.0018  sigreg=0.0629  lr=2.98e-04
+  E008 S0660 | total=0.0071  pred=0.0016  sigreg=0.0552  lr=2.98e-04
+  E008 S0680 | total=0.0075  pred=0.0016  sigreg=0.0594  lr=2.98e-04
+  E008 S0700 | total=0.0071  pred=0.0015  sigreg=0.0564  lr=2.98e-04
+  E008 S0720 | total=0.0072  pred=0.0015  sigreg=0.0568  lr=2.98e-04
+  E008 S0740 | total=0.0067  pred=0.0013  sigreg=0.0544  lr=2.98e-04
+  E008 S0760 | total=0.0075  pred=0.0021  sigreg=0.0544  lr=2.98e-04
+
+  ?? Epoch   8/40 ??
+     Train: total=0.0074  pred=0.0016  sigreg=0.0576
+     Val:   total=0.0201  pred=0.0007  sigreg=0.1943
+     LR: 2.98e-04
+
+  E009 S0000 | total=0.0075  pred=0.0016  sigreg=0.0593  lr=2.95e-04
+  E009 S0020 | total=0.0069  pred=0.0014  sigreg=0.0550  lr=2.95e-04
+  E009 S0040 | total=0.0071  pred=0.0014  sigreg=0.0566  lr=2.95e-04
+  E009 S0060 | total=0.0068  pred=0.0013  sigreg=0.0553  lr=2.95e-04
+  E009 S0080 | total=0.0077  pred=0.0013  sigreg=0.0636  lr=2.95e-04
+  E009 S0100 | total=0.0070  pred=0.0012  sigreg=0.0581  lr=2.95e-04
+  E009 S0120 | total=0.0080  pred=0.0019  sigreg=0.0611  lr=2.95e-04
+  E009 S0140 | total=0.0070  pred=0.0012  sigreg=0.0579  lr=2.95e-04
+  E009 S0160 | total=0.0069  pred=0.0014  sigreg=0.0543  lr=2.95e-04
+  E009 S0180 | total=0.0072  pred=0.0014  sigreg=0.0577  lr=2.95e-04
+  E009 S0200 | total=0.0068  pred=0.0012  sigreg=0.0565  lr=2.95e-04
+  E009 S0220 | total=0.0069  pred=0.0014  sigreg=0.0550  lr=2.95e-04
+  E009 S0240 | total=0.0073  pred=0.0014  sigreg=0.0596  lr=2.95e-04
+  E009 S0260 | total=0.0070  pred=0.0011  sigreg=0.0587  lr=2.95e-04
+  E009 S0280 | total=0.0076  pred=0.0021  sigreg=0.0548  lr=2.95e-04
+  E009 S0300 | total=0.0068  pred=0.0012  sigreg=0.0560  lr=2.95e-04
+  E009 S0320 | total=0.0076  pred=0.0015  sigreg=0.0609  lr=2.95e-04
+  E009 S0340 | total=0.0069  pred=0.0016  sigreg=0.0529  lr=2.95e-04
+  E009 S0360 | total=0.0073  pred=0.0016  sigreg=0.0569  lr=2.95e-04
+  E009 S0380 | total=0.0076  pred=0.0018  sigreg=0.0585  lr=2.95e-04
+  E009 S0400 | total=0.0072  pred=0.0014  sigreg=0.0579  lr=2.95e-04
+  E009 S0420 | total=0.0072  pred=0.0013  sigreg=0.0594  lr=2.95e-04
+  E009 S0440 | total=0.0075  pred=0.0014  sigreg=0.0602  lr=2.95e-04
+  E009 S0460 | total=0.0080  pred=0.0019  sigreg=0.0610  lr=2.95e-04
+  E009 S0480 | total=0.0068  pred=0.0012  sigreg=0.0558  lr=2.95e-04
+  E009 S0500 | total=0.0069  pred=0.0013  sigreg=0.0561  lr=2.95e-04
+  E009 S0520 | total=0.0068  pred=0.0015  sigreg=0.0533  lr=2.95e-04
+  E009 S0540 | total=0.0070  pred=0.0012  sigreg=0.0584  lr=2.95e-04
+  E009 S0560 | total=0.0069  pred=0.0013  sigreg=0.0561  lr=2.95e-04
+  E009 S0580 | total=0.0069  pred=0.0015  sigreg=0.0540  lr=2.95e-04
+  E009 S0600 | total=0.0078  pred=0.0024  sigreg=0.0542  lr=2.95e-04
+  E009 S0620 | total=0.0075  pred=0.0016  sigreg=0.0589  lr=2.95e-04
+  E009 S0640 | total=0.0069  pred=0.0015  sigreg=0.0546  lr=2.95e-04
+  E009 S0660 | total=0.0071  pred=0.0016  sigreg=0.0549  lr=2.95e-04
+  E009 S0680 | total=0.0083  pred=0.0029  sigreg=0.0539  lr=2.95e-04
+  E009 S0700 | total=0.0077  pred=0.0017  sigreg=0.0604  lr=2.95e-04
+  E009 S0720 | total=0.0072  pred=0.0018  sigreg=0.0539  lr=2.95e-04
+  E009 S0740 | total=0.0070  pred=0.0017  sigreg=0.0526  lr=2.95e-04
+  E009 S0760 | total=0.0073  pred=0.0018  sigreg=0.0553  lr=2.95e-04
+
+  ?? Epoch   9/40 ??
+     Train: total=0.0071  pred=0.0015  sigreg=0.0565
+     Val:   total=0.0185  pred=0.0004  sigreg=0.1810
+     LR: 2.95e-04
+
+  E010 S0000 | total=0.0074  pred=0.0017  sigreg=0.0570  lr=2.90e-04
+  E010 S0020 | total=0.0073  pred=0.0014  sigreg=0.0586  lr=2.90e-04
+  E010 S0040 | total=0.0077  pred=0.0017  sigreg=0.0597  lr=2.90e-04
+  E010 S0060 | total=0.0068  pred=0.0011  sigreg=0.0576  lr=2.90e-04
+  E010 S0080 | total=0.0070  pred=0.0016  sigreg=0.0531  lr=2.90e-04
+  E010 S0100 | total=0.0068  pred=0.0013  sigreg=0.0551  lr=2.90e-04
+  E010 S0120 | total=0.0071  pred=0.0012  sigreg=0.0584  lr=2.90e-04
+  E010 S0140 | total=0.0068  pred=0.0015  sigreg=0.0534  lr=2.90e-04
+  E010 S0160 | total=0.0067  pred=0.0014  sigreg=0.0535  lr=2.90e-04
+  E010 S0180 | total=0.0073  pred=0.0016  sigreg=0.0576  lr=2.90e-04
+  E010 S0200 | total=0.0078  pred=0.0019  sigreg=0.0590  lr=2.90e-04
+  E010 S0220 | total=0.0067  pred=0.0012  sigreg=0.0546  lr=2.90e-04
+  E010 S0240 | total=0.0074  pred=0.0020  sigreg=0.0540  lr=2.90e-04
+  E010 S0260 | total=0.0075  pred=0.0020  sigreg=0.0548  lr=2.90e-04
+  E010 S0280 | total=0.0076  pred=0.0015  sigreg=0.0609  lr=2.90e-04
+  E010 S0300 | total=0.0066  pred=0.0013  sigreg=0.0533  lr=2.90e-04
+  E010 S0320 | total=0.0072  pred=0.0018  sigreg=0.0549  lr=2.90e-04
+  E010 S0340 | total=0.0071  pred=0.0019  sigreg=0.0524  lr=2.90e-04
+  E010 S0360 | total=0.0067  pred=0.0011  sigreg=0.0554  lr=2.90e-04
+  E010 S0380 | total=0.0069  pred=0.0014  sigreg=0.0549  lr=2.90e-04
+  E010 S0400 | total=0.0075  pred=0.0016  sigreg=0.0591  lr=2.90e-04
+  E010 S0420 | total=0.0070  pred=0.0014  sigreg=0.0562  lr=2.90e-04
+  E010 S0440 | total=0.0067  pred=0.0014  sigreg=0.0533  lr=2.90e-04
+  E010 S0460 | total=0.0072  pred=0.0016  sigreg=0.0557  lr=2.90e-04
+  E010 S0480 | total=0.0066  pred=0.0013  sigreg=0.0524  lr=2.90e-04
+  E010 S0500 | total=0.0072  pred=0.0017  sigreg=0.0551  lr=2.90e-04
+  E010 S0520 | total=0.0068  pred=0.0014  sigreg=0.0543  lr=2.90e-04
+  E010 S0540 | total=0.0070  pred=0.0013  sigreg=0.0564  lr=2.90e-04
+  E010 S0560 | total=0.0070  pred=0.0013  sigreg=0.0572  lr=2.90e-04
+  E010 S0580 | total=0.0069  pred=0.0015  sigreg=0.0541  lr=2.90e-04
+  E010 S0600 | total=0.0068  pred=0.0011  sigreg=0.0562  lr=2.90e-04
+  E010 S0620 | total=0.0071  pred=0.0016  sigreg=0.0545  lr=2.90e-04
+  E010 S0640 | total=0.0074  pred=0.0020  sigreg=0.0540  lr=2.90e-04

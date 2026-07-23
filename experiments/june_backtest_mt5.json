@@ -1,0 +1,66 @@
+{
+  "generated": "2026-06-19T15:37:11",
+  "test_slice": [
+    "2026-04-30 01:00:00+00:00",
+    "2026-06-19 19:00:00+00:00"
+  ],
+  "june_bars": 327,
+  "results": {
+    "new (fine-tuned)": {
+      "epoch": 80,
+      "st": {
+        "n": 326,
+        "mean": 0.0007476384754349937,
+        "p50": 0.0006072239484637976,
+        "p90": 0.0015509348595514894,
+        "p99": 0.003096443775575608,
+        "max": 0.003940942697227001
+      },
+      "metrics": {
+        "sharpe": -5.7825,
+        "sortino": -2.7466,
+        "max_drawdown": 0.0497,
+        "profit_factor": 0.6212,
+        "win_rate": 0.4731,
+        "avg_win": 0.00139,
+        "avg_loss": 0.001997,
+        "total_return": -0.037,
+        "n_bars": 326,
+        "n_active_bars": 93,
+        "market_exposure": 0.2853,
+        "n_trade_entries": 5,
+        "avg_holding_bars": 18.6,
+        "cb_overrides": 66,
+        "bars_per_year": 5690
+      }
+    },
+    "old (production)": {
+      "epoch": 180,
+      "st": {
+        "n": 326,
+        "mean": 0.0005337653511432014,
+        "p50": 0.0004389529349282384,
+        "p90": 0.0011323394137434661,
+        "p99": 0.0016410315001849085,
+        "max": 0.001995302503928542
+      },
+      "metrics": {
+        "sharpe": -4.9329,
+        "sortino": -2.9329,
+        "max_drawdown": 0.0537,
+        "profit_factor": 0.7259,
+        "win_rate": 0.5099,
+        "avg_win": 0.001175,
+        "avg_loss": 0.001673,
+        "total_return": -0.034,
+        "n_bars": 326,
+        "n_active_bars": 151,
+        "market_exposure": 0.4632,
+        "n_trade_entries": 6,
+        "avg_holding_bars": 25.17,
+        "cb_overrides": 125,
+        "bars_per_year": 5690
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+2026-06-17 08:48:09  INFO      Logging to experiments\live_20260617_114809.log
+2026-06-17 08:48:09  INFO      Loaded encoder + predictor from ./experiments/checkpoints/best_model.pt (epoch 180)
+2026-06-17 08:48:09  INFO      Loaded execution heads from ./experiments/heads_gold  Dir AUC=0.543  Vol AUC=0.641
+2026-06-17 08:48:09  INFO      Config D: loaded M15 encoder (epoch 172)
+2026-06-17 08:48:13  INFO      Connected to MT5: MetaTrader 5 build 5836
+2026-06-17 08:48:13  INFO      Config D M15 execution layer enabled  S_t gate=0.000012
+2026-06-17 08:48:13  INFO      Warming up: fetching 548 bars for XAUUSD ...
+2026-06-17 08:48:19  INFO      Warm-up complete. Surprise buffer: 250 bars.
+2026-06-17 08:48:19  INFO      M15 warm-up: fetching 596 M15 bars...
+2026-06-17 08:48:21  INFO      M15 warm-up complete. Surprise buffer: 250 bars.
+2026-06-17 08:48:21  INFO      Live trader started. symbol=XAUUSD  dry_run=True  poll=10s  m15=enabled
+2026-06-17 08:54:38  INFO      Interrupted — closing positions and disconnecting.
+2026-06-17 08:54:38  INFO      MT5 connection closed.

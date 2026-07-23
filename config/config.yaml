@@ -1,0 +1,119 @@
+# ============================================================
+# MarketWorldModel — central configuration
+# ============================================================
+# Every number in the project traces back to this file.
+# If you change a hyperparameter, change it here only.
+# ============================================================
+
+project:
+  name: "MarketWorldModel"
+  version: "0.1.0"
+  seed: 42                      # Fixed seed for reproducibility across all runs
+
+# ----------------------------------------------------------
+# DATA
+# ----------------------------------------------------------
+data:
+  ticker: "GC=F"                # Yahoo Finance ticker for gold futures (XAUUSD proxy)
+  interval: "1h"                # Bar timeframe — H1 is our primary timeframe
+  start_date: "2018-01-01"      # Training data start
+  end_date:   "2024-12-31"      # Training data end
+  
+  # Windowing
+  lookback: 48                  # How many bars form one input observation (48 H1 bars = 2 days)
+  stride: 1                     # Step size when sliding window across time series
+  
+  # Feature matrix dimensions (set after feature engineering)
+  n_features: 52                # Number of features per bar (matches GoldFeatureAgent)
+  
+  # Train / val / test split (chronological — never random!)
+  train_ratio: 0.70             # 70% for training (~2018-2022)
+  val_ratio:   0.15             # 15% for validation (~2022-2023)
+  test_ratio:  0.15             # 15% for test (~2023-2024)
+
+# ----------------------------------------------------------
+# ENCODER  (the "Perception" module — maps raw features → z_t)
+# ----------------------------------------------------------
+encoder:
+  # Patch tokenization
+  # We treat the (lookback × n_features) matrix like an image.
+  # A "patch" is a group of consecutive bars. Each patch becomes one token.
+  patch_size: 4                 # 4 consecutive bars = 1 token → 48/4 = 12 tokens
+  
+  # Transformer architecture (ViT-Tiny scale for a single GPU)
+  d_model: 128                  # Embedding dimension inside the transformer
+  n_heads: 4                    # Number of attention heads (d_model must be divisible by n_heads)
+  n_layers: 4                   # Number of transformer encoder layers (depth)
+  dropout: 0.1                  # Dropout rate for regularization
+  
+  # Projection head (maps CLS token → final embedding z_t)
+  # Uses BatchNorm between the two linear layers.
+  # Why BatchNorm and not LayerNorm? SIGReg needs a Gaussian distribution
+  # in z_t space. BatchNorm normalizes across the batch dimension,
+  # which is what SIGReg's projections operate over.
+  proj_hidden: 256              # Hidden dim of projection MLP
+  z_dim: 128                    # Final embedding dimension (this IS z_t)
+
+# ----------------------------------------------------------
+# PREDICTOR  (models market dynamics: z_t, a_t → z_t+1)
+# ----------------------------------------------------------
+predictor:
+  d_model: 128                  # Must match encoder z_dim
+  n_heads: 4
+  n_layers: 6                   # Deeper than encoder — dynamics are harder to learn than perception
+  dropout: 0.1
+  history_len: 3                # How many past z_t the predictor sees at once (like LeWM's N=3)
+  
+  # Macro event conditioning
+  # "Action" in LeWM = macro event in trading
+  # We encode: [fed_flag, nfp_beat, cot_shift, dxy_move, gvz_percentile]
+  action_dim: 5                 # Dimension of the macro event vector a_t
+  # AdaLN (Adaptive Layer Normalization) injects action at each layer
+  # This is exactly what LeWM uses for action conditioning
+
+# ----------------------------------------------------------
+# SIGREG  (anti-collapse regularizer — the core innovation)
+# ----------------------------------------------------------
+sigreg:
+  # λ is the ONLY effective hyperparameter — everything else is insensitive (per LeWM ablations)
+  lambda_weight: 0.1            # Start here; tune via bisection: [0.01, 0.02, 0.05, 0.1, 0.2]
+  
+  # Number of random projection directions on the unit hypersphere
+  # LeWM shows performance is insensitive to M above ~256
+  n_projections: 1024
+  
+  # Quadrature nodes for approximating the Epps-Pulley integral
+  # over t ∈ [0.2, 4.0]. 17 nodes is sufficient per LeWM ablations.
+  n_integration_knots: 17
+  t_min: 0.2                    # Integration range start
+  t_max: 4.0                    # Integration range end
+  
+  # Weighting function parameter: w(t) = exp(-t² / (2 * weight_lambda²))
+  weight_lambda: 1.0
+
+# ----------------------------------------------------------
+# TRAINING
+# ----------------------------------------------------------
+training:
+  batch_size: 128
+  n_epochs: 200
+  learning_rate: 3.0e-4         # AdamW default for transformers
+  weight_decay: 1.0e-4
+  grad_clip: 1.0                # Gradient clipping — prevents exploding gradients
+  
+  # Learning rate schedule: warmup then cosine decay
+  warmup_epochs: 10             # Linear warmup for first 10 epochs
+  
+  # Device
+  device: "cuda"                # "cuda" if GPU available, else "cpu"
+  
+  # Logging
+  log_every: 10                 # Log metrics every N steps
+  save_every: 20                # Save checkpoint every N epochs
+
+# ----------------------------------------------------------
+# EXPERIMENT TRACKING  (MLflow)
+# ----------------------------------------------------------
+mlflow:
+  experiment_name: "MWM_O1_encoder"
+  tracking_uri: "./experiments/mlruns"

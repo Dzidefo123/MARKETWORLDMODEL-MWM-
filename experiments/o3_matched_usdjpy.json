@@ -1,0 +1,13 @@
+{
+  "instrument": "usdjpy",
+  "n_test": 15503,
+  "range": "2020-01-01..2026-07-01",
+  "trained_through": "2022-12-31",
+  "extreme_return_ratio_median": 1.10407555103302,
+  "extreme_return_effect_r": -0.06326936577157216,
+  "extreme_return_p": 0.0011230706685439677,
+  "n_extreme": 821,
+  "spearman_surprise_impliedvol_idx43": -0.06808135674280553,
+  "spearman_surprise_realizedvol_idx10": 0.34481737456674183,
+  "rankbiserial_r_realizedvol_idx10": 0.35148783691681174
+}

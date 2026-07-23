@@ -1,0 +1,82 @@
+[
+  {
+    "instrument": "gold",
+    "horizon": 12,
+    "probe": "linear",
+    "slice": "high_vol",
+    "trained_r": 0.1465120990243396,
+    "random_r": 0.23957974415163627,
+    "delta_TR": -0.09306764512729668,
+    "n": 28284
+  },
+  {
+    "instrument": "gold",
+    "horizon": 12,
+    "probe": "linear",
+    "slice": "low_vol",
+    "trained_r": 0.1235395126589887,
+    "random_r": 0.24747934741750138,
+    "delta_TR": -0.12393983475851268,
+    "n": 28277
+  },
+  {
+    "instrument": "gold",
+    "horizon": 12,
+    "probe": "mlp",
+    "slice": "high_vol",
+    "trained_r": 0.056172673619245564,
+    "random_r": 0.2049639722086972,
+    "delta_TR": -0.14879129858945161,
+    "n": 28284
+  },
+  {
+    "instrument": "gold",
+    "horizon": 12,
+    "probe": "mlp",
+    "slice": "low_vol",
+    "trained_r": 0.11318385727882227,
+    "random_r": 0.058551689587132215,
+    "delta_TR": 0.054632167691690055,
+    "n": 28277
+  },
+  {
+    "instrument": "gold",
+    "horizon": 24,
+    "probe": "linear",
+    "slice": "high_vol",
+    "trained_r": 0.16869169565363745,
+    "random_r": 0.2894401352281961,
+    "delta_TR": -0.12074843957455866,
+    "n": 28280
+  },
+  {
+    "instrument": "gold",
+    "horizon": 24,
+    "probe": "linear",
+    "slice": "low_vol",
+    "trained_r": 0.1796275042515763,
+    "random_r": 0.29996931867346643,
+    "delta_TR": -0.12034181442189013,
+    "n": 28270
+  },
+  {
+    "instrument": "gold",
+    "horizon": 24,
+    "probe": "mlp",
+    "slice": "high_vol",
+    "trained_r": 0.04504048246428323,
+    "random_r": 0.36495881205812764,
+    "delta_TR": -0.3199183295938444,
+    "n": 28280
+  },
+  {
+    "instrument": "gold",
+    "horizon": 24,
+    "probe": "mlp",
+    "slice": "low_vol",
+    "trained_r": 0.19330631057079958,
+    "random_r": 0.061629673575885245,
+    "delta_TR": 0.13167663699491433,
+    "n": 28270
+  }
+]

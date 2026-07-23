@@ -1,0 +1,182 @@
+==============================================================================
+MWM surprise precision/recall  |  window=+/-2d  spike>=95.0pct  react>=3.0sigma  top_n=15
+==============================================================================
+
+##### GOLD  (2026-01-22 -> 2026-05-06)
+  relevant scheduled events in window: 9   | of which market reacted (>3.0sig): 8
+  RECALL   = 4/8 = 0.50  (reacted events the model spiked on)
+  PRECISION= 3/5 = 0.60  (top surprise episodes on a known event)
+
+  Top 15 surprise episodes (precision view):
+    peak day      xmean  event (<= window)
+    2026-03-18     9.9x  FOMC Mar 2026 [VERIFY] (d+0)
+    2026-01-27     6.4x  FOMC Jan 2026 [VERIFY] (d+1)
+    2026-03-05     5.3x  NFP Feb 2026 [VERIFY] (d+1)
+    2026-02-20     4.6x  -- UNEXPLAINED --
+    2026-02-10     3.7x  -- UNEXPLAINED --
+
+  Reacted events (recall view):
+    2026-01-28  SPIKE  retz=3.5  FOMC Jan 2026 [VERIFY]
+    2026-02-13    .  (MISS)  retz=4.4  CPI Jan 2026 [shutdown-rescheduled from Feb 11]
+    2026-03-06  SPIKE  retz=3.3  NFP Feb 2026 [VERIFY]
+    2026-03-11  SPIKE  retz=4.4  CPI Feb 2026 [VERIFY]
+    2026-03-18  SPIKE  retz=4.5  FOMC Mar 2026 [VERIFY]
+    2026-04-03    .  (MISS)  retz=4.8  NFP Mar 2026 [VERIFY]
+    2026-04-10    .  (MISS)  retz=4.5  CPI Mar 2026 [VERIFY]
+    2026-04-29    .  (MISS)  retz=3.3  FOMC Apr 2026 [VERIFY]
+
+##### EURUSD  (2024-11-14 -> 2026-05-08)
+  relevant scheduled events in window: 54   | of which market reacted (>3.0sig): 44
+  RECALL   = 15/44 = 0.34  (reacted events the model spiked on)
+  PRECISION= 8/15 = 0.53  (top surprise episodes on a known event)
+
+  Top 15 surprise episodes (precision view):
+    peak day      xmean  event (<= window)
+    2025-08-22    34.1x  Powell Jackson Hole 2025 (d+0)
+    2025-07-25    27.1x  ECB Jul 2025 (d+1)
+    2025-01-03    24.6x  -- UNEXPLAINED --
+    2025-02-05    20.2x  NFP Jan 2025 (d+2)
+    2024-12-18    19.4x  FOMC Dec 2024 (d+0)
+    2025-08-27    14.4x  -- UNEXPLAINED --
+    2025-05-12    13.3x  CPI Apr 2025 (d+1)
+    2025-10-13    13.2x  -- UNEXPLAINED --
+    2025-09-11    12.3x  CPI Aug 2025 (d+0)
+    2024-11-14    11.5x  -- UNEXPLAINED --
+    2025-04-02    10.3x  NFP Mar 2025 (d+2)
+    2025-05-28    10.2x  -- UNEXPLAINED --
+    2025-04-17     9.4x  ECB Apr 2025 (d+0)
+    2026-03-26     9.3x  -- UNEXPLAINED --
+    2025-09-01     9.0x  -- UNEXPLAINED --
+
+  Reacted events (recall view):
+    2024-12-11  SPIKE  retz=3.8  CPI Nov 2024
+    2024-12-12  SPIKE  retz=3.8  ECB Dec 2024
+    2024-12-18  SPIKE  retz=4.9  FOMC Dec 2024
+    2025-01-10    .  (MISS)  retz=4.5  NFP Dec 2024
+    2025-01-15  SPIKE  retz=5.1  CPI Dec 2024
+    2025-01-29    .  (MISS)  retz=4.8  FOMC Jan 2025
+    2025-01-30    .  (MISS)  retz=4.8  ECB Jan 2025
+    2025-02-12    .  (MISS)  retz=5.0  CPI Jan 2025
+    2025-03-12    .  (MISS)  retz=3.6  CPI Feb 2025
+    2025-03-19  SPIKE  retz=3.6  FOMC Mar 2025
+    2025-04-10    .  (MISS)  retz=3.1  CPI Mar 2025
+    2025-04-17  SPIKE  retz=4.3  ECB Apr 2025
+    2025-05-02    .  (MISS)  retz=4.3  NFP Apr 2025
+    2025-05-07    .  (MISS)  retz=6.2  FOMC May 2025
+    2025-05-13  SPIKE  retz=4.0  CPI Apr 2025
+    2025-06-05    .  (MISS)  retz=4.5  ECB Jun 2025
+    2025-06-11    .  (MISS)  retz=4.6  CPI May 2025
+    2025-06-18    .  (MISS)  retz=3.4  FOMC Jun 2025
+    2025-07-03    .  (MISS)  retz=4.1  NFP Jun 2025
+    2025-07-15    .  (MISS)  retz=3.4  CPI Jun 2025
+    2025-07-24  SPIKE  retz=4.9  ECB Jul 2025
+    2025-07-30  SPIKE  retz=4.0  FOMC Jul 2025
+    2025-08-01    .  (MISS)  retz=3.4  NFP Jul 2025
+    2025-08-22  SPIKE  retz=5.9  Powell Jackson Hole 2025
+    2025-09-05    .  (MISS)  retz=4.3  NFP Aug 2025
+    2025-09-11  SPIKE  retz=3.1  CPI Aug 2025
+    2025-09-11  SPIKE  retz=3.1  ECB Sep 2025
+    2025-09-17    .  (MISS)  retz=4.0  FOMC Sep 2025
+    2025-10-24    .  (MISS)  retz=3.4  CPI Sep 2025 [shutdown-delayed from Oct 15]
+    2025-10-29    .  (MISS)  retz=5.3  FOMC Oct 2025
+    2025-10-30    .  (MISS)  retz=4.6  ECB Oct 2025
+    2025-11-20    .  (MISS)  retz=3.8  NFP Sep 2025 [shutdown-delayed from Oct 3; Oct NFP cancelled]
+    2025-12-10    .  (MISS)  retz=4.2  FOMC Dec 2025
+    2025-12-16    .  (MISS)  retz=4.0  NFP Nov 2025 [shutdown-rescheduled from Dec 5]
+    2025-12-18  SPIKE  retz=4.0  CPI Nov 2025 [shutdown-rescheduled from Dec 10; Oct CPI cancelled]
+    2025-12-18  SPIKE  retz=4.0  ECB Dec 2025
+    2026-01-09    .  (MISS)  retz=4.8  NFP Dec 2025 [VERIFY]
+    2026-01-13    .  (MISS)  retz=5.0  CPI Dec 2025 [VERIFY]
+    2026-03-06    .  (MISS)  retz=3.3  NFP Feb 2026 [VERIFY]
+    2026-03-11    .  (MISS)  retz=3.3  CPI Feb 2026 [VERIFY]
+    2026-03-18    .  (MISS)  retz=4.5  FOMC Mar 2026 [VERIFY]
+    2026-04-03    .  (MISS)  retz=5.6  NFP Mar 2026 [VERIFY]
+    2026-04-10    .  (MISS)  retz=4.5  CPI Mar 2026 [VERIFY]
+    2026-04-29  SPIKE  retz=4.7  FOMC Apr 2026 [VERIFY]
+
+##### USDJPY  (2024-08-14 -> 2026-05-13)
+  relevant scheduled events in window: 66   | of which market reacted (>3.0sig): 53
+  RECALL   = 21/53 = 0.40  (reacted events the model spiked on)
+  PRECISION= 8/15 = 0.53  (top surprise episodes on a known event)
+
+  Top 15 surprise episodes (precision view):
+    peak day      xmean  event (<= window)
+    2025-04-21    24.8x  -- UNEXPLAINED --
+    2025-07-29    24.5x  FOMC Jul 2025 (d+1)
+    2024-09-16    20.6x  FOMC Sep 2024 (50bp cut) (d+2)
+    2025-08-14    18.6x  CPI Jul 2025 (d+2)
+    2025-08-26    17.8x  -- UNEXPLAINED --
+    2025-12-22    16.7x  -- UNEXPLAINED --
+    2024-10-24    16.3x  -- UNEXPLAINED --
+    2025-12-09    14.8x  FOMC Dec 2025 (d+1)
+    2025-03-12    13.1x  CPI Feb 2025 (d+0)
+    2026-02-06    13.0x  NFP Jan 2026 [VERIFY] (d+0)
+    2025-11-06    12.8x  -- UNEXPLAINED --
+    2025-02-04    12.0x  -- UNEXPLAINED --
+    2025-05-29    11.0x  -- UNEXPLAINED --
+    2025-09-03    10.3x  NFP Aug 2025 (d+2)
+    2025-11-21     8.8x  NFP Sep 2025 [shutdown-delayed from Oct 3; Oct NFP cancelled] (d+1)
+
+  Reacted events (recall view):
+    2024-08-23    .  (MISS)  retz=4.6  Powell Jackson Hole 2024
+    2024-09-06    .  (MISS)  retz=4.9  NFP Aug 2024
+    2024-09-11  SPIKE  retz=3.2  CPI Aug 2024
+    2024-09-18  SPIKE  retz=4.6  FOMC Sep 2024 (50bp cut)
+    2024-10-04    .  (MISS)  retz=5.8  NFP Sep 2024
+    2024-10-31  SPIKE  retz=4.4  BOJ Oct 2024
+    2024-11-01    .  (MISS)  retz=4.4  NFP Oct 2024
+    2024-11-13  SPIKE  retz=3.9  CPI Oct 2024
+    2024-12-06    .  (MISS)  retz=3.5  NFP Nov 2024
+    2024-12-11    .  (MISS)  retz=5.2  CPI Nov 2024
+    2024-12-18    .  (MISS)  retz=6.4  FOMC Dec 2024
+    2024-12-19    .  (MISS)  retz=5.0  BOJ Dec 2024
+    2025-01-10    .  (MISS)  retz=3.5  NFP Dec 2024
+    2025-01-15    .  (MISS)  retz=3.7  CPI Dec 2024
+    2025-01-24    .  (MISS)  retz=3.8  BOJ Jan 2025 (hike)
+    2025-01-29  SPIKE  retz=3.0  FOMC Jan 2025
+    2025-02-12  SPIKE  retz=4.5  CPI Jan 2025
+    2025-03-19  SPIKE  retz=5.5  FOMC Mar 2025
+    2025-03-19  SPIKE  retz=5.5  BOJ Mar 2025
+    2025-04-04    .  (MISS)  retz=3.5  NFP Mar 2025
+    2025-05-01    .  (MISS)  retz=4.1  BOJ Apr/May 2025
+    2025-05-02    .  (MISS)  retz=3.8  NFP Apr 2025
+    2025-05-07  SPIKE  retz=5.4  FOMC May 2025
+    2025-05-13  SPIKE  retz=3.5  CPI Apr 2025
+    2025-06-11    .  (MISS)  retz=3.7  CPI May 2025
+    2025-06-17    .  (MISS)  retz=4.9  BOJ Jun 2025
+    2025-06-18    .  (MISS)  retz=4.9  FOMC Jun 2025
+    2025-07-03    .  (MISS)  retz=4.7  NFP Jun 2025
+    2025-07-30  SPIKE  retz=4.3  FOMC Jul 2025
+    2025-07-31  SPIKE  retz=4.3  BOJ Jul 2025
+    2025-08-01  SPIKE  retz=4.3  NFP Jul 2025
+    2025-08-12  SPIKE  retz=3.5  CPI Jul 2025
+    2025-08-22  SPIKE  retz=6.2  Powell Jackson Hole 2025
+    2025-09-05  SPIKE  retz=4.8  NFP Aug 2025
+    2025-09-11  SPIKE  retz=3.1  CPI Aug 2025
+    2025-09-17    .  (MISS)  retz=3.9  FOMC Sep 2025
+    2025-10-24    .  (MISS)  retz=3.3  CPI Sep 2025 [shutdown-delayed from Oct 15]
+    2025-10-29    .  (MISS)  retz=3.9  FOMC Oct 2025
+    2025-10-30    .  (MISS)  retz=3.9  BOJ Oct 2025
+    2025-11-20  SPIKE  retz=3.3  NFP Sep 2025 [shutdown-delayed from Oct 3; Oct NFP cancelled]
+    2025-12-16    .  (MISS)  retz=4.6  NFP Nov 2025 [shutdown-rescheduled from Dec 5]
+    2025-12-18    .  (MISS)  retz=4.6  CPI Nov 2025 [shutdown-rescheduled from Dec 10; Oct CPI cancelled]
+    2025-12-19    .  (MISS)  retz=4.6  BOJ Dec 2025
+    2026-01-09  SPIKE  retz=4.1  NFP Dec 2025 [VERIFY]
+    2026-01-13  SPIKE  retz=4.4  CPI Dec 2025 [VERIFY]
+    2026-01-28    .  (MISS)  retz=3.7  FOMC Jan 2026 [VERIFY]
+    2026-02-06  SPIKE  retz=3.4  NFP Jan 2026 [VERIFY]
+    2026-03-06    .  (MISS)  retz=5.4  NFP Feb 2026 [VERIFY]
+    2026-03-11    .  (MISS)  retz=3.3  CPI Feb 2026 [VERIFY]
+    2026-03-18    .  (MISS)  retz=4.7  FOMC Mar 2026 [VERIFY]
+    2026-03-19    .  (MISS)  retz=4.7  BOJ Mar 2026 [VERIFY]
+    2026-04-03    .  (MISS)  retz=5.4  NFP Mar 2026 [VERIFY]
+    2026-04-29    .  (MISS)  retz=4.4  FOMC Apr 2026 [VERIFY]
+
+Saved -> C:\Users\kalom\Downloads\MarketWorldModel (MWM)\experiments\event_precision_recall_results.json
+
+==============================================================================
+HONEST REFRAMING (paste-ready, fill asset):
+==============================================================================
+  gold: model spiked on 4/8 market-moving scheduled events (recall 50%); 3/5 of its top surprise episodes sit on a known event (precision 60%).
+  eurusd: model spiked on 15/44 market-moving scheduled events (recall 34%); 8/15 of its top surprise episodes sit on a known event (precision 53%).
+  usdjpy: model spiked on 21/53 market-moving scheduled events (recall 40%); 8/15 of its top surprise episodes sit on a known event (precision 53%).

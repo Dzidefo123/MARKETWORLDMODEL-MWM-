@@ -1,0 +1,13 @@
+{
+  "instrument": "eurusd",
+  "n_test": 15504,
+  "range": "2020-01-01..2026-07-01",
+  "trained_through": "2022-12-31",
+  "extreme_return_ratio_median": 0.8571121096611023,
+  "extreme_return_effect_r": 0.048396676470401356,
+  "extreme_return_p": 0.9915533457496583,
+  "n_extreme": 860,
+  "spearman_surprise_impliedvol_idx43": -0.03750655342111483,
+  "spearman_surprise_realizedvol_idx10": 0.0967666256117376,
+  "rankbiserial_r_realizedvol_idx10": 0.07747825788291518
+}

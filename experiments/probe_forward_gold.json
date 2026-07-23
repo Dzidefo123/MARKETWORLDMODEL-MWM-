@@ -1,0 +1,74 @@
+[
+  {
+    "instrument": "gold",
+    "horizon": 1,
+    "probe": "linear",
+    "trained_r": 0.100274210036779,
+    "random_r": 0.1674624819243144,
+    "delta_TR": -0.0671882718875354,
+    "n_samples": 84749
+  },
+  {
+    "instrument": "gold",
+    "horizon": 1,
+    "probe": "mlp",
+    "trained_r": 0.05407862588878878,
+    "random_r": 0.09475028159879922,
+    "delta_TR": -0.04067165571001045,
+    "n_samples": 84749
+  },
+  {
+    "instrument": "gold",
+    "horizon": 4,
+    "probe": "linear",
+    "trained_r": 0.14749574737993718,
+    "random_r": 0.2093965522627722,
+    "delta_TR": -0.06190080488283503,
+    "n_samples": 84747
+  },
+  {
+    "instrument": "gold",
+    "horizon": 4,
+    "probe": "mlp",
+    "trained_r": 0.06062479535457098,
+    "random_r": 0.13208730939425992,
+    "delta_TR": -0.07146251403968894,
+    "n_samples": 84747
+  },
+  {
+    "instrument": "gold",
+    "horizon": 12,
+    "probe": "linear",
+    "trained_r": 0.2095846971350872,
+    "random_r": 0.29842445914508003,
+    "delta_TR": -0.08883976200999283,
+    "n_samples": 84737
+  },
+  {
+    "instrument": "gold",
+    "horizon": 12,
+    "probe": "mlp",
+    "trained_r": 0.10388153278831791,
+    "random_r": 0.11757332910239299,
+    "delta_TR": -0.013691796314075078,
+    "n_samples": 84737
+  },
+  {
+    "instrument": "gold",
+    "horizon": 24,
+    "probe": "linear",
+    "trained_r": 0.2584272060841164,
+    "random_r": 0.3736246576235097,
+    "delta_TR": -0.11519745153939331,
+    "n_samples": 84722
+  },
+  {
+    "instrument": "gold",
+    "horizon": 24,
+    "probe": "mlp",
+    "trained_r": 0.13162749318918396,
+    "random_r": 0.17375643399350774,
+    "delta_TR": -0.04212894080432378,
+    "n_samples": 84722
+  }
+]

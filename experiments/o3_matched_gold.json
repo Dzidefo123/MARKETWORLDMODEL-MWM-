@@ -1,0 +1,13 @@
+{
+  "instrument": "gold",
+  "n_test": 20606,
+  "range": "2015-01-01..2026-07-01",
+  "trained_through": "2021-12-31",
+  "extreme_return_ratio_median": 0.9225848913192749,
+  "extreme_return_effect_r": 0.022233413836050597,
+  "extreme_return_p": 0.9003162027424018,
+  "n_extreme": 1178,
+  "spearman_surprise_impliedvol_idx43": 0.026952033259893017,
+  "spearman_surprise_realizedvol_idx10": 0.10986207818007682,
+  "rankbiserial_r_realizedvol_idx10": 0.10114193155200968
+}

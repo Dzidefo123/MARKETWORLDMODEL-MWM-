@@ -1,0 +1,30 @@
+{
+  "encoder_ckpt": "experiments\\checkpoints\\m15_warmstart\\best_model.pt",
+  "encoder_epoch": 172,
+  "encoder_val_loss": 0.005363,
+  "horizon": 4,
+  "horizon_minutes": 60,
+  "trend_window": 200,
+  "history_len": 3,
+  "dir_in_dim": null,
+  "structured_features": false,
+  "vol": {
+    "accuracy": 0.37370030581039754,
+    "auc": 0.589684798280675
+  },
+  "direction": {
+    "accuracy": 0.5107296137339056,
+    "auc": 0.5190357963499874
+  },
+  "magnitude": {
+    "mae": 0.05667728930711746,
+    "pearson_r": 0.07225705683231354
+  },
+  "vol_thresholds": [
+    -0.5860545635223389,
+    0.2614995241165161
+  ],
+  "mag_threshold": 0.05992542952299118,
+  "n_train_labeled": 42142,
+  "n_val_labeled": 1631
+}

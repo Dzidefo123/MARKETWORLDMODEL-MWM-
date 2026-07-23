@@ -1,0 +1,28 @@
+2026-05-27 20:25:56  INFO      Logging to experiments\live_20260527_232556.log
+2026-05-27 20:25:57  INFO      Loaded encoder + predictor from ./experiments/checkpoints/best_model.pt (epoch 180)
+2026-05-27 20:25:57  INFO      Loaded execution heads from ./experiments/heads_gold  Dir AUC=0.543  Vol AUC=0.641
+2026-05-27 20:25:57  INFO      Connected to MT5: MetaTrader 5 build 5836
+2026-05-27 20:25:57  INFO      Warming up: fetching 548 bars for XAUUSD ...
+2026-05-27 20:26:12  INFO      Warm-up complete. Surprise buffer: 250 bars.
+2026-05-27 20:26:12  INFO      Live trader started. symbol=XAUUSD  dry_run=True  poll=10s
+2026-05-27 21:00:04  INFO      Bar close: dir_prob=0.696  S_t=1.44902  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-05-27 22:00:05  INFO      Bar close: dir_prob=0.675  S_t=0.05025  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-05-27 23:00:07  INFO      Bar close: dir_prob=0.569  S_t=0.00373  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 00:00:08  INFO      Bar close: dir_prob=0.482  S_t=0.00231  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 01:00:09  INFO      Bar close: dir_prob=0.471  S_t=0.00988  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 02:00:08  INFO      Bar close: dir_prob=0.467  S_t=0.00087  signal=-1.000  eff=-0.500  lots=0.11  action=dry_run(short 0.11)
+2026-05-28 03:00:10  INFO      Bar close: dir_prob=0.453  S_t=0.00127  signal=-1.000  eff=-0.500  lots=0.11  action=hold
+2026-05-28 04:00:01  INFO      Bar close: dir_prob=0.459  S_t=0.00228  signal=-1.000  eff=-0.500  lots=0.11  action=hold
+2026-05-28 05:00:03  INFO      Bar close: dir_prob=0.461  S_t=0.01144  signal=-1.000  eff=0.000  lots=0.00  action=dry_run(flat 0.00)
+2026-05-28 06:00:05  INFO      Bar close: dir_prob=0.468  S_t=0.02026  signal=-1.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 07:00:07  INFO      Bar close: dir_prob=0.462  S_t=0.00035  signal=-1.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 08:00:02  INFO      Bar close: dir_prob=0.515  S_t=0.00728  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 09:00:05  INFO      Bar close: dir_prob=0.513  S_t=0.01396  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 10:00:06  INFO      Bar close: dir_prob=0.509  S_t=0.00909  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 11:00:07  INFO      Bar close: dir_prob=0.469  S_t=0.00626  signal=-1.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 12:00:10  INFO      Bar close: dir_prob=0.522  S_t=0.02514  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 13:00:01  INFO      Bar close: dir_prob=0.579  S_t=0.02046  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 14:00:04  INFO      Bar close: dir_prob=0.567  S_t=0.00568  signal=1.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 15:00:06  INFO      Bar close: dir_prob=0.528  S_t=0.00750  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 16:00:08  INFO      Bar close: dir_prob=0.484  S_t=0.16085  signal=0.000  eff=0.000  lots=0.00  action=hold
+2026-05-28 18:00:11  INFO      Bar close: dir_prob=0.449  S_t=0.00222  signal=-1.000  eff=-0.500  lots=0.11  action=dry_run(short 0.11)

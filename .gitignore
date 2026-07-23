@@ -1,0 +1,27 @@
+# Claude Code local session state (contains local settings / permissions)
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# LaTeX build intermediates (the .tex and the built .pdf are tracked)
+*.aux
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.toc
+mwm_audit_paper.log
+mwm_revised_full_corrected.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

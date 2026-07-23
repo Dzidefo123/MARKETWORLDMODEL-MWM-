@@ -1,0 +1,122 @@
+Random seed: 42
+=======================================================
+Training execution heads  [GOLD]
+=======================================================
+
+Building MarketEncoder:
+  PatchEmbedding: 48 bars ? 52 features -> 12 patches ? 128 dims (patch_dim=208)
+  CLS token: shape (1, 1, 128)
+  Positional encoding: 13 positions ? 128 dims
+  Transformer: 4 layers ? 4 heads ? 128 dims
+  Projection: 128 -> 256 -> 128 (z_dim)
+
+  Total parameters:     888,448
+  Trainable parameters: 888,448
+  CausalPredictor: 1,424,448 parameters  (6 layers ? 4 heads ? 128 dims  history=3  cond_dim=64)
+Loaded encoder + predictor from epoch 180
+
+=======================================================
+DataPipeline.build()  [GOLD]
+=======================================================
+
+[1/5] Fetching market data...
+
+=======================================================
+DataFetcher: 2024-06-23 -> 2026-06-22  |  interval=1h  |  GOLD
+=======================================================
+  Loading gold from cache (GC_F_1h_2024-06-23_2026-06-22.parquet)...
+
+  GOLD bars: 11,395
+  Date range: 2024-06-23 -> 2026-06-21
+  Loading dxy from cache (DX_Y.NYB_1h_2024-06-23_2026-06-22.parquet)...
+  dxy     : 11,875 bars
+  Loading gvz from cache (GVZ_1h_2024-06-23_2026-06-22.parquet)...
+  gvz     : 3,465 bars
+  Loading tlt from cache (TLT_1h_2024-06-23_2026-06-22.parquet)...
+  tlt     : 3,460 bars
+  Loading silver from cache (SI_F_1h_2024-06-23_2026-06-22.parquet)...
+  silver  : 11,392 bars
+
+  Macro columns:  ['dxy', 'gvz', 'tlt', 'silver']
+  Missing values: {'dxy': 0, 'gvz': 65, 'tlt': 66, 'silver': 0}
+  Raw bars: 11,395
+
+[2/5] Computing 52 features...
+  Computing Group A: Returns...
+  Computing Group B: Volatility...
+  Computing Group C: Momentum/Trend...
+  Computing Group D: Price Structure...
+  Computing Group E: Session/Time...
+  Computing Group F: Macro...
+
+  Feature matrix shape: (11145, 52)
+  NaN count after cleanup: 0
+  Timestamp range: 2024-07-10 10:00:00 -> 2026-06-21 23:00:00
+  After warm-up trim: (11145, 52)
+
+[3/5] Building action vectors...
+  Action shape: (11145, 5)  (5 macro signals per bar)
+
+[4/5] Applying rolling z-score normalization...
+  Clipped 1,682 values beyond +-5 sigma
+  Normalized stats: mean=0.0077  std=1.0696
+
+[5/5] Creating walk-forward train/val/test splits...
+  Train: 7,801 bars  (2024-07-10 -> 2025-11-13)
+  Val:   1,671 bars  (2025-11-13 -> 2026-03-05)
+  Test:  1,673 bars  (2026-03-06 -> 2026-06-21)
+  MarketWindowDataset: 7801 bars -> 7752 samples (lookback=48, stride=1, history_len=3)
+  MarketWindowDataset: 1671 bars -> 406 samples (lookback=48, stride=4, history_len=3)
+  MarketWindowDataset: 1673 bars -> 1624 samples (lookback=48, stride=1, history_len=3)
+
+----------------------------------------
+Pipeline complete.
+  Train samples: 7,752
+  Val samples:   406
+  Test samples:  1,624
+  Feature dim:   52
+  Action dim:    5
+  Lookback:      48 bars
+----------------------------------------
+
+[1/4] Encoding train split...
+  Z_train: (7754, 128)
+
+[2/4] Encoding val split...
+  Z_val:   (1624, 128)
+
+[3/4] Computing labels...
+  Trend-adjusted labels: rolling median window=200
+  Vol thresholds (train p33/p67): -0.606 / 0.250
+  Direction label balance (train): 0.502  (0.5 = perfect)
+  Train: 7,753 labeled  7,754 vol-labeled
+  Val:   1,623 labeled  1,624 vol-labeled
+
+[4/4] Training heads...
+  VolatilityHead  (3-class)  ...  val acc=0.443  auc=0.614
+  DirectionalHead (binary)   ...  val acc=0.510  auc=0.502
+  MagnitudeHead   (regress)  ...  val mae=0.06132  r=-0.034
+  Magnitude threshold (p50 train preds): 0.058967  [train range 0.0488–0.1051]
+
+=======================================================
+EXECUTION HEAD TRAINING RESULTS
+=======================================================
+
+  VolatilityHead  (3-class)  (chance=0.333)
+    val accuracy : 0.443  (chance=0.333)
+    val AUC      : 0.614
+
+  DirectionalHead (binary)
+    val accuracy : 0.510  (chance=0.500)
+    val AUC      : 0.502
+
+  MagnitudeHead   (regression)
+    val MAE      : 0.06132
+    val Pearson r: -0.034
+
+  Vol thresholds (p33/p67): -0.606 / 0.250
+  Train labeled: 7,753  Val labeled: 1,623
+=======================================================
+
+Saved execution layer: experiments\heads_sweep_h1\execution_layer.pt
+Saved metrics:         experiments\heads_sweep_h1\metrics.json
