@@ -56,12 +56,13 @@ Recorded here rather than left implicit.
    `experiments/RESEARCH_STATUS_2026-07-17.md` but has no standalone result
    file. It is a property of the estimator, not of a checkpoint.
 
-4. **The "verified separately" sentence in the Discussion is the weakest-sourced
-   claim in the paper.** It cites a frozen-early-encoder slide and a
-   retrain-per-boundary slide. `o1b_frozen_slide_eurusd.json` exists for EUR/USD
-   only; `o1b_boundary_slide.py` has no saved result file in this repo. Both
-   scripts are released and runnable, but that sentence is not reproducible from
-   stored artifacts the way every other claim is.
+4. **The frozen-slide robustness check is EUR/USD-only.** §5.4 and the
+   Discussion cite a frozen-early-encoder slide showing the same flatness;
+   `o1b_frozen_slide_eurusd.json` backs it for EUR/USD. The retrain-per-boundary
+   variant (`o1b_boundary_slide.py`) is released as a runnable script but has no
+   saved result file, so the paper now presents it as an extension for the
+   reader rather than a completed cross-asset result. Both sentences were
+   softened on 2026-07-23 to match exactly what is stored.
 
 5. **`data/cache/` is included** so the audit reruns offline. The combined
    per-range caches under `data/cache/long/` are the ones the scripts read;
