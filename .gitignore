@@ -7,6 +7,9 @@ mwm_audit_paper.tex
 mwm_audit_paper.pdf
 mwm_revised_full_corrected.tex
 
+# Third-party reference paper (LeWorldModel) — not ours to redistribute.
+LeWorldModel.pdf
+
 # Superseded short-history checkpoints + live-trading heads (no paper number
 # uses these; kept on disk for the live-trading path, out of the repo).
 experiments/checkpoints/
